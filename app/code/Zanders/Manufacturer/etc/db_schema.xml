@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="zanders_manufacturer" resource="default" comment="Zanders Manufacturer Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="manufacturer_id" identity="true" unsigned="true" nullable="false"
+                comment="Manufacturer Id"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Manufacturer name"/>
+        <column xsi:type="text" name="address" nullable="true" comment="Manufacturer address"/>
+        <column xsi:type="varchar" name="serialized_display_on" length="255" nullable="true"
+                comment="Serialized Display On"/>
+        <column xsi:type="text" name="serialized_text" nullable="true" comment="Serialized Text"/>
+        <column xsi:type="varchar" name="phone" length="20" nullable="true"/>
+        <column xsi:type="varchar" name="web" length="255" nullable="true"/>
+        <column xsi:type="varchar" name="image" length="500" nullable="true"/>
+        <column xsi:type="tinyint" name="status" nullable="false" default="1"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="manufacturer_id"/>
+        </constraint>
+        <index referenceId="ZANDERS_MANUFACTURER_NAME_ADDRESS_PHONE_WEB" indexType="fulltext">
+            <column name="name"/>
+            <column name="address"/>
+            <column name="phone"/>
+            <column name="web"/>
+        </index>
+    </table>
+</schema>

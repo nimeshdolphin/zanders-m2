@@ -1,0 +1,15 @@
+{
+    "zanders_warningcode": {
+        "column": {
+            "warningcode_id": true,
+            "warning_code": true,
+            "warning_text": true
+        },
+        "index": {
+            "ZANDERS_WARNINGCODE_WARNING_CODE_WARNING_TEXT": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

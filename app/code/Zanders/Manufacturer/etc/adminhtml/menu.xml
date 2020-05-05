@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_Manufacturer
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Zanders_Manufacturer::zanders" title="Zanders" translate="title" module="Zanders_Manufacturer" sortOrder="100"
+             parent="Magento_Catalog::catalog" dependsOnModule="Magento_Catalog" resource="Zanders_Manufacturer::zanders"/>
+        <add id="Zanders_Manufacturer::manufacturer" title="Manufacturer" module="Zanders_Manufacturer" sortOrder="50"
+             parent="Zanders_Manufacturer::zanders" action="zanders_manufacturer/items/"
+             resource="Zanders_Manufacturer::manufacturer"/>
+    </menu>
+</config>

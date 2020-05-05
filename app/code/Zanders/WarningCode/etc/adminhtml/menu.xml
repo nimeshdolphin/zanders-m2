@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_WarningCode
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Zanders_WarningCode::zanders" title="Zanders" translate="title"
+             module="Zanders_WarningCode" sortOrder="100"
+             resource="Zanders_WarningCode::zanders"/>
+        <add id="Zanders_WarningCode::warning_code" title="Warning Codes" module="Zanders_WarningCode" sortOrder="10"
+             parent="Zanders_WarningCode::zanders" action="zanders_warningcode/items/"
+             resource="Zanders_WarningCode::warning_code"/>
+    </menu>
+</config>
