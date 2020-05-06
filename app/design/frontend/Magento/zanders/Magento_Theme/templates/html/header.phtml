@@ -1,0 +1,23 @@
+<header class="page-header" >
+    <div class="header content">
+        <span data-action="toggle-nav" class="action nav-toggle"><span><?=  __('Menu') ?></span></span>
+		<div class="logo">
+			<?= $this->getChildHtml("logo"); ?>
+        </div>
+		<?= $this->getChildHtml("header.contact"); ?>
+		<div class="quick-access">
+			<p class="welcome-msg">
+				<?= $this->helper('Zanders\Theme\Helper\Data')->getConfig('design/header/welcome'); ?>
+			</p>
+			<ul class="links">
+				<?= $this->getChildHtml("header.top.link.block"); ?>
+				<?= $this->getChildHtml("top.customer.link.block"); ?>
+			</ul>
+		 </div>
+    </div>
+	<div class="search-menu-cart">
+		<?= $this->getChildHtml("navigation.sections"); ?>
+        <?= $this->getChildHtml("top.search"); ?>
+		<?= $this->getChildHtml("minicart"); ?>
+	</div>
+</header>

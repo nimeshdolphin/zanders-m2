@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Checkout\Block\Cart\Sidebar */
+?>
+
+
+
+<div data-block="minicart" class="minicart-wrapper">
+    <a class="action showcart" href="<?= $block->escapeUrl($block->getShoppingCartUrl()) ?>"
+       data-bind="scope: 'minicart_content'">
+		<div class="block block-cart">
+			<div class="block-content">
+				<!-- ko if: getCartParam('summary_count') -->
+					<span class="no-empty">
+						(
+						<!-- ko text: getCartParam('summary_count') --><!-- /ko -->
+						<!-- ko i18n: 'items' --><!-- /ko -->
+						)
+					</span>
+				<!-- /ko -->
+				<!-- ko ifnot: getCartParam('summary_count') -->
+					<span class="empty"><!-- ko i18n: '(0 items)' --><!-- /ko --></span>
+				<!-- /ko -->
+			</div>
+		</div>
+	</a>
+</div>
+
+
+<script>
+        window.checkout = <?= /* @noEscape */ $block->getSerializedConfig() ?>;
+</script>
+<script type="text/x-magento-init">
+{
+	"[data-block='minicart']": {
+		"Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+	},
+	"*": {
+		"Magento_Ui/js/block-loader": "<?= $block->escapeJs(
+			$block->escapeUrl($block->getViewFileUrl('images/loader-1.gif'))
+		) ?>"
+	}
+}
+</script>

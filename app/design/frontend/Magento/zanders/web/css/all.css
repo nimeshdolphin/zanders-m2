@@ -1,0 +1,336 @@
+/* Common */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+body {
+    background: #efefef;
+    font: 12px/1.55 Montserrat, Helvetica, sans-serif;
+    color: #2f2f2f;
+}
+body .page-main {
+    background: #06466C;
+    min-height: 900px;
+}
+header.page-header, .page-footer, .navigation, .breadcrumbs, .page-header .header.panel, .header.content, .footer.content, .page-wrapper>.widget, .page-wrapper>.page-bottom, .block.category.event, .top-container, .page-main {
+	width: 1366px !important;
+    margin: 0 auto;
+    background-color: #ffffff;
+    max-width: 100% !important;
+}
+::-webkit-scrollbar{width:7px;}
+::-webkit-scrollbar-track{box-shadow:inset 0 0 5px grey;border-radius:7px;}
+::-webkit-scrollbar-thumb{background:#777;border-radius:7px;}
+/* Footer */
+.footer .menu {
+    display: table;
+    width: 100%;
+    padding: 20px 0 30px;
+}
+footer.page-footer {
+    text-align: center;
+}
+.footer .phonenumber {
+    text-align: center;
+    width: 390px;
+    font-size: 16px;
+    font-weight: bold;
+    background: white;
+    float: left;
+}
+.footer .phonenumber ul {
+    padding-left: 130px;
+    text-align: left;
+	margin-bottom: 0;
+}
+.footer .phonenumber li {
+    display: block;
+    text-align: left;
+	margin: 0;
+	color: #202020;
+}
+.footer .phonenumber li.need-help {
+    font: 400 21px/21px Montserrat, Helvetica, sans-serif;
+    margin-top: 16px;
+}
+.footer .phonenumber li.call-free {
+    font: bold 15px/23px Montserrat, Helvetica, sans-serif;
+    color: white;
+    margin-top: 3px;
+    background-color: #944D2C;
+    display: inline-block;
+    padding: 0 7px;
+}
+.footer .phonenumber li.number {
+    font: 400 23px/23px Montserrat, Helvetica, sans-serif;
+    margin-top: 9px;
+}
+.footer .phonenumber li.hours {
+    font: 400 28px/28px Montserrat, Helvetica, sans-serif;
+    margin-top: 20px;
+}
+.footer .phonenumber li.days {
+    font: 400 18px/18px Montserrat, Helvetica, sans-serif;
+    margin-top: 7px;
+}
+.footer .phonenumber li.time {
+    font: 400 20px/20px Montserrat, Helvetica, sans-serif;
+    margin-top: 5px;
+}
+.footer .phonenumber .telephone {
+    height: 0;
+    width: 0;
+    position: relative;
+    top: -178px;
+    left: 62px;
+}
+.footer .phonenumber .telephone-img {
+    background: url(../images/css_sprites.png) 59px -10px;
+    width: 49px;
+    height: 41px;
+}
+.footer .phonenumber .sandglass {
+    height: 0;
+    width: 0;
+    position: relative;
+    top: -80px;
+    left: 69px;
+}
+.footer .phonenumber .sandglass-img {
+    background: url(../images/css_sprites.png) 59px -71px;
+    width: 34px;
+    height: 44px;
+}
+.footer .separator {
+    float: left;
+    height: 60px;
+    width: 2px;
+    background-color: #6B6B6B;
+    margin: 0;
+    margin-top: 94px;
+}
+.footer .menu-links {
+    float: left;
+    width: 604px;
+}
+.footer .menu-links .title {
+    font: 400 28px/28px Montserrat, Helvetica, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #202020;
+}
+.footer ul.links {
+    display: block;
+    float: left;
+    font-size: 16px;
+    padding-left: 100px;
+    margin-bottom: 0;
+}
+.footer ul.links li {
+    display: inline-block;
+    width: 45%;
+    float: left;
+    font-size: 16px;
+    line-height: 24px;
+    color: #202020;
+    text-decoration: underline;
+    text-align: left;
+	    margin-bottom: 0;
+}
+
+.links li.first {
+    padding-left: 0 !important;
+}
+.footer a {
+    color: #203254;
+    text-decoration: none;
+}
+.footer li.last {
+    background: none !important;
+    padding-right: 0 !important;
+}
+.footer .logotype {
+    float: left;
+    width: 360px;
+    background: white;
+    padding: 25px 0 31px 0;
+}
+.footer a.logo {
+    background: url(../images/css_sprites.png) -10px -10px;
+	width: 272px;
+    height: 141px;
+    margin: 0 0 0 25px;
+    max-width: 100%;
+}
+.footer .basement {
+    float: left;
+    width: 100%;
+    background: #CB0101;
+    text-align: left;
+}
+.footer .basement .connected {
+    font-size: 18px;
+    line-height: 55px;
+    font-weight: 400;
+    color: white;
+    padding: 0 22px;
+    display: inline-block;
+}
+.footer .basement .connected a {
+    padding-left: 10px;
+    color: white;
+}
+.footer .address {
+    padding: 10px;
+    color: #fff;
+    background: #CB0101;
+    text-align: right;
+    float: right;
+}
+address {
+    font-style: normal;
+    line-height: 1.35;
+}
+.page-footer {
+	background: #fff !important;
+    padding-bottom: 0 !important;
+}
+
+/*header*/
+.logo {
+    margin: 0 !important;
+	max-width: 100%;
+}
+.header .phone-number {
+    position: relative;
+    width: 160px;
+    float: left;
+    text-align: left;
+    top: 33px;
+    left: 59px;
+}
+.header .phone-number .fa-phone {
+    font-size: 33px;
+    position: absolute;
+    left: -51px;
+    top: 20px;
+    transform: scaleX(-1);
+}
+.header .phone-number .number {
+    font-size: 24px;
+}
+.header .quick-access {
+    float: right;
+    width: 850px;
+    padding: 0;
+    position: relative;
+    top: 40px;
+}
+.header .welcome-msg {
+    margin: 0;
+    color: #000;
+    text-align: right;
+}
+.header .links {
+    float: right;
+    margin: 0 0 6px;
+	list-style: none;
+}
+.header .links li {
+    float: left;
+    font-size: 18px;
+    padding: 0 7px 0 7px;
+	display: inline;
+}
+.links li.first {
+    padding-left: 0;
+}
+.header .links a {
+    color: #000000;
+    text-decoration: none;
+}
+.links li.last {
+    background: none;
+    padding-right: 0;
+}
+.nav-sections-item-content > * {
+    display: block !important;
+}
+.sections.nav-sections{
+	float: left;
+	margin-bottom: 0;
+}
+.search-menu-cart .block-search{
+	float: left;
+    width: 562px;
+	margin-top: 10px;
+	margin-left: 35px;
+	padding-left: 0;
+}
+.search-menu-cart {
+    padding-left: 25px;
+    height: 70px;
+    background: #343434;
+    position: relative;
+}
+.search-menu-cart .block-search input {
+    padding: 0 60px;
+    width: 562px;
+    height: 52px;
+    line-height: 50px;
+    font-size: 16px;
+    color: #808080;
+    -webkit-box-shadow: inset 0px 0px 5px 1px rgba(145,145,145,1);
+    -moz-box-shadow: inset 0px 0px 5px 1px rgba(145,145,145,1);
+    box-shadow: inset 0px 0px 5px 1px rgba(145,145,145,1);
+}
+.search-menu-cart .block-search .control::before{
+	position: absolute;
+    left: 20px;
+    top: 11px;
+    width: 31px;
+    height: 31px;
+    background: url(../images/css_sprites.png) -246px -222px;
+    content: ' ';
+    z-index: 10;
+}
+.search-menu-cart .block-search .actions {
+    display: none;
+}
+.minicart-wrapper .action.showcart .counter.qty.empty {
+    display: inline-block;
+}
+.search-menu-cart .minicart-wrapper {
+    height: 70px;
+    background: #991020;
+    width: 320px;
+    color: #ffffff;
+	text-align: center;
+    font-size: 16px;
+}
+.search-menu-cart .minicart-wrapper::before {
+    position: absolute;
+    left: 27px;
+    top: 21px;
+    width: 34px;
+    height: 32px;
+    background: url(../images/mini-cart.png);
+    content: ' ';
+	background-repeat: no-repeat;
+}
+.search-menu-cart .minicart-wrapper .block-content span {
+    height: 70px;
+    line-height: 70px;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+.minicart-wrapper .action.showcart:before{
+	display:none;
+}
+.page-wrapper .header.content {
+    padding: 25px;
+}
+.header .links a.my-account {
+    color: #c40000;
+    font-weight: bold;
+}

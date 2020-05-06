@@ -1,0 +1,30 @@
+<?php 
+/**
+ * Zanders/VerticalMenu/Block/Menu
+ */
+?>
+<div class="menu-header"><div class="top-dropdown-head"><a href="/"><?= __('Catalog') ?></a></div><div id="top-dropdown"></div></div>
+<div class="vertnav-container">
+    <div class="">
+        <h4 class="no-display"><?= __('Category Navigation:') ?></h4>
+<?php $store_categories = $this->toLinearArray($this->getStoreCategories()) ?>
+<?php if ($count = count($store_categories)): ?>
+		<ul id="vertnav">
+<?php endif; ?>
+<?php foreach ($store_categories as $i => $_category): ?><?php $class = array() ?>
+<?php if ($count == 1): ?>
+<?php $class[] = 'only' ?>
+<?php elseif (! $i): ?>
+<?php $class[] = 'first' ?>
+<?php elseif ($i == $count-1): ?>
+<?php $class[] = 'last' ?>
+<?php endif; ?>
+<?php if (isset($store_categories[$i+1]) && $this->isCategoryActive($store_categories[$i+1])) $class[] = 'prev'; ?>
+<?php if (isset($store_categories[$i-1]) && $this->isCategoryActive($store_categories[$i-1])) $class[] = 'next'; ?>
+<?php echo $this->drawOpenCategoryItem($_category, 0, $class) ?>
+<?php endforeach ?>
+<?php if ($count): ?>
+        </ul>
+<?php endif;?>
+    </div>
+</div>

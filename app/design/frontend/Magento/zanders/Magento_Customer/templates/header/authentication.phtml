@@ -1,0 +1,9 @@
+<?php
+/** @var Magento\Customer\Block\Account\Customer $block */
+?>
+<?php if ($block->customerLoggedIn()) { ?>
+	<li><a href="<?= $this->getUrl('customer/account/logout'); ?>" title="Log Out"><?=  __('Log Out') ?></a></li>
+<?php }else{ ?>
+	<li><a href="<?= $this->getUrl('customer/account/login'); ?>" title="Log In"><?=  __('Log In') ?></a></li>
+<?php } ?>
+<li class=" last"><a href="<?= $this->getUrl('customer/account'); ?>" title="My Account" class="my-account"><?= __('My Account') ?></a></li>

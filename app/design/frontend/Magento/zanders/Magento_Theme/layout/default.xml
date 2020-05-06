@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceBlock name="copyright" remove="true" />
+        <referenceContainer name="footer" remove="true"/>
+		<referenceContainer name="footer-container">
+           <block class="Magento\Theme\Block\Html\Footer" name="footer_block" as="footer_block" template="html/footer.phtml"/>
+        </referenceContainer>
+		<referenceContainer name="page.wrapper">
+            <block class="Magento\Framework\View\Element\Template" name="zanders_header" template="Magento_Theme::html/header.phtml" before="main.content">
+                <block class="Magento\Store\Block\Switcher" name="store_language" as="store_language" template="switch/languages.phtml"/>
+                <block class="Magento\Framework\View\Element\Template" name="top.search" as="topSearch" template="Magento_Search::form.mini.phtml" />
+                <block class="Magento\Cms\Block\Block" name="header.contact">
+					<arguments>
+						<argument name="block_id" xsi:type="string">header_top_number</argument>
+					</arguments>
+				</block>
+				<block class="Magento\Cms\Block\Block" name="header.top.link.block">
+					<arguments>
+						<argument name="block_id" xsi:type="string">header_top_link</argument>
+					</arguments>
+				</block>
+				<block class="Magento\Customer\Block\Account\Customer" name="top.customer.link.block" template="Magento_Customer::header/authentication.phtml" />
+				
+            </block>
+        </referenceContainer>
+        <move element="navigation.sections" destination="zanders_header"/>
+        <move element="top.search" destination="zanders_header"/>
+        <move element="minicart" destination="zanders_header"/>
+        <move element="currency" destination="zanders_header"/>
+        <move element="logo" destination="zanders_header"/>
+        <move element="skip_to_content" destination="zanders_header"/>
+
+        <move element="page.top" destination="page.wrapper" after="zanders_header"/>
+
+        <referenceContainer name="header.container" remove="1"/>
+        <referenceContainer name="header.panel" remove="1"/>
+        <referenceContainer name="header-wrapper" remove="1"/>
+    </body>
+</page>

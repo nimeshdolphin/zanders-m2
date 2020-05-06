@@ -1,0 +1,63 @@
+ul#vertnav {padding: 0;margin-bottom: 0;}
+#vertnav li.parent .vertnav-cat{background:none;}
+#vertnav-full{columns:5;-webkit-columns:5;-moz-columns:5;position:absolute;top:0;left:270px;z-index:101;background-color:rgba(218,218,218,1);margin:0;padding:15px 0px 20px 23px;}
+.close-menu{position:absolute;top:10px;right:15px;cursor:pointer;font-size:20px;}
+.vertnav-container{background-color:#dadada;margin:0;position:absolute;padding:0 25px 20px;width: 220px;text-align: left;z-index: 9;}
+
+#vertnav li{display:block;border-bottom:1px solid #000;position:relative;padding-left:5px;margin-bottom: 0;}
+#vertnav li:hover, #vertnav .parent, #vertnav .active{background:#eee;}
+#vertnav li.open:after{content:"\f105";font-family:'Font Awesome 5 Free';font-weight:900;right:10px;position:absolute;font-size:16px;top:18px;}
+#vertnav li ul{display:none;position:absolute;top:0;left:100%;background-color:#dadada;padding:0;z-index:101;}
+#vertnav li ul li{border-bottom:0;}
+#vertnav li ul li a{line-height:60px;}
+#vertnav li:hover > ul{display:block;}
+#vertnav-full li{display:block;width:200px;position:relative;}
+#vertnav-full li.parent:after{content:"\f105";font-family:'Font Awesome 5 Free';font-weight:900;right:5px;position:absolute;font-size:16px;top:3px;}
+#vertnav li a, .menu-toggler{color:#000;line-height:60px;font-size:12px;cursor:pointer;display:block;font-weight: 600;}
+.menu-toggler:after{content:"\f105";font-family:'Font Awesome 5 Free';font-weight:900;float:right;padding-right:5px;font-size:18px;}
+#vertnav-full li a{color:#000;line-height:30px;font-size:12px;text-decoration:none;display:block;padding:0 5px;}
+#vertnav li a:hover, .menu-toggler:hover, #vertnav-full li a:hover, #vertnav .parent{text-decoration:none;color:#991020;}
+#vertnav-full li:hover{background:#fff;}
+.sub-nav{display:none;position:absolute;top:0;left:100%;background:#fff;padding:0 10px;z-index:101;}
+#vertnav-full li.parent:hover .sub-nav{display:block;}
+#vertnav .level1 .vertnav-cat {
+    padding-left: 10px;
+    width: 182px;display: block;
+}
+.menu-header {
+    width: 210px;
+    height: 70px;
+    text-align: left;
+    line-height: 70px;
+    background: #6d6d6d;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    transition: 0.5s all;
+    padding-left: 60px;
+}
+.menu-header::before {
+    width: 16px;
+    height: 16px;
+    content: "\f0c9";
+    position: absolute;
+    left: 35px;
+    top: 0;
+    z-index: 10;
+    color: #ffffff;
+    font-family: "Font Awesome 5 Free";
+    font-size: 16px;
+}
+.menu-header .top-dropdown-head a {
+    color: #fff;
+}
+.page-products .search-menu-cart .vertnav-container {
+    display: none !important;
+}
+.page-products .search-menu-cart .vertnav-container:hover {
+    display: block !important;
+}
+.page-products .search-menu-cart .menu-header:hover + .vertnav-container {
+    display: block !important;
+}
