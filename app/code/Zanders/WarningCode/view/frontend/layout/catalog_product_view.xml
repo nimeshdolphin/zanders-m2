@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.extrahint">
+            <container name="product.info.warning.code" label="Product View Warning Code" htmlTag="div"
+                       htmlClass="product-warning-code" after="product.info.social">
+                <block name="warning.code" template="Zanders_WarningCode::product/view/warning_code.phtml">
+                    <arguments>
+                        <argument name="viewModel" xsi:type="object">Zanders\WarningCode\ViewModel\WarningCode
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

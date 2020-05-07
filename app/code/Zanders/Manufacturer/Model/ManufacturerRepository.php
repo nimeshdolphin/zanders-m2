@@ -153,7 +153,7 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface
             $this->resource->save($manufacturer);
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(
-                __('Could not save the Payment Extra Charge: %1', $exception->getMessage()),
+                __('Could not save the manufacturer: %1', $exception->getMessage()),
                 $exception
             );
         }
@@ -172,7 +172,7 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface
         $manufacturer = $this->manufacturerFactory->create();
         $manufacturer->load($manufacturerId);
         if (!$manufacturer->getId()) {
-            throw new NoSuchEntityException(__('The Payment Extra Charge with the "%1" ID doesn\'t exist.', $manufacturerId));
+            throw new NoSuchEntityException(__('The manufacturer with the "%1" ID doesn\'t exist.', $manufacturerId));
         }
         return $manufacturer;
     }
@@ -213,7 +213,7 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface
             $this->resource->delete($manufacturer);
         } catch (\Exception $exception) {
             throw new CouldNotDeleteException(
-                __('Could not delete the Payment Extra Charge: %1', $exception->getMessage())
+                __('Could not delete the manufacturer: %1', $exception->getMessage())
             );
         }
         return true;

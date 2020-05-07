@@ -1,0 +1,37 @@
+<?php
+/**
+ * Shopping cart additional info for WarningCode
+ * @var $block \Zanders\WarningCode\Block\Cart\Additional\WarningCode
+ */
+?>
+<?php if ($block->getItem()->getProduct()->getData('prop65warningcode')) : ?>
+    <?php
+    $warningCode = $block->getItem()->getProduct()->getAttributeText('prop65warningcode');
+    $warningHtml = $block->getWarningHtml($warningCode);
+    ?>
+    <div class="warning-code warning-code-<?= $block->getItem()->getId() ?>">
+        <p><strong><?= __('Warning') ?></strong>: <span><?= __('California Prop 65 Warning') ?></span></p>
+    </div>
+    <div class="warning-text" id="popup-warning-text-<?= $block->getItem()->getId() ?>" style="display: none">
+        <img src="<?php echo $block->getViewFileUrl('Zanders_WarningCode::images/i_notice.gif'); ?>"
+             alt="<?= __('Warning') ?>"/><?= $warningHtml ?>
+    </div>
+    <script>
+        require(
+            ['jquery', 'Magento_Ui/js/modal/modal'],
+            function ($, modal) {
+                let options = {
+                    type: 'popup',
+                    // title: '<?= __('Warning') ?>',
+                    modalClass: 'modal-warning-code',
+                    responsive: true,
+                    buttons: []
+                };
+                let popup = modal(options, $('#popup-warning-text-<?= $block->getItem()->getId() ?>'));
+                $(".warning-code-<?= $block->getItem()->getId() ?>").on('click', function () {
+                    $('#popup-warning-text-<?= $block->getItem()->getId() ?>').modal("openModal");
+                });
+            }
+        );
+    </script>
+<?php endif; ?>

@@ -1,0 +1,33 @@
+& when (@media-common = true) {
+  .product-warning-code, .product-item-details {
+    .warning-code {
+      padding: 20px 20px 20px 70px;
+      background: #f4f4f4 url('../Zanders_WarningCode/images/i_notice.gif') no-repeat 20px center;
+      cursor: pointer;
+      font-size: 16px;
+
+      p {
+        margin: 0;
+      }
+
+      strong {
+        text-transform: uppercase;
+      }
+
+      span {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .modal-popup {
+    &.modal-warning-code {
+      .warning-text {
+        img {
+          margin-right: 10px;
+          float: left;
+        }
+      }
+    }
+  }
+}
