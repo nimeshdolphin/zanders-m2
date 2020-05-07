@@ -19,8 +19,7 @@ class Index extends \Zanders\WarningCode\Controller\Adminhtml\Items
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Zanders_WarningCode::warning_code');
         $resultPage->getConfig()->getTitle()->prepend(__('Warning Codes'));
-        $resultPage->addBreadcrumb(__('Warning'), __('Warning'));
-        $resultPage->addBreadcrumb(__('Codes'), __('Codes'));
+        $resultPage->addBreadcrumb(__('Warning Codes'), __('Warning Codes'));
         return $resultPage;
     }
 }

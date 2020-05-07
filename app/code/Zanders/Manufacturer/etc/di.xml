@@ -13,9 +13,6 @@
                 type="Zanders\Manufacturer\Model\Manufacturer"/>
     <preference for="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface"
                 type="Zanders\Manufacturer\Model\ManufacturerRepository"/>
-    <!--<preference for="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface"
-                type="Zanders\Manufacturer\Model\ManufacturerRepository\ValidationComposite"/>-->
-
     <virtualType name="Zanders\Manufacturer\Model\Api\SearchCriteria\ManufacturerCollectionProcessor"
                  type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
         <arguments>

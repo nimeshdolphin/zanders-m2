@@ -7,10 +7,10 @@
             <resource ref="Zanders_Manufacturer::manufacturer"/>
         </resources>
     </route>
-    <route url="/V1/manufacturer/search" method="GET">
+    <route url="/V1/" method="GET">
         <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="getList"/>
         <resources>
-            <resource ref="Zanders_Manufacturer::manufacturer"/>
+            <resource ref="Zanders_manufacturer/searchManufacturer::manufacturer"/>
         </resources>
     </route>
     <route url="/V1/manufacturer" method="POST">

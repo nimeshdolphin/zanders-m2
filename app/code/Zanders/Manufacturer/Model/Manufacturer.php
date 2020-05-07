@@ -68,7 +68,7 @@ class Manufacturer extends AbstractModel implements ManufacturerInterface
      */
     public function getAddress()
     {
-        return $this->getData(self::NAME);
+        return $this->getData(self::ADDRESS);
     }
 
     /**
@@ -79,7 +79,7 @@ class Manufacturer extends AbstractModel implements ManufacturerInterface
      */
     public function setAddress($address)
     {
-        return $this->setData(self::NAME, $address);
+        return $this->setData(self::ADDRESS, $address);
     }
 
     /**

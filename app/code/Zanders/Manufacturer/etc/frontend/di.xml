@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_Manufacturer
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Helper\Output">
+        <plugin name="get_manufacturer_attribute_html" type="Zanders\Manufacturer\Plugin\Catalog\Helper\OutputPlugin"
+                sortOrder="100" disabled="true"/>
+    </type>
+</config>

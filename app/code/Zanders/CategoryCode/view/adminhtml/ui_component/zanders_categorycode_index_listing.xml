@@ -2,7 +2,7 @@
 <!--
 /**
  * @category   Zanders
- * @package    Zanders_Manufacturer
+ * @package    Zanders_CategoryCode
  */
  -->
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,13 +10,13 @@
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">
-                zanders_manufacturer_index_listing.zanders_manufacturer_index_listing_data_source
+                zanders_categorycode_index_listing.zanders_categorycode_index_listing_data_source
             </item>
             <item name="deps" xsi:type="string">
-                zanders_manufacturer_index_listing.zanders_manufacturer_index_listing_data_source
+                zanders_categorycode_index_listing.zanders_categorycode_index_listing_data_source
             </item>
         </item>
-        <item name="spinner" xsi:type="string">zanders_manufacturer_index_listing_columns</item>
+        <item name="spinner" xsi:type="string">zanders_categorycode_index_listing_columns</item>
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
@@ -26,18 +26,18 @@
             </item>
         </item>
     </argument>
-    <dataSource name="zanders_manufacturer_index_listing_data_source">
+    <dataSource name="zanders_categorycode_index_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">ZandersManufacturerGridDataProvider</argument>
-            <argument name="name" xsi:type="string">zanders_manufacturer_index_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">manufacturer_id</argument>
-            <argument name="requestFieldName" xsi:type="string">manufacturer_id</argument>
+            <argument name="class" xsi:type="string">ZandersCategoryCodeGridDataProvider</argument>
+            <argument name="name" xsi:type="string">zanders_categorycode_index_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">categorycode_id</argument>
+            <argument name="requestFieldName" xsi:type="string">categorycode_id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
                     <item name="update_url" xsi:type="url" path="mui/index/render"/>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">manufacturer_id</item>
+                        <item name="indexField" xsi:type="string">categorycode_id</item>
                     </item>
                 </item>
             </argument>
@@ -47,20 +47,21 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/grid/toolbar</item>
+                <item name="sticky" xsi:type="string">true</item>
             </item>
         </argument>
         <filterSearch name="fulltext">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="provider" xsi:type="string">
-                        zanders_manufacturer_index_listing.zanders_manufacturer_index_listing_data_source
+                        zanders_categorycode_index_listing.zanders_categorycode_index_listing_data_source
                     </item>
                     <item name="chipsProvider" xsi:type="string">
-                        zanders_manufacturer_index_listing.zanders_manufacturer_index_listing.listing_top.listing_filters_chips
+                        zanders_categorycode_index_listing.zanders_categorycode_index_listing.listing_top.listing_filters_chips
                     </item>
                     <item name="storageConfig" xsi:type="array">
                         <item name="provider" xsi:type="string">
-                            zanders_manufacturer_index_listing.zanders_manufacturer_index_listing.listing_top.bookmarks
+                            zanders_categorycode_index_listing.zanders_categorycode_index_listing.listing_top.bookmarks
                         </item>
                         <item name="namespace" xsi:type="string">current.search</item>
                     </item>
@@ -74,31 +75,9 @@
                         <message translate="true">Delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="zanders_manufacturer/items/massDelete"/>
+                    <url path="zanders_categorycode/items/massDelete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
-                </settings>
-            </action>
-            <action name="status">
-                <settings>
-                    <type>status</type>
-                    <label translate="true">Change status</label>
-                    <actions>
-                        <action name="0">
-                            <type>enable</type>
-                            <label translate="true">Enable</label>
-                            <url path="zanders_manufacturer/items/massStatus">
-                                <param name="status">1</param>
-                            </url>
-                        </action>
-                        <action name="1">
-                            <type>disable</type>
-                            <label translate="true">Disable</label>
-                            <url path="zanders_manufacturer/items/massStatus">
-                                <param name="status">0</param>
-                            </url>
-                        </action>
-                    </actions>
                 </settings>
             </action>
         </massaction>
@@ -107,41 +86,41 @@
                 <item name="config" xsi:type="array">
                     <item name="storageConfig" xsi:type="array">
                         <item name="provider" xsi:type="string">
-                            zanders_manufacturer_index_listing.zanders_manufacturer_index_listing.listing_top.bookmarks
+                            zanders_categorycode_index_listing.zanders_categorycode_index_listing.listing_top.bookmarks
                         </item>
                         <item name="namespace" xsi:type="string">current.paging</item>
                     </item>
                     <item name="selectProvider" xsi:type="string">
-                        zanders_manufacturer_index_listing.zanders_manufacturer_index_listing.zanders_manufacturer_index_listing_columns.ids
+                        zanders_categorycode_index_listing.zanders_categorycode_index_listing.zanders_categorycode_index_listing_columns.ids
                     </item>
                 </item>
             </argument>
         </paging>
     </container>
-    <columns name="zanders_manufacturer_index_listing_columns">
+    <columns name="zanders_categorycode_index_listing_columns">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="storageConfig" xsi:type="array">
                     <item name="provider" xsi:type="string">
-                        zanders_manufacturer_index_listing.zanders_manufacturer_index_listing.listing_top.bookmarks
+                        zanders_categorycode_index_listing.zanders_categorycode_index_listing.listing_top.bookmarks
                     </item>
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
                 <item name="editorConfig" xsi:type="array">
                     <item name="selectProvider" xsi:type="string">
-                        zanders_manufacturer_index_listing.zanders_manufacturer_index_listing.zanders_manufacturer_index_listing_columns.ids
+                        zanders_categorycode_index_listing.zanders_categorycode_index_listing.zanders_categorycode_index_listing_columns.ids
                     </item>
                     <item name="enabled" xsi:type="boolean">true</item>
-                    <item name="indexField" xsi:type="string">manufacturer_id</item>
+                    <item name="indexField" xsi:type="string">categorycode_id</item>
                     <item name="clientConfig" xsi:type="array">
-                        <item name="saveUrl" xsi:type="url" path="zanders_manufacturer/items/inlineEdit"/>
+                        <item name="saveUrl" xsi:type="url" path="zanders_categorycode/items/inlineEdit"/>
                         <item name="validateBeforeSave" xsi:type="boolean">false</item>
                     </item>
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
                         <item name="provider" xsi:type="string">
-                            zanders_manufacturer_index_listing.zanders_manufacturer_index_listing.zanders_manufacturer_index_listing_columns_editor
+                            zanders_categorycode_index_listing.zanders_categorycode_index_listing.zanders_categorycode_index_listing_columns_editor
                         </item>
                         <item name="target" xsi:type="string">startEdit</item>
                         <item name="params" xsi:type="array">
@@ -151,7 +130,7 @@
                     </item>
                     <item name="storageConfig" xsi:type="array">
                         <item name="provider" xsi:type="string">
-                            zanders_manufacturer_index_listing.zanders_manufacturer_index_listing.listing_top.bookmarks
+                            zanders_categorycode_index_listing.zanders_categorycode_index_listing.listing_top.bookmarks
                         </item>
                         <item name="root" xsi:type="string">columns.${ $.index }</item>
                         <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
@@ -162,24 +141,24 @@
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">manufacturer_id</item>
+                    <item name="indexField" xsi:type="string">categorycode_id</item>
                 </item>
             </argument>
         </selectionsColumn>
-        <column name="manufacturer_id">
+        <column name="categorycode_id">
             <argument name="data" xsi:type="array">
                 <item name="js_config" xsi:type="array">
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
                 </item>
                 <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">manufacturer_id</item>
+                    <item name="indexField" xsi:type="string">categorycode_id</item>
                     <item name="filter" xsi:type="string">textRange</item>
                     <item name="sorting" xsi:type="string">desc</item>
                     <item name="label" xsi:type="string" translate="true">ID</item>
                 </item>
             </argument>
         </column>
-        <column name="name">
+        <column name="category">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="editor" xsi:type="array">
@@ -189,79 +168,28 @@
                         </item>
                     </item>
                     <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="label" xsi:type="string" translate="true">Category</item>
                 </item>
             </argument>
         </column>
-        <column name="address">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Address</item>
-                </item>
-            </argument>
-        </column>
-        <column name="phone">
+        <column name="code">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">false</item>
-                        </item>
-                    </item>
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Phone</item>
-                </item>
-            </argument>
-        </column>
-        <column name="web">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">false</item>
-                        </item>
-                    </item>
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Website</item>
-                </item>
-            </argument>
-        </column>
-        <column name="image" class="Zanders\Manufacturer\Ui\Component\Listing\Column\Thumbnail">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="has_preview" xsi:type="string">1</item>
-                    <item name="label" xsi:type="string" translate="true">Image</item>
-                </item>
-            </argument>
-        </column>
-        <column name="status">
-            <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Zanders\Manufacturer\Model\Source\Status</item>
-                <item name="config" xsi:type="array">
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">select</item>
                         <item name="validation" xsi:type="array">
                             <item name="required-entry" xsi:type="boolean">true</item>
                         </item>
                     </item>
-                    <item name="filter" xsi:type="string">select</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
-                    <item name="label" xsi:type="string" translate="true">Status</item>
-                    <item name="dataType" xsi:type="string">select</item>
-                    <item name="sortOrder" xsi:type="number">30</item>
-                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Code</item>
                 </item>
             </argument>
         </column>
-        <actionsColumn name="actions" class="Zanders\Manufacturer\Ui\Component\Listing\Column\ManufacturerActions">
+        <actionsColumn name="actions" class="Zanders\CategoryCode\Ui\Component\Listing\Column\CategoryCodeActions">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">manufacturer_id</item>
+                    <item name="indexField" xsi:type="string">categorycode_id</item>
                     <item name="urlEntityParamName" xsi:type="string">id</item>
                 </item>
             </argument>

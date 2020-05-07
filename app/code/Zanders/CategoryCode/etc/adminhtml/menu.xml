@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_CategoryCode
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Zanders_CategoryCode::category_code" title="Category Code" module="Zanders_CategoryCode"
+             sortOrder="200"
+             parent="Zanders_Sports::zanders_catalog" action="zanders_categorycode/items/"
+             resource="Zanders_CategoryCode::category_code"/>
+    </menu>
+</config>

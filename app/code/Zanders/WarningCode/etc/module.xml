@@ -7,5 +7,9 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Zanders_WarningCode"/>
+    <module name="Zanders_WarningCode">
+        <sequence>
+            <module name="Zanders_Sports"/>
+        </sequence>
+    </module>
 </config>

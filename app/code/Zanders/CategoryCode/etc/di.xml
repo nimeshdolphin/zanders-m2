@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_CategoryCode
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="ZandersCategoryCodeGridFilterPool"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">
+                    Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter
+                </item>
+                <item name="fulltext" xsi:type="object">
+                    Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ZandersCategoryCodeGridDataProvider"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">
+                Zanders\CategoryCode\Model\ResourceModel\CategoryCode\Collection
+            </argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ZandersCategoryCodeGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Zanders\CategoryCode\Model\ResourceModel\CategoryCode\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">zanders_categorycode</argument>
+            <argument name="resourceModel" xsi:type="string">Zanders\CategoryCode\Model\ResourceModel\CategoryCode
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="zanders_categorycode_index_listing_data_source" xsi:type="string">
+                    Zanders\CategoryCode\Model\ResourceModel\CategoryCode\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

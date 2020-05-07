@@ -17,7 +17,7 @@ class Index extends \Zanders\Manufacturer\Controller\Adminhtml\Items
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Zanders_Manufacturer::test');
+        $resultPage->setActiveMenu('Zanders_Manufacturer::manufacturer');
         $resultPage->getConfig()->getTitle()->prepend(__('Manufacturers'));
         $resultPage->addBreadcrumb(__('Manufacturers'), __('Manufacturers'));
         return $resultPage;
