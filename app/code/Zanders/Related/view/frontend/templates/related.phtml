@@ -15,10 +15,11 @@
             $templateType = null;
             $description = false;
  
-	?>
-
-		<div class="products wrapper grid products-grid products-<?= /* @escapeNotVerified */ $type ?>">
-            <ol class="products list items product-items">
+	?> 
+        <div class='box-collateral box-related_products'>
+		<div id="owlslider">
+            
+                <ul>
                 <?php foreach ($items as $_item): ?>
                 <?php $available = ''; ?>
                 <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
@@ -26,11 +27,7 @@
                         <?php $available = 'related-available'; ?>
                     <?php endif; ?>
                 <?php endif; ?>
-                <?php if ($type == 'related' || $type == 'upsell'): ?>
-                    <li class="item product product-item">
-                <?php else: ?>
-                    <li class="item product product-item">
-                <?php endif; ?>
+                 
                 <div class="product-item-info <?= /* @escapeNotVerified */ $available ?>">
                     <?= /* @escapeNotVerified */ '<!-- ' . $image . '-->' ?>
                     <a href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>" class="product photo product-item-photo">
@@ -98,18 +95,20 @@
                     </div>
                 </li>
                 <?php endforeach ?>
-            </ol>
+            </ul>
         </div>
-     
-     <style>
-     	.products.wrapper.grid.products-grid.products-related { display: table; clear: left;
-    		background-color: #fff; width: 100%;}
-    	.product-item-info { margin: 0 auto;}	
-    	.product-item .product-item-info:hover {
-    		margin: 0 !important;
-    		box-shadow: none !important;
-    		border: none;
-		}
+        </div>
 
-		
-     </style>	
+      <script>
+        (function  () {
+            require(["jquery","owlcarousel"],function($) {
+                $(document).ready(function() {
+                    $("#owlslider").owlCarousel({
+                        navigation : true, // Show next and prev buttons
+                        autoPlay: false, //Set AutoPlay to 3 seconds 
+                        items : 5
+                    });
+                });
+            });
+        })();
+    </script>

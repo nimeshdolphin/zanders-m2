@@ -1,6 +1,10 @@
 <?xml version="1.0" ?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-	<body>
+	<head>
+    	<css src="Zanders_Related::css/related_products.css"/>
+    	<css src="Zanders_Related::css/owl.carousel.min.css"/>
+	</head>
+	<body>       
 		<referenceContainer name="content">
 			<block  class="Magento\Catalog\Block\Product\ProductList\Related" name="related.products.custom" after='product.info.media' template="Zanders_Related::related.phtml">
 				<arguments>
@@ -10,4 +14,4 @@
 		</referenceContainer>
 	</body>
 </page>
- 
+ 	

@@ -1,0 +1,24 @@
+/*.catalog-product-view .products.wrapper.grid.products-grid.products-related { display: table; clear: left;background-color: #fff; width: 100%;}
+.catalog-product-view .product-item-info { margin: 0 auto;}	
+.catalog-product-view .product-item .product-item-info:hover { margin: 0 !important; box-shadow: none !important;border: none;}
+.catalog-product-view li.item.product.product-item { background-color: #fff;}*/
+.catalog-product-view .owl-item li {
+    text-align: center;
+    background: #fff;
+    -webkit-box-sizing: unset;
+    width: 225px;
+    margin-right: 20px;
+    position: relative;
+    z-index: 1;
+    float: left;
+    min-height: 400px;
+     
+    margin: 0 auto;
+}
+
+.catalog-product-view .box-collateral.box-related_products h2 {
+	color: #fff;
+    border-bottom: 1px solid #fff;
+    font-weight: bold;
+    font-size: 15px;
+}

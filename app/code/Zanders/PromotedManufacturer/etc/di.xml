@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" type="Zanders\PromotedManufacturer\Model\PromotedManufacturerRepository"/>
+	<preference for="Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterface" type="Zanders\PromotedManufacturer\Model\Data\PromotedManufacturer"/>
+	<preference for="Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Zanders\PromotedManufacturer\Model\ResourceModel\PromotedManufacturer\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">zanders_promotedmanufacturer_promotedmanufacturer</argument>
+			<argument name="resourceModel" xsi:type="string">Zanders\PromotedManufacturer\Model\ResourceModel\PromotedManufacturer\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="zanders_promotedmanufacturer_promotedmanufacturer_listing_data_source" xsi:type="string">Zanders\PromotedManufacturer\Model\ResourceModel\PromotedManufacturer\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
