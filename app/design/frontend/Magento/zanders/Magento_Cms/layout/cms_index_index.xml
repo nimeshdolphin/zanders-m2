@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceContainer name="columns">
+			<container name="content.bottom.area" htmlTag="div" htmlClass="content-bottom-area" after="main">
+				<block class="Magento\Cms\Block\Block" name="n-hp-featured-banners">
+					<arguments>
+						<argument name="block_id" xsi:type="string">n-hp-featured-banners</argument>
+					</arguments>
+				</block>
+				<block class="Zanders\Sports\Block\Homeproducts" name="home.featured.product" template="Zanders_Sports::homepage/featured_products.phtml"/>
+				<block class="Zanders\Sports\Block\Homeproducts" name="home.dailyspecial.product" template="Zanders_Sports::homepage/daily_specials.phtml"/>
+				<block class="Zanders\Sports\Block\Homeproducts" name="home.hotsale.product" template="Zanders_Sports::homepage/hotsale_products.phtml"/>
+			</container>
+		</referenceContainer>
+    </body>
+</page>

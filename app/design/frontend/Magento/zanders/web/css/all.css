@@ -334,3 +334,7 @@ address {
     color: #c40000;
     font-weight: bold;
 }
+.page-layout-1column .column.main {
+    float: right;
+    width: 1015px !important;
+}
