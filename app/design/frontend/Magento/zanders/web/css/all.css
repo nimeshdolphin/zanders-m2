@@ -5,7 +5,7 @@ body {
     background: #efefef;
     font: 12px/1.55 Montserrat, Helvetica, sans-serif;
     color: #2f2f2f;
-} 
+}
 body .page-main {
     background: #06466C;
     min-height: 900px;
@@ -157,7 +157,7 @@ footer.page-footer {
     background: url(../images/css_sprites.png) -10px -10px;
 	width: 272px;
     height: 141px;
-    margin: 0 0 0 25px;
+    margin: 0 0 0 25px !important;
     max-width: 100%;
 }
 .footer .basement {
@@ -302,7 +302,6 @@ address {
     height: 70px;
     background: #991020;
     width: 320px;
-    color: #ffffff;
 	text-align: center;
     font-size: 16px;
 }
@@ -316,7 +315,7 @@ address {
     content: ' ';
 	background-repeat: no-repeat;
 }
-.search-menu-cart .minicart-wrapper .block-content span {
+.search-menu-cart .minicart-wrapper .showcart .block-cart .block-content span {
     height: 70px;
     line-height: 70px;
     font-size: 14px;
@@ -325,7 +324,7 @@ address {
     color: #fff;
 }
 .minicart-wrapper .action.showcart:before{
-	display:none;
+	display:none !important;
 }
 .page-wrapper .header.content {
     padding: 25px;
@@ -337,4 +336,125 @@ address {
 .page-layout-1column .column.main {
     float: right;
     width: 1015px !important;
+}
+.minicart-wrapper .action.showcart.active:active:before{
+    display: none;
+}
+.minicart-wrapper a.product-item-photo {
+    border: 1px solid #a9a9a9;
+}
+div#minicart-content-wrapper {
+    text-align: left;
+}
+.minicart-wrapper .minicart-items .product-item-name a {
+    color: #000;
+    font-size: 12px;
+}
+.minicart-wrapper .minicart-items .product-item-name{
+    margin: 0;
+    padding-right: 34px;
+}
+.minicart-wrapper .minicart-items .product-item-details {
+    padding-left: 60px;
+}
+.minicart-wrapper .block-minicart li {
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.search-menu-cart .minicart-wrapper .product .actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+}
+.search-menu-cart .minicart-wrapper .action.edit:before{
+    background: url(../images/btn_edit.gif) 0 0 no-repeat;
+    content: '';
+    width: 11px;
+    height: 11px;
+}
+.search-menu-cart .minicart-items .action.delete:before {
+    content: '';
+    background: url(../images/btn_remove.gif) 0 0 no-repeat;
+    width: 11px;
+    height: 11px;
+}
+.minicart-wrapper .product .actions > .primary:not(:last-child) {
+    margin-right: 5px;
+}
+.search-menu-cart .minicart-wrapper .block-minicart {
+    margin-top: 0;
+    width: 320px;
+    right: 0;
+    border: 0;
+}
+.search-menu-cart .minicart-items-wrapper{
+    padding: 7px 0;
+    margin: 0;
+    border: 0;
+}
+.minicart-wrapper .block-minicart {
+    width: 320px;
+    right: 0;
+    border: 0;
+    padding: 10px;
+}
+.minicart-wrapper .block-minicart .subtitle {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+}
+.minicart-wrapper .product-item-pricing {
+    margin-top: -5px;
+}
+
+.block-minicart .block-content > .actions a {
+    color: #fff;
+    text-transform: uppercase;
+    font: bold 12px/26px Montserrat, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.block-minicart .block-content > .actions {
+    margin-top: 8px;
+    background: #50a725;
+    padding-top: 7px;
+    padding-bottom: 6px;
+}
+.block-minicart .block-content > .actions a:hover {
+    text-decoration: none;
+}
+.block-minicart .block-content > .actions:hover {
+    background: #3a7a1a;
+}
+.search-menu-cart .minicart-items .product-item:not(:first-child) {
+    border-top: 0;
+}
+.search-menu-cart .price-container {
+    display: inline-block;
+}
+span.miniqty:after {
+    content: 'x';
+    padding-left: 3px;
+    font-weight: 400;
+}
+span.miniqty {
+    font-size: 12px;
+    font-weight: bold;
+}
+.minicart-items .product-item-details .price {
+    font-weight: normal;
+    font-size: 12px;
+}
+.subtotal-section {
+    padding: 7px;
+    background: #efefef;
+    font-size: 12px;
+    text-align: center;
+}
+.subtotal-section span.price {
+    font-weight: 700;
+}
+.minicart-wrapper .block-minicart li:nth-child(even) {
+    background: #fafafa;
 }

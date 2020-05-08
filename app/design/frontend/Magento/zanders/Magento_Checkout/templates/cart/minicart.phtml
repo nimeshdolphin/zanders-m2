@@ -28,6 +28,34 @@
 			</div>
 		</div>
 	</a>
+	<?php if ($block->getIsNeedToDisplaySideBar()) :?>
+        <div class="block block-minicart"
+             data-role="dropdownDialog"
+             data-mage-init='{"dropdownDialog":{
+             	"triggerEvent" : "hover",
+                "appendTo":"[data-block=minicart]",
+                "triggerTarget":".showcart",
+                "timeout": "2000",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "closeOnMouseLeave": true,
+                "triggerClass":"active",
+                "parentClass":"active",
+                "buttons":[]}}'>
+            <div id="minicart-content-wrapper" data-bind="scope: 'minicart_content'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+            <?= $block->getChildHtml('minicart.addons') ?>
+        </div>
+    <?php else :?>
+        <script>
+            require(['jquery'], function ($) {
+                $('a.action.showcart').click(function() {
+                    $(document.body).trigger('processStart');
+                });
+            });
+        </script>
+    <?php endif ?>
 </div>
 
 
@@ -45,4 +73,20 @@
 		) ?>"
 	}
 }
+</script>
+<script type="text/javascript">
+     require(['jquery'], function($){
+        $(document).ready(function(){
+            $("[data-block='minicart']").on("dropdowndialogopen", (e) => {
+                $(".block-minicart").hide();
+                $(".block-minicart").slideDown(500);
+				$(".fullscreen-blackout").addClass('active');
+            });
+            $("[data-block='minicart']").on("dropdowndialogclose", (e) => {
+               $(".mage-dropdown-dialog").show();
+               $('.block-minicart').slideUp(500);
+			   $(".fullscreen-blackout").removeClass('active');
+            });
+        });
+ });
 </script>
