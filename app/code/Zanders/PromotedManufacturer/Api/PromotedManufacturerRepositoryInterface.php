@@ -8,6 +8,19 @@ interface PromotedManufacturerRepositoryInterface {
 
 	/**
 	 * Save PromotedManufacturer
+	 * @param string id
+	 * @param string $category_id
+	 * @param string $manufacture_id
+	 * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterface
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 */
+	public function update($id,
+		$category_id,
+		$manufacture_id
+	);
+
+	/**
+	 * Save PromotedManufacturer
 	 * @param string $category_id
 	 * @param string $manufacture_id
 	 * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterface
@@ -54,4 +67,12 @@ interface PromotedManufacturerRepositoryInterface {
 	 * @throws \Magento\Framework\Exception\LocalizedException
 	 */
 	public function deleteById($promotedmanufacturerId);
+
+	/**
+	 * Retrieve PromotedManufacturer matching the specified criteria.
+	 * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerSearchResultsInterface
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 */
+	public function PromotedmanufacturerList();
+
 }
