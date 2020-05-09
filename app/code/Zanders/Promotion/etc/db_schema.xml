@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="zanders_promotion" resource="default" comment="Zanders Promotion Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="promotion_id" identity="true" unsigned="true" nullable="false"
+                comment="Promotion Id"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false"/>
+        <column xsi:type="tinyint" name="type" nullable="false" default="1"/>
+        <column xsi:type="text" name="pdf" nullable="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="promotion_id"/>
+        </constraint>
+        <index referenceId="ZANDERS_PROMOTION_TITLE" indexType="fulltext">
+            <column name="title"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="promotion_listing_data_source" xsi:type="string">
+                    Zanders\Promotion\Model\ResourceModel\Promotion\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Zanders\Promotion\Model\ResourceModel\Promotion\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">zanders_promotion</argument>
+            <argument name="eventPrefix" xsi:type="string">
+                promotion_promotion_grid_collection
+            </argument>
+            <argument name="eventObject" xsi:type="string">promotion_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">
+                Zanders\Promotion\Model\ResourceModel\Promotion
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="PromotionGridFilterPool"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">
+                    Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter
+                </item>
+                <item name="fulltext" xsi:type="object">
+                    Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- For filter -->
+    <type name="Zanders\Promotion\Ui\Component\DataProvider">
+        <arguments>
+            <argument name="additionalFilterPool" xsi:type="array">
+                <item name="fulltext" xsi:type="object">
+                    Zanders\Promotion\Ui\Component\Promotion\FulltextFilter
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Zanders\Promotion\Ui\Component\MassAction\Status\Options">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">*/*/massStatus</item>
+                <item name="paramName" xsi:type="string">status</item>
+                <item name="confirm" xsi:type="array">
+                    <item name="title" xsi:type="string" translatable="true">Change Status</item>
+                    <item name="message" xsi:type="string" translatable="true">Are you sure?</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Payment\Model\Method\AbstractMethod">
+        <plugin name="method_info" type="Zanders\Promotion\Plugin\Payment\Model\Method\AbstractMethod"/>
+    </type>
+    <preference for="Magento\Sales\Model\Order\CreditmemoFactory"
+                type="Zanders\Promotion\Plugin\Sales\Model\Order\CreditmemoFactory"/>
+    <!-- Save refunded promotion value -->
+    <type name="Magento\Sales\Model\Order\Creditmemo\RefundOperation">
+        <plugin name="add_extra_charge_refunded_to_order"
+                type="Zanders\Promotion\Plugin\Sales\Model\Order\Creditmemo\RefundOperation" disabled="false"
+                sortOrder="500"/>
+    </type>
+</config>

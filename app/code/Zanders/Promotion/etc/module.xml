@@ -2,15 +2,13 @@
 <!--
 /**
  * @category   Zanders
- * @package    Zanders_WarningCode
+ * @package    Zanders_Promotion
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Zanders_WarningCode">
+    <module name="Zanders_Promotion">
         <sequence>
-            <module name="Magento_Catalog"/>
-            <module name="Magento_Checkout"/>
             <module name="Zanders_Sports"/>
         </sequence>
     </module>

@@ -101,9 +101,9 @@ class Product extends AbstractSource implements SourceInterface, OptionSourceInt
 
         if ($withEmpty) {
             if (!$this->_options) {
-                return [['value' => '', 'label' => __('None')]];
+                return [['value' => '', 'label' => __('')]];
             } else {
-                return array_merge([['value' => '', 'label' => __('None')]], $this->_options);
+                return array_merge([['value' => '', 'label' => __('')]], $this->_options);
             }
         }
         return $this->_options;

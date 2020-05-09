@@ -46,9 +46,10 @@ class Style extends \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFronten
      */
     public function getValue(\Magento\Framework\DataObject $object)
     {
-        $this->getAttribute()->setData(\Magento\Catalog\Model\ResourceModel\Eav\Attribute::IS_HTML_ALLOWED_ON_FRONT, 1);
-        // $value = parent::getValue($object);
+        $value = parent::getValue($object);
+        if (!$value || $value == "") return false;
 
+        $this->getAttribute()->setData(\Magento\Catalog\Model\ResourceModel\Eav\Attribute::IS_HTML_ALLOWED_ON_FRONT, 1);
         $manufacturerId = $object->getData($this->getAttribute()->getAttributeCode());
         $manufacturer = $this->manufacturerClassRepository->getById($manufacturerId);
 
