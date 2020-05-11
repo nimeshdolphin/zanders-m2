@@ -9,21 +9,14 @@ namespace Zanders\Promotion\Ui\Component;
 use Magento\Framework\Api\Filter;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\AuthorizationInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
 
 /**
  * DataProvider for Promotion ui.
  */
-class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
+class PromotionDataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
-    /**
-     * @var AuthorizationInterface
-     */
-    private $authorization;
-
     /**
      * @var AddFilterInterface[]
      */

@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">promotion_listing.promotion_listing_data_source
+            <item name="provider" xsi:type="string">bogo_listing.bogo_listing_data_source
             </item>
         </item>
     </argument>
@@ -15,24 +15,24 @@
                 <label translate="true">Add New</label>
             </button>
         </buttons>
-        <spinner>promotion_columns</spinner>
+        <spinner>bogo_columns</spinner>
         <deps>
-            <dep>promotion_listing.promotion_listing_data_source</dep>
+            <dep>bogo_listing.bogo_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="promotion_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="bogo_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
-                <param name="indexField" xsi:type="string">promotion_id</param>
+                <param name="indexField" xsi:type="string">bogo_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Zanders_Promotion::promotion</aclResource>
-        <dataProvider class="Zanders\Promotion\Ui\Component\PromotionDataProvider"
-                      name="promotion_listing_data_source">
+        <aclResource>Zanders_Promotion::bogo</aclResource>
+        <dataProvider class="Zanders\Promotion\Ui\Component\BogoDataProvider"
+                      name="bogo_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
-                <primaryFieldName>promotion_id</primaryFieldName>
+                <primaryFieldName>bogo_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>
@@ -64,7 +64,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="selectProvider" xsi:type="string">
-                        promotion_listing.promotion_listing.promotion_columns.ids
+                        bogo_listing.bogo_listing.bogo_columns.ids
                     </item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
                     <item name="indexField" xsi:type="string">id</item>
@@ -86,7 +86,7 @@
                     <callback>
                         <target>editSelected</target>
                         <provider>
-                            promotion_listing.promotion_listing.promotion_columns_editor
+                            bogo_listing.bogo_listing.bogo_columns_editor
                         </provider>
                     </callback>
                     <type>edit</type>
@@ -96,23 +96,23 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="promotion_columns">
+    <columns name="bogo_columns">
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
                     <item name="saveUrl" xsi:type="url" path="*/*/inlineEdit"/>
                     <item name="validateBeforeSave" xsi:type="boolean">false</item>
                 </param>
-                <param name="indexField" xsi:type="string">promotion_id</param>
+                <param name="indexField" xsi:type="string">bogo_id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
                 <param name="selectProvider" xsi:type="string">
-                    promotion_listing.promotion_listing.promotion_columns.ids
+                    bogo_listing.bogo_listing.bogo_columns.ids
                 </param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
                     <item name="provider" xsi:type="string">
-                        promotion_listing.promotion_listing.promotion_columns_editor
+                        bogo_listing.bogo_listing.bogo_columns_editor
                     </item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
@@ -124,19 +124,19 @@
         </settings>
         <selectionsColumn name="ids">
             <settings>
-                <indexField>promotion_id</indexField>
+                <indexField>bogo_id</indexField>
                 <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>55</resizeDefaultWidth>
             </settings>
         </selectionsColumn>
-        <column name="promotion_id">
+        <column name="bogo_id">
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">ID</label>
                 <sorting>asc</sorting>
             </settings>
         </column>
-        <column name="title">
+        <column name="buy_one_sku">
             <settings>
                 <filter>text</filter>
                 <editor>
@@ -145,23 +145,36 @@
                     </validation>
                     <editorType>text</editorType>
                 </editor>
-                <label translate="true">Title</label>
+                <label translate="true">Buy One Sku</label>
             </settings>
         </column>
-        <column name="type" component="Magento_Ui/js/grid/columns/select">
+        <column name="buy_one_id">
             <settings>
-                <options class="Zanders\Promotion\Model\Config\Source\Type"/>
-                <filter>select</filter>
+                <filter>text</filter>
+                <label translate="true">Buy One Id</label>
+            </settings>
+        </column>
+        <column name="get_one_sku">
+            <settings>
+                <filter>text</filter>
                 <editor>
-                    <editorType>select</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
                 </editor>
-                <dataType>select</dataType>
-                <label translate="true">Promotion Type</label>
+                <label translate="true">Get One Sku</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Zanders\Promotion\Ui\Component\Listing\Column\PromotionActions">
+        <column name="get_one_id">
             <settings>
-                <indexField>promotion_id</indexField>
+                <filter>text</filter>
+                <label translate="true">Get One Id</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Zanders\Promotion\Ui\Component\Listing\Column\BogoActions">
+            <settings>
+                <indexField>bogo_id</indexField>
                 <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>107</resizeDefaultWidth>
             </settings>

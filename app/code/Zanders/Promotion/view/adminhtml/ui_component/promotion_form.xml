@@ -24,7 +24,7 @@
     </argument>
     <dataSource name="promotion_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Zanders\Promotion\Model\DataProvider</argument>
+            <argument name="class" xsi:type="string">Zanders\Promotion\Model\PromotionDataProvider</argument>
             <argument name="name" xsi:type="string">promotion_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">promotion_id</argument>
             <argument name="requestFieldName" xsi:type="string">promotion_id</argument>

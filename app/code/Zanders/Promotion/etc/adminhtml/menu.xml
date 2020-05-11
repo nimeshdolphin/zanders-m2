@@ -2,9 +2,14 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Zanders_Promotion::promotion" title="Promotion"
+        <add id="Zanders_Promotion::promotion" title="Promotions and Flyers"
              module="Zanders_Promotion" sortOrder="100" parent="Magento_CatalogRule::promo"
              action="promotion/index/index"
              resource="Zanders_Promotion::promotion"/>
+
+        <add id="Zanders_Promotion::bogo" title="Buy One Get One Promos"
+             module="Zanders_Promotion" sortOrder="110" parent="Magento_CatalogRule::promo"
+             action="promotion/bogo/index"
+             resource="Zanders_Promotion::bogo"/>
     </menu>
 </config>

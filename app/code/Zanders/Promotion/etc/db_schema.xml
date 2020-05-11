@@ -15,4 +15,21 @@
             <column name="title"/>
         </index>
     </table>
+    <table name="zanders_bogo" resource="default" comment="Zanders BOGO Promotion Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="bogo_id" identity="true" unsigned="true" nullable="false"
+                comment="BOGO Promotion Id"/>
+        <column xsi:type="varchar" name="buy_one_sku" length="255" nullable="false"/>
+        <column xsi:type="int" name="buy_one_id" nullable="false" default="0"/>
+        <column xsi:type="varchar" name="get_one_sku" length="255" nullable="false"/>
+        <column xsi:type="int" name="get_one_id" nullable="false" default="0"/>
+        <column xsi:type="text" name="details" nullable="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="bogo_id"/>
+        </constraint>
+        <index referenceId="ZANDERS_BOGO_BUY_ONE_SKU_GET_ONE_SKU" indexType="fulltext">
+            <column name="buy_one_sku"/>
+            <column name="get_one_sku"/>
+        </index>
+    </table>
 </schema>

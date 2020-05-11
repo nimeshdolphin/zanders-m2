@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Zanders\Promotion\Ui\Component\Promotion;
+namespace Zanders\Promotion\Ui\Component\Bogo;
 
 use Zanders\Promotion\Ui\Component\AddFilterInterface;
 use Magento\Framework\Api\Filter;
@@ -36,11 +36,16 @@ class FulltextFilter implements AddFilterInterface
      */
     public function addFilter(SearchCriteriaBuilder $searchCriteriaBuilder, Filter $filter)
     {
-        $titleFilter = $this->filterBuilder->setField('title')
+        $buyOneSkuFilter = $this->filterBuilder->setField('buy_one_sku')
             ->setValue(sprintf('%%%s%%', $filter->getValue()))
             ->setConditionType('like')
             ->create();
+        $searchCriteriaBuilder->addFilter($buyOneSkuFilter);
 
-        $searchCriteriaBuilder->addFilter($titleFilter);
+        $getOneSkuFilter = $this->filterBuilder->setField('get_one_sku')
+            ->setValue(sprintf('%%%s%%', $filter->getValue()))
+            ->setConditionType('like')
+            ->create();
+        $searchCriteriaBuilder->addFilter($getOneSkuFilter);
     }
 }

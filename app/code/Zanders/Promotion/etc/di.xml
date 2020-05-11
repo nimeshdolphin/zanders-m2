@@ -7,36 +7,28 @@
                 <item name="promotion_listing_data_source" xsi:type="string">
                     Zanders\Promotion\Model\ResourceModel\Promotion\Grid\Collection
                 </item>
+                <item name="bogo_listing_data_source" xsi:type="string">
+                    Zanders\Promotion\Model\ResourceModel\Bogo\Grid\Collection
+                </item>
             </argument>
         </arguments>
     </type>
-    <type name="Zanders\Promotion\Model\ResourceModel\Promotion\Grid\Collection">
+    <virtualType name="Zanders\Promotion\Model\ResourceModel\Promotion\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">zanders_promotion</argument>
-            <argument name="eventPrefix" xsi:type="string">
-                promotion_promotion_grid_collection
-            </argument>
-            <argument name="eventObject" xsi:type="string">promotion_grid_collection</argument>
-            <argument name="resourceModel" xsi:type="string">
-                Zanders\Promotion\Model\ResourceModel\Promotion
-            </argument>
+            <argument name="resourceModel" xsi:type="string">Zanders\Promotion\Model\ResourceModel\Promotion</argument>
         </arguments>
-    </type>
-    <virtualType name="PromotionGridFilterPool"
-                 type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+    </virtualType>
+    <virtualType name="Zanders\Promotion\Model\ResourceModel\Bogo\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="appliers" xsi:type="array">
-                <item name="regular" xsi:type="object">
-                    Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter
-                </item>
-                <item name="fulltext" xsi:type="object">
-                    Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter
-                </item>
-            </argument>
+            <argument name="mainTable" xsi:type="string">zanders_bogo</argument>
+            <argument name="resourceModel" xsi:type="string">Zanders\Promotion\Model\ResourceModel\Bogo</argument>
         </arguments>
     </virtualType>
     <!-- For filter -->
-    <type name="Zanders\Promotion\Ui\Component\DataProvider">
+    <type name="Zanders\Promotion\Ui\Component\PromotionDataProvider">
         <arguments>
             <argument name="additionalFilterPool" xsi:type="array">
                 <item name="fulltext" xsi:type="object">
@@ -45,27 +37,13 @@
             </argument>
         </arguments>
     </type>
-    <type name="Zanders\Promotion\Ui\Component\MassAction\Status\Options">
+    <type name="Zanders\Promotion\Ui\Component\BogoDataProvider">
         <arguments>
-            <argument name="data" xsi:type="array">
-                <item name="urlPath" xsi:type="string">*/*/massStatus</item>
-                <item name="paramName" xsi:type="string">status</item>
-                <item name="confirm" xsi:type="array">
-                    <item name="title" xsi:type="string" translatable="true">Change Status</item>
-                    <item name="message" xsi:type="string" translatable="true">Are you sure?</item>
+            <argument name="additionalFilterPool" xsi:type="array">
+                <item name="fulltext" xsi:type="object">
+                    Zanders\Promotion\Ui\Component\Bogo\FulltextFilter
                 </item>
             </argument>
         </arguments>
-    </type>
-    <type name="Magento\Payment\Model\Method\AbstractMethod">
-        <plugin name="method_info" type="Zanders\Promotion\Plugin\Payment\Model\Method\AbstractMethod"/>
-    </type>
-    <preference for="Magento\Sales\Model\Order\CreditmemoFactory"
-                type="Zanders\Promotion\Plugin\Sales\Model\Order\CreditmemoFactory"/>
-    <!-- Save refunded promotion value -->
-    <type name="Magento\Sales\Model\Order\Creditmemo\RefundOperation">
-        <plugin name="add_extra_charge_refunded_to_order"
-                type="Zanders\Promotion\Plugin\Sales\Model\Order\Creditmemo\RefundOperation" disabled="false"
-                sortOrder="500"/>
     </type>
 </config>

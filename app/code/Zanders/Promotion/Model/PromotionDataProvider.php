@@ -15,7 +15,7 @@ use Magento\Framework\AuthorizationInterface;
 /**
  * Class DataProvider
  */
-class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
+class PromotionDataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 {
     /**
      * @var \Zanders\Promotion\Model\ResourceModel\Promotion\Collection
