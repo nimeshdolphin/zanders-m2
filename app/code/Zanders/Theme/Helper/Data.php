@@ -5,16 +5,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
 	protected $_customerSession;
 	protected $stockState;
+    protected $customer;
 
     public function __construct(
     	\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
 		\Magento\Customer\Model\Session $customerSession,
-		\Magento\CatalogInventory\Api\StockStateInterface $stockState
+		\Magento\CatalogInventory\Api\StockStateInterface $stockState,
+        \Magento\Customer\Block\Account\Customer $customer
     )
     {
     	$this->scopeConfig = $scopeConfig;
 		$this->_customerSession = $customerSession;
 		$this->stockState = $stockState;
+        $this->customer = $customer;
     }
 
     public function getConfig($config_path)
@@ -27,14 +30,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getCustomerGroupId(){
         $customerGroup = '';
-        if($this->_customerSession->isLoggedIn()){
+        if($this->customer->customerLoggedIn()){
             $customerGroup = $this->_customerSession->getCustomer()->getGroupId();
         }
         return $customerGroup;
     }
 
     public function getCustomerLogin(){
-        if($this->_customerSession->isLoggedIn()){
+        if($this->customer->customerLoggedIn()){
             return true;
         }
         return false;

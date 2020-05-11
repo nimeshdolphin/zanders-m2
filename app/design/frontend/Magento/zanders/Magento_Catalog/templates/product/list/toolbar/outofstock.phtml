@@ -1,0 +1,15 @@
+<?php
+/*
+* $block Zanders\Theme\Block\Outofstock
+*/
+?>
+<a style="color: #DC6809; font-weight:bold;float:left;" href="<?= $this->getUrl('zanders/index/outofstock'); ?>">
+    <?php
+        $values = $block->getOutOfStockSession();
+        if($values =='y'){
+            echo __('Show Out of Stock Items');
+        }else{
+            echo __('Hide Out of Stock Items');
+        }
+     ?>
+</a>
