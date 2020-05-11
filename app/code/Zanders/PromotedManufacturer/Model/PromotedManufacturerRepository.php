@@ -11,6 +11,8 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Store\Model\StoreManagerInterface;
+use Zanders\Manufacturer\Api\Data;
+use Zanders\Manufacturer\Model\ResourceModel\Manufacturer\CollectionFactory as ManufacturerCollectionFactory;
 use Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterfaceFactory;
 use Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerSearchResultsInterfaceFactory;
 use Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface;
@@ -18,6 +20,10 @@ use Zanders\PromotedManufacturer\Model\ResourceModel\PromotedManufacturer as Res
 use Zanders\PromotedManufacturer\Model\ResourceModel\PromotedManufacturer\CollectionFactory as PromotedManufacturerCollectionFactory;
 
 class PromotedManufacturerRepository implements PromotedManufacturerRepositoryInterface {
+
+	protected $categoryRepository;
+
+	protected $dataManufacturerFactory;
 
 	protected $extensionAttributesJoinProcessor;
 
@@ -41,6 +47,11 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 	protected $promotedManufacturerFactory;
 
 	/**
+	 * @var ManufacturerFactory
+	 */
+	protected $manufacturerFactory;
+
+	/**
 	 * @param ResourcePromotedManufacturer $resource
 	 * @param PromotedManufacturerFactory $promotedManufacturerFactory
 	 * @param PromotedManufacturerInterfaceFactory $dataPromotedManufacturerFactory
@@ -54,6 +65,7 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 	 * @param ExtensibleDataObjectConverter $extensibleDataObjectConverter
 	 */
 	public function __construct(
+		\Magento\Catalog\Model\CategoryRepository $categoryRepository,
 		ResourcePromotedManufacturer $resource,
 		PromotedManufacturerFactory $promotedManufacturerFactory,
 		PromotedManufacturerInterfaceFactory $dataPromotedManufacturerFactory,
@@ -64,8 +76,11 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 		StoreManagerInterface $storeManager,
 		CollectionProcessorInterface $collectionProcessor,
 		JoinProcessorInterface $extensionAttributesJoinProcessor,
-		ExtensibleDataObjectConverter $extensibleDataObjectConverter
+		ExtensibleDataObjectConverter $extensibleDataObjectConverter,
+		Data\ManufacturerInterfaceFactory $dataManufacturerFactory,
+		\Zanders\Manufacturer\Model\ManufacturerFactory $manufacturerFactory
 	) {
+		$this->categoryRepository = $categoryRepository;
 		$this->resource = $resource;
 		$this->promotedManufacturerFactory = $promotedManufacturerFactory;
 		$this->promotedManufacturerCollectionFactory = $promotedManufacturerCollectionFactory;
@@ -77,6 +92,52 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 		$this->collectionProcessor = $collectionProcessor;
 		$this->extensionAttributesJoinProcessor = $extensionAttributesJoinProcessor;
 		$this->extensibleDataObjectConverter = $extensibleDataObjectConverter;
+		$this->dataManufacturerFactory = $dataManufacturerFactory;
+		$this->manufacturerFactory = $manufacturerFactory;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function update($id,
+		$category_id, $manufacturer_id
+	) {
+		/* if (empty($promotedManufacturer->getStoreId())) {
+			            $storeId = $this->storeManager->getStore()->getId();
+			            $promotedManufacturer->setStoreId($storeId);
+		*/
+
+		try {
+
+			$promotedManufacturerModel = $this->promotedManufacturerFactory->create();
+			$promotedManufacturerModel->load($id);
+
+			$category = $this->categoryRepository->get($category_id);
+
+			if ($manufacturer_id) {
+				$man = explode(',', $manufacturer_id);
+
+				foreach ($man as $id) {
+					$manufacturer = $this->manufacturerFactory->create();
+
+					$manufacturer->load($id);
+					if (!$manufacturer->getId()) {
+						throw new NoSuchEntityException(__('The manufacturer with the "%1" ID doesn\'t exist.', $id));
+					}
+				}
+
+			}
+
+			$promotedManufacturerData = array('category_id' => $category_id, 'manufacturer_id' => $manufacturer_id);
+			$promotedManufacturerModel->setData($promotedManufacturerData);
+
+			$this->resource->save($promotedManufacturerModel);
+		} catch (\Exception $exception) {
+			throw new CouldNotSaveException(__(
+				$exception->getMessage()
+			));
+		}
+		return $promotedManufacturerModel->getDataModel();
 	}
 
 	/**
@@ -90,14 +151,30 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 			            $promotedManufacturer->setStoreId($storeId);
 		*/
 
-		$promotedManufacturerData = array('category_id' => $category_id, 'manufacturer_id' => $manufacturer_id);
-		$promotedManufacturerModel = $this->promotedManufacturerFactory->create()->setData($promotedManufacturerData);
-
 		try {
+
+			$category = $this->categoryRepository->get($category_id);
+
+			if ($manufacturer_id) {
+				$man = explode(',', $manufacturer_id);
+
+				foreach ($man as $id) {
+					$manufacturer = $this->manufacturerFactory->create();
+
+					$manufacturer->load($id);
+					if (!$manufacturer->getId()) {
+						throw new NoSuchEntityException(__('The manufacturer with the "%1" ID doesn\'t exist.', $id));
+					}
+				}
+
+			}
+
+			$promotedManufacturerData = array('category_id' => $category_id, 'manufacturer_id' => $manufacturer_id);
+			$promotedManufacturerModel = $this->promotedManufacturerFactory->create()->setData($promotedManufacturerData);
+
 			$this->resource->save($promotedManufacturerModel);
 		} catch (\Exception $exception) {
 			throw new CouldNotSaveException(__(
-				'Could not save the promotedManufacturer: %1',
 				$exception->getMessage()
 			));
 		}
@@ -114,6 +191,28 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 			throw new NoSuchEntityException(__('PromotedManufacturer with id "%1" does not exist.', $promotedManufacturerId));
 		}
 		return $promotedManufacturer->getDataModel();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function PromotedmanufacturerList(
+	) {
+		$collection = $this->promotedManufacturerCollectionFactory->create();
+
+		//$this->collectionProcessor->process($criteria, $collection);
+
+		$searchResults = $this->searchResultsFactory->create();
+		//$searchResults->setSearchCriteria($criteria);
+
+		$items = [];
+		foreach ($collection as $model) {
+			$items[] = $model->getDataModel();
+		}
+
+		$searchResults->setItems($items);
+		$searchResults->setTotalCount($collection->getSize());
+		return $searchResults;
 	}
 
 	/**

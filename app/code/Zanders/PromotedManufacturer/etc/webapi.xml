@@ -6,18 +6,31 @@
 			<resource ref="anonymous"/>
 		</resources>
 	</route>
+	<route method="POST" url="/V1/promotedmanufacturer_api/update">
+		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="update"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
 	<route method="GET" url="/V1/promotedmanufacturer_api/list">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="getList"/>
 		<resources>
 			<resource ref="anonymous"/>
 		</resources>
 	</route>
+	<route method="GET" url="/V1/promotedmanufacturer_api/promotedmanufacturerList">
+		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="PromotedmanufacturerList"/>
+		<resources>
+			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
+		</resources>
+	</route>
+	
 	<route method="GET" url="/V1/promotedmanufacturer_api/get/:promotedmanufacturerId">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="get"/>
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
 		</resources>
-	</route>
+	</route>	
 	<route method="PUT" url="/V1/zanders-promotedmanufacturer/promotedmanufacturer/:promotedmanufacturerId">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="save"/>
 		<resources>
