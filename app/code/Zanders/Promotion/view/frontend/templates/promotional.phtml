@@ -1,0 +1,75 @@
+<?php
+/**
+ * @category   Zanders
+ * @package    Zanders_Promotion
+ */
+
+/* @var $block Zanders\Promotion\Block\Promotional */
+?>
+<h3><?= __("Promotions &amp; Flyers") ?></h3>
+<ul style="margin-bottom:20px;">
+    <?php if ($title = $block->getConfig('sports/promotions/currentcatalog')) : ?>
+        <li><a target="_blank"
+               href="<?php echo $this->getUrl() . 'current_catalog/index.html' ?>"><?= $title ?></a>
+        </li>
+    <?php endif; ?>
+    <?php if ($title = $block->getConfig('sports/promotions/currentflyer')) : ?>
+        <li><a target="_blank"
+               href="<?php echo $this->getUrl() . 'current_flyer/index.html' ?>"><?= $title ?></a>
+        </li>
+    <?php endif; ?>
+    <?php if ($title = $block->getConfig('sports/promotions/currentstuffer')) : ?>
+        <li><a target="_blank"
+               href="<?php echo $this->getUrl() . 'current_stuffer/index.html' ?>"><?= $title ?></a>
+        </li>
+    <?php endif; ?>
+    <?php if ($title = $block->getConfig('sports/promotions/currentarcherycatalog')) : ?>
+        <li><a target="_blank"
+               href="<?php echo $this->getUrl() . 'current_archery_catalog/index.html' ?>"><?= $title ?></a>
+        </li>
+    <?php endif; ?>
+
+    <?php $generalPromotions = $block->getGeneralPromotions(); ?>
+    <?php if ($generalPromotions->count() > 0): ?>
+        <?php foreach ($generalPromotions as $generalPromotion): ?>
+            <li><a target="_blank"
+                   href="<?= $block->getMediaUrl() . 'promotions/' . $generalPromotion->getId() . '.pdf' ?>">
+                    <?= __($generalPromotion->getTitle()); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</ul>
+
+<?php $dealerPromotions = $block->getDealerPromotions(); ?>
+<?php if ($dealerPromotions->count() > 0): ?>
+    <h3><?= __("Dealer Promotions") ?></h3>
+    <ul style="margin-bottom:20px;">
+        <?php foreach ($dealerPromotions as $dealerPromotion): ?>
+            <li><a target="_blank"
+                   href="<?= $block->getUrl('zanders/index/showpromo', ['id' => $dealerPromotion->getId()]) ?>">
+                    <?= __($dealerPromotion->getTitle()); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<h3><?= __("E-Show Promotions") ?></h3>
+<ul style="margin-bottom:20px;">
+    <li>Coming soon...</li>
+</ul>
+
+<?php $consumerPromotions = $block->getConsumerPromotions(); ?>
+<?php if ($consumerPromotions->count() > 0): ?>
+    <h3><?= __("Consumer Promotions") ?></h3>
+    <ul style="margin-bottom:20px;">
+        <?php foreach ($consumerPromotions as $consumerPromotion): ?>
+            <li><a target="_blank"
+                   href="<?= $block->getUrl('zanders/index/showpromo', ['id' => $consumerPromotion->getId()]) ?>">
+                    <?= __($consumerPromotion->getTitle()); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

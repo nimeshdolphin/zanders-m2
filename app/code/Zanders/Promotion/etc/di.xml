@@ -10,6 +10,9 @@
                 <item name="bogo_listing_data_source" xsi:type="string">
                     Zanders\Promotion\Model\ResourceModel\Bogo\Grid\Collection
                 </item>
+                <item name="toppromo_listing_data_source" xsi:type="string">
+                    Zanders\Promotion\Model\ResourceModel\TopPromo\Grid\Collection
+                </item>
             </argument>
         </arguments>
     </type>
@@ -27,6 +30,13 @@
             <argument name="resourceModel" xsi:type="string">Zanders\Promotion\Model\ResourceModel\Bogo</argument>
         </arguments>
     </virtualType>
+    <virtualType name="Zanders\Promotion\Model\ResourceModel\TopPromo\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">zanders_toppromo</argument>
+            <argument name="resourceModel" xsi:type="string">Zanders\Promotion\Model\ResourceModel\TopPromo</argument>
+        </arguments>
+    </virtualType>
     <!-- For filter -->
     <type name="Zanders\Promotion\Ui\Component\PromotionDataProvider">
         <arguments>
@@ -42,6 +52,15 @@
             <argument name="additionalFilterPool" xsi:type="array">
                 <item name="fulltext" xsi:type="object">
                     Zanders\Promotion\Ui\Component\Bogo\FulltextFilter
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Zanders\Promotion\Ui\Component\TopPromoDataProvider">
+        <arguments>
+            <argument name="additionalFilterPool" xsi:type="array">
+                <item name="fulltext" xsi:type="object">
+                    Zanders\Promotion\Ui\Component\TopPromo\FulltextFilter
                 </item>
             </argument>
         </arguments>

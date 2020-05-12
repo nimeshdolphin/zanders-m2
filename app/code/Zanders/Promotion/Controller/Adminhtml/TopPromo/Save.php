@@ -4,20 +4,20 @@
  * @package    Zanders_Promotion
  */
 
-namespace Zanders\Promotion\Controller\Adminhtml\Index;
+namespace Zanders\Promotion\Controller\Adminhtml\TopPromo;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Image\AdapterFactory;
 use Magento\MediaStorage\Model\File\UploaderFactory;
-use Zanders\Promotion\Model\Promotion;
+use Zanders\Promotion\Model\TopPromo;
 use Magento\Backend\Model\Session;
 use Magento\Framework\Exception\LocalizedException;
 
 class Save extends \Magento\Backend\App\Action
 {
-    protected $promotionModel;
+    protected $topPromoModel;
     protected $adminsession;
     protected $uploaderFactory;
     protected $adapterFactory;
@@ -26,7 +26,7 @@ class Save extends \Magento\Backend\App\Action
 
     public function __construct(
         Action\Context $context,
-        Promotion $promotionModel,
+        TopPromo $topPromoModel,
         Session $adminsession,
         DirectoryList $directoryList,
         UploaderFactory $uploaderFactory,
@@ -35,7 +35,7 @@ class Save extends \Magento\Backend\App\Action
     )
     {
         parent::__construct($context);
-        $this->promotionModel = $promotionModel;
+        $this->topPromoModel = $topPromoModel;
         $this->adminsession = $adminsession;
         $this->directoryList = $directoryList;
         $this->uploaderFactory = $uploaderFactory;
@@ -46,40 +46,48 @@ class Save extends \Magento\Backend\App\Action
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
-
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
-            $promotion_id = $this->getRequest()->getParam('promotion_id');
-
-            if ($promotion_id) {
-                $this->promotionModel->load($promotion_id);
-            }
-
-            $this->promotionModel->setData($data);
-
             try {
-                $promotion = $this->promotionModel->save();
-                if (isset($_FILES['pdf']['name']) && $_FILES['pdf']['name'] != '') {
+                if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
                     try {
-                        $uploaderFactory = $this->uploaderFactory->create(['fileId' => 'pdf']);
-                        $uploaderFactory->setAllowedExtensions(['pdf']);
-                        $uploaderFactory->setAllowRenameFiles(false);
+                        $uploaderFactory = $this->uploaderFactory->create(['fileId' => 'image']);
+                        $uploaderFactory->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+                        $imageAdapter = $this->adapterFactory->create();
+                        $uploaderFactory->addValidateCallback('custom_image_upload', $imageAdapter, 'validateUploadFile');
+                        $uploaderFactory->setAllowRenameFiles(true);
+                        $uploaderFactory->setFilesDispersion(true);
                         $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA);
-                        $destinationPath = $mediaDirectory->getAbsolutePath('promotions');
-                        $newFileName = $promotion->getId() . "." . $uploaderFactory->getFileExtension();
-                        $result = $uploaderFactory->save($destinationPath, $newFileName);
+                        $destinationPath = $mediaDirectory->getAbsolutePath('promotions/covers');
+                        $result = $uploaderFactory->save($destinationPath);
                         if (!$result) {
                             throw new LocalizedException(
                                 __('File cannot be saved to path: $1', $destinationPath)
                             );
                         }
-                        // $imagePath = 'promotions' . $result['file'];
+                        $imagePath = 'promotions/covers' . $result['file'];
+                        $data['image'] = $imagePath;
                     } catch (\Exception $e) {
-                        throw new LocalizedException(
-                            __('Error uploading file, please try again.')
-                        );
                     }
                 }
+                if (isset($data['image']['delete']) && $data['image']['delete'] == 1) {
+                    $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA)->getAbsolutePath();
+                    $file = $data['image']['value'];
+                    $imgPath = $mediaDirectory . $file;
+                    if ($this->_file->isExists($imgPath)) {
+                        $this->_file->deleteFile($imgPath);
+                    }
+                    $data['image'] = NULL;
+                }
+                if (isset($data['image']['value'])) {
+                    $data['image'] = $data['image']['value'];
+                }
+                $toppromo_id = $this->getRequest()->getParam('toppromo_id');
+                if ($toppromo_id) {
+                    $this->topPromoModel->load($toppromo_id);
+                }
+                $this->topPromoModel->setData($data);
+                $this->topPromoModel->save();
 
                 $this->messageManager->addSuccessMessage(__('The data has been saved.'));
                 $this->adminsession->setFormData(false);
@@ -90,7 +98,7 @@ class Save extends \Magento\Backend\App\Action
                         return $resultRedirect->setPath(
                             '*/*/edit',
                             [
-                                'promotion_id' => $this->promotionModel->getPromotionId(),
+                                'toppromo_id' => $this->topPromoModel->getToppromoId(),
                                 '_current' => true
                             ]
                         );
@@ -106,7 +114,7 @@ class Save extends \Magento\Backend\App\Action
             }
 
             $this->_getSession()->setFormData($data);
-            return $resultRedirect->setPath('*/*/edit', ['promotion_id' => $this->getRequest()->getParam('promotion_id')]);
+            return $resultRedirect->setPath('*/*/edit', ['toppromo_id' => $this->getRequest()->getParam('toppromo_id')]);
         }
         return $resultRedirect->setPath('*/*/');
     }
@@ -116,6 +124,6 @@ class Save extends \Magento\Backend\App\Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Zanders_Promotion::promotion');
+        return $this->_authorization->isAllowed('Zanders_Promotion::top_promo');
     }
 }

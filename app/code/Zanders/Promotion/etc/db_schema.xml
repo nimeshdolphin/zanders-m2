@@ -32,4 +32,19 @@
             <column name="get_one_sku"/>
         </index>
     </table>
+    <table name="zanders_toppromo" resource="default" comment="Zanders Top Promotion Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="toppromo_id" identity="true" unsigned="true" nullable="false"
+                comment="Top Promotion Id"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false"/>
+        <column xsi:type="varchar" name="image" length="500" nullable="false"/>
+        <column xsi:type="varchar" name="link" length="500" nullable="false"/>
+        <column xsi:type="int" name="sort_order" nullable="false" default="0"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="toppromo_id"/>
+        </constraint>
+        <index referenceId="ZANDERS_TOPPROMO_TITLE" indexType="fulltext">
+            <column name="title"/>
+        </index>
+    </table>
 </schema>

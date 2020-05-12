@@ -3,31 +3,31 @@
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">promotion_form.promotion_form_data_source</item>
-            <item name="deps" xsi:type="string">promotion_form.promotion_form_data_source</item>
+            <item name="provider" xsi:type="string">toppromo_form.toppromo_form_data_source</item>
+            <item name="deps" xsi:type="string">toppromo_form.toppromo_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="config" xsi:type="array">
             <item name="dataScope" xsi:type="string">data</item>
-            <item name="namespace" xsi:type="string">promotion_form</item>
+            <item name="namespace" xsi:type="string">toppromo_form</item>
         </item>
         <item name="spinner" xsi:type="string">general_information</item>
         <item name="buttons" xsi:type="array">
-            <item name="back" xsi:type="string">Zanders\Promotion\Block\Adminhtml\Index\Edit\Button\Back</item>
-            <item name="delete" xsi:type="string">Zanders\Promotion\Block\Adminhtml\Index\Edit\Button\Delete
+            <item name="back" xsi:type="string">Zanders\Promotion\Block\Adminhtml\TopPromo\Edit\Button\Back</item>
+            <item name="delete" xsi:type="string">Zanders\Promotion\Block\Adminhtml\TopPromo\Edit\Button\Delete
             </item>
-            <item name="reset" xsi:type="string">Zanders\Promotion\Block\Adminhtml\Index\Edit\Button\Reset
+            <item name="reset" xsi:type="string">Zanders\Promotion\Block\Adminhtml\TopPromo\Edit\Button\Reset
             </item>
-            <item name="save" xsi:type="string">Zanders\Promotion\Block\Adminhtml\Index\Edit\Button\Save</item>
+            <item name="save" xsi:type="string">Zanders\Promotion\Block\Adminhtml\TopPromo\Edit\Button\Save</item>
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
-    <dataSource name="promotion_form_data_source">
+    <dataSource name="toppromo_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Zanders\Promotion\Model\PromotionDataProvider</argument>
-            <argument name="name" xsi:type="string">promotion_form_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">promotion_id</argument>
-            <argument name="requestFieldName" xsi:type="string">promotion_id</argument>
+            <argument name="class" xsi:type="string">Zanders\Promotion\Model\TopPromoDataProvider</argument>
+            <argument name="name" xsi:type="string">toppromo_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">toppromo_id</argument>
+            <argument name="requestFieldName" xsi:type="string">toppromo_id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="submit_url" xsi:type="url" path="*/*/save"/>
@@ -44,7 +44,7 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">false</item>
-                <item name="label" xsi:type="string" translate="true">Promotion Information</item>
+                <item name="label" xsi:type="string" translate="true">Top Promo Information</item>
                 <item name="sortOrder" xsi:type="number">20</item>
             </item>
         </argument>
@@ -63,52 +63,47 @@
                 </item>
             </argument>
         </field>
-        <field name="type">
+        <field name="link">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Zanders\Promotion\Model\Config\Source\Type</item>
                 <item name="config" xsi:type="array">
-                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Promotion Type</item>
-                    <item name="formElement" xsi:type="string">select</item>
-                    <item name="source" xsi:type="string">type</item>
-                    <item name="dataScope" xsi:type="string">type</item>
+                    <item name="label" xsi:type="string" translate="true">Link</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">link</item>
+                    <item name="dataScope" xsi:type="string">link</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
                     </item>
                 </item>
             </argument>
         </field>
-        <field name="pdf">
+        <field name="sort_order">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Promo or Flyer (PDF)</item>
-                    <item name="formElement" xsi:type="string">file</item>
-                    <item name="source" xsi:type="string">pdf</item>
-                </item>
-            </argument>
-        </field>
-
-
-        <!--<field name="pdf">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">string</item>
-                    <item name="source" xsi:type="string">pdf</item>
-                    <item name="dataScope" xsi:type="string">pdf</item>
-                    <item name="label" xsi:type="string" translate="true">Promo or Flyer (PDF)</item>
-                    <item name="visible" xsi:type="boolean">true</item>
-                    <item name="formElement" xsi:type="string">fileUploader</item>
-                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
-                    <item name="required" xsi:type="boolean">false</item>
-                    <item name="sortOrder" xsi:type="number">60</item>
-                    <item name="uploaderConfig" xsi:type="array">
-                        <item name="url" xsi:type="url" path="promotion/index/uploadPdf"/>
+                    <item name="label" xsi:type="string" translate="true">Sort Order</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">sort_order</item>
+                    <item name="dataScope" xsi:type="string">sort_order</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
                     </item>
                 </item>
             </argument>
-        </field>-->
+        </field>
+        <field name="image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Link Image</item>
+                    <item name="formElement" xsi:type="string">image</item>
+                    <item name="source" xsi:type="string">image</item>
+                </item>
+            </argument>
+        </field>
     </fieldset>
 </form>

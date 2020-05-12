@@ -11,5 +11,10 @@
              module="Zanders_Promotion" sortOrder="110" parent="Magento_CatalogRule::promo"
              action="promotion/bogo/index"
              resource="Zanders_Promotion::bogo"/>
+
+        <add id="Zanders_Promotion::top_promo" title="Header Promo Links"
+             module="Zanders_Promotion" sortOrder="110" parent="Magento_CatalogRule::promo"
+             action="promotion/toppromo/index"
+             resource="Zanders_Promotion::top_promo"/>
     </menu>
 </config>
