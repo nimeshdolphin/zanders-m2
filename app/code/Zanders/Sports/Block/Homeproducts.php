@@ -21,7 +21,7 @@ class Homeproducts extends \Magento\Catalog\Block\Product\AbstractProduct
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Framework\Url\Helper\Data $urlHelper,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Zanders\Sports\Helper\Config $scopeConfig,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\CatalogInventory\Api\StockStateInterface $stockState,
         array $data = []
@@ -37,9 +37,7 @@ class Homeproducts extends \Magento\Catalog\Block\Product\AbstractProduct
     }
 
     public function getFeaturedProducts() {
-        //$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-        //$this->scopeConfig->getValue('', $storeScope);
-        $skuConfig = "00002, G2796066CT,GH002,A05400,CC0001GRC,G5080512,GH001L,A03190,CC0002YD,G2837218,GH001T,A01950,CC0021CB,G2796066TNS,GH004L,A02300,RP0002CPV";
+        $skuConfig = $this->scopeConfig->getConfig('sports/homepage/featured');
         $sku = explode(',',$skuConfig);
         $collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*')
@@ -49,9 +47,7 @@ class Homeproducts extends \Magento\Catalog\Block\Product\AbstractProduct
     }
 
     public function getDailySpecials() {
-        //$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-        //$this->scopeConfig->getValue('', $storeScope);
-        $skuConfig = "GCF930242,00002";
+        $skuConfig = $this->scopeConfig->getConfig('sports/homepage/daily');
         $sku = explode(',',$skuConfig);
         $collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*')
@@ -61,9 +57,7 @@ class Homeproducts extends \Magento\Catalog\Block\Product\AbstractProduct
     }
 
     public function getHotsaleProducts() {
-        //$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-        //$this->scopeConfig->getValue('', $storeScope);
-        $skuConfig = "G26993,G16950,GPP410LNTXR,GPP411LNBB,GDTSPORTM2,GRFTM160,AVAR15AMW,AVAR15MBB,AVAR15AMK,18700H,15020,15000,H3103,613944,613948,150142,PR3124NM,HE510CGR,GSUB9G17HC,SVL620BT,MPAR15";
+        $skuConfig = $this->scopeConfig->getConfig('sports/homepage/topsellers');
         $sku = explode(',',$skuConfig);
         $collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*')
