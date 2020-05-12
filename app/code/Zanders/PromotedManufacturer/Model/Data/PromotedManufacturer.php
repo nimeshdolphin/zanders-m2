@@ -13,7 +13,7 @@ class PromotedManufacturer extends \Magento\Framework\Api\AbstractExtensibleObje
      * Get id
      * @return string|null
      */
-    public function getPromotedmanufacturerId()
+    public function getId()
     {
         return $this->_get(self::id);
     }
@@ -23,7 +23,7 @@ class PromotedManufacturer extends \Magento\Framework\Api\AbstractExtensibleObje
      * @param string $promotedmanufacturerId
      * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterface
      */
-    public function setPromotedmanufacturerId($promotedmanufacturerId)
+    public function setId($promotedmanufacturerId)
     {
         return $this->setData(self::id, $promotedmanufacturerId);
     }

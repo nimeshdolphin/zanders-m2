@@ -128,10 +128,10 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 
 			}
 
-			$promotedManufacturerData = array('category_id' => $category_id, 'manufacturer_id' => $manufacturer_id);
-			$promotedManufacturerModel->setData($promotedManufacturerData);
+			$promotedManufacturerModel->setCategoryId($category_id);
+			$promotedManufacturerModel->setManufacturerId($manufacturer_id);
+			$promotedManufacturerModel->save();
 
-			$this->resource->save($promotedManufacturerModel);
 		} catch (\Exception $exception) {
 			throw new CouldNotSaveException(__(
 				$exception->getMessage()
@@ -196,7 +196,7 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 	/**
 	 * {@inheritdoc}
 	 */
-	public function PromotedmanufacturerList(
+	public function List(
 	) {
 		$collection = $this->promotedManufacturerCollectionFactory->create();
 
@@ -251,7 +251,7 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 	) {
 		try {
 			$promotedManufacturerModel = $this->promotedManufacturerFactory->create();
-			$this->resource->load($promotedManufacturerModel, $promotedManufacturer->getPromotedmanufacturerId());
+			$this->resource->load($promotedManufacturerModel, $promotedManufacturer->getId());
 			$this->resource->delete($promotedManufacturerModel);
 		} catch (\Exception $exception) {
 			throw new CouldNotDeleteException(__(

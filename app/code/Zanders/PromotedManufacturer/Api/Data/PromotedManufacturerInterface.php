@@ -15,14 +15,14 @@ interface PromotedManufacturerInterface extends \Magento\Framework\Api\Extensibl
      * Get id
      * @return string|null
      */
-    public function getPromotedmanufacturerId();
+    public function getId();
 
     /**
      * Set id
      * @param string $promotedmanufacturerId
      * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterface
      */
-    public function setPromotedmanufacturerId($promotedmanufacturerId);
+    public function setId($promotedmanufacturerId);
 
     /**
      * Get category_id

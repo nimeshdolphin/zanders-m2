@@ -7,7 +7,7 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 interface PromotedManufacturerRepositoryInterface {
 
 	/**
-	 * Save PromotedManufacturer
+	 * update PromotedManufacturer
 	 * @param string id
 	 * @param string $category_id
 	 * @param string $manufacture_id
@@ -26,8 +26,7 @@ interface PromotedManufacturerRepositoryInterface {
 	 * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterface
 	 * @throws \Magento\Framework\Exception\LocalizedException
 	 */
-	public function save(
-		$category_id,
+	public function save($category_id,
 		$manufacture_id
 	);
 
@@ -73,6 +72,6 @@ interface PromotedManufacturerRepositoryInterface {
 	 * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerSearchResultsInterface
 	 * @throws \Magento\Framework\Exception\LocalizedException
 	 */
-	public function PromotedmanufacturerList();
+	public function List();
 
 }

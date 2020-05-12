@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-	<route method="POST" url="/V1/promotedmanufacturer_api/create">
+	<route method="POST" url="/V1/promotedmanufacturer_api/save">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="save"/>
 		<resources>
 			<resource ref="anonymous"/>
@@ -15,13 +15,13 @@
 	<route method="GET" url="/V1/promotedmanufacturer_api/list">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="getList"/>
 		<resources>
-			<resource ref="anonymous"/>
+			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
 		</resources>
 	</route>
 	<route method="GET" url="/V1/promotedmanufacturer_api/promotedmanufacturerList">
-		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="PromotedmanufacturerList"/>
+		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="List"/>
 		<resources>
-			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
+			<resource ref="anonymous"/>
 		</resources>
 	</route>
 	
