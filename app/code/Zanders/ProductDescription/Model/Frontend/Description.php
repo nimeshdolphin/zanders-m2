@@ -1,34 +1,27 @@
 <?php
 /**
  * @category   Zanders
- * @package    Zanders_Manufacturer
+ * @package    Zanders_ProductDescription
  */
 
-namespace Zanders\Manufacturer\Model\Frontend;
+namespace Zanders\ProductDescription\Model\Frontend;
 
 /**
- * Product manufacturer source model.
+ * Product Description source model.
  */
-class Style extends \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend
+class Description extends \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend
 {
     /**
-     * @var \Zanders\Manufacturer\Api\ManufacturerRepositoryInterface
+     * @var \Zanders\ProductDescription\Model\ResourceModel\ProductDescription
      */
-    protected $manufacturerClassRepository;
-
-    /**
-     * @var \Magento\Framework\UrlInterface
-     */
-    protected $urlInterface;
+    protected $productDescriptionResource;
 
     public function __construct(
         \Magento\Eav\Model\Entity\Attribute\Source\BooleanFactory $attrBooleanFactory,
-        \Magento\Framework\UrlInterface $urlInterface,
-        \Zanders\Manufacturer\Api\ManufacturerRepositoryInterface $manufacturerClassRepository
+        \Zanders\ProductDescription\Model\ResourceModel\ProductDescription $productDescriptionResource
     )
     {
-        $this->manufacturerClassRepository = $manufacturerClassRepository;
-        $this->urlInterface = $urlInterface;
+        $this->productDescriptionResource = $productDescriptionResource;
         parent::__construct($attrBooleanFactory);
     }
 
@@ -39,11 +32,15 @@ class Style extends \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFronten
      */
     public function getValue(\Magento\Framework\DataObject $object)
     {
+        return 'getValue';
         $value = parent::getValue($object);
         if (!$value || $value == "") return false;
 
-        $this->getAttribute()->setData(\Magento\Catalog\Model\ResourceModel\Eav\Attribute::IS_HTML_ALLOWED_ON_FRONT, 1);
-        $manufacturerId = $object->getData($this->getAttribute()->getAttributeCode());
+        $product = $this->getAttribute()->getEntityId();
+
+        return $this->productDescriptionResource->getDescriptionBySku($product->getSku());
+
+        /*$manufacturerId = $object->getData($this->getAttribute()->getAttributeCode());
         $manufacturer = $this->manufacturerClassRepository->getById($manufacturerId);
 
         $manufacturerHtml[] = sprintf(
@@ -58,14 +55,6 @@ class Style extends \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFronten
             $this->fixUrl($manufacturer->getWeb()),
             $manufacturer->getWeb()
         );
-        return implode('<br />', $manufacturerHtml);
-    }
-
-    private function fixUrl($url)
-    {
-        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-            $url = "http://" . $url;
-        }
-        return $url;
+        return implode('<br />', $manufacturerHtml);*/
     }
 }

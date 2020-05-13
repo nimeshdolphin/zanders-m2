@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="productdescription_listing_data_source" xsi:type="string">
+                    Zanders\ProductDescription\Model\ResourceModel\ProductDescription\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Zanders\ProductDescription\Model\ResourceModel\ProductDescription\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">zanders_description</argument>
+            <argument name="resourceModel" xsi:type="string">Zanders\ProductDescription\Model\ResourceModel\ProductDescription</argument>
+        </arguments>
+    </virtualType>
+    <!-- For filter -->
+    <type name="Zanders\ProductDescription\Ui\Component\DataProvider">
+        <arguments>
+            <argument name="additionalFilterPool" xsi:type="array">
+                <item name="fulltext" xsi:type="object">
+                    Zanders\ProductDescription\Ui\Component\ProductDescription\FulltextFilter
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

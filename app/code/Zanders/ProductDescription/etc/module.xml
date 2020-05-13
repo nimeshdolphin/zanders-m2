@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_ProductDescription
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Zanders_ProductDescription">
+        <sequence>
+            <module name="Zanders_Sports"/>
+        </sequence>
+    </module>
+</config>

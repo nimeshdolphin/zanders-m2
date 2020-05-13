@@ -3,7 +3,16 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="sports">
-            <group id="promotions" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+            <group id="bogo" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Buy One Get One Promo</label>
+                <field id="send_to" translate="label" type="textarea" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Send E-Mail to</label>
+                    <comment>One E-Mail addresses per line</comment>
+                </field>
+            </group>
+            <group id="promotions" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1"
                    showInStore="1">
                 <label>Promotions</label>
                 <field id="currentcatalog" translate="label" type="text" sortOrder="10" showInDefault="1"
@@ -23,6 +32,7 @@
                     <label>Current Stuffer Label</label>
                 </field>
             </group>
+
         </section>
     </system>
 </config>

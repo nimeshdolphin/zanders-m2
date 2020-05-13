@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Zanders_ProductDescription::description" title="Product Detail Descriptions"
+             module="Zanders_ProductDescription" sortOrder="300"
+             parent="Zanders_Sports::zanders_catalog" action="productdescription/index/index"
+             resource="Zanders_ProductDescription::description"/>
+    </menu>
+</config>

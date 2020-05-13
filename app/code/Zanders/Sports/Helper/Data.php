@@ -22,15 +22,28 @@ class Data extends AbstractHelper
     */
     protected $urlManager;
 
+    /**
+     * @var \Magento\Framework\App\Http\Context
+     */
+    private $httpContext;
+
     public function __construct(
         Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        UrlInterface $urlManager
+        UrlInterface $urlManager,
+        \Magento\Framework\App\Http\Context $httpContext
     )
     {
         $this->storeManager = $storeManager;
         $this->urlManager = $urlManager;
+        $this->httpContext = $httpContext;
         parent::__construct($context);
+    }
+
+    public function isLoggedIn()
+    {
+        $isLoggedIn = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
+        return $isLoggedIn;
     }
 
     public function getMediaUrl()
