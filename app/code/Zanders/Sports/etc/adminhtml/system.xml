@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <tab id="zanders" translate="label" sortOrder="401" class="zanders-extensions">
             <label>Zanders</label>
         </tab>
-        <section id="sports" translate="label" type="text" sortOrder="8888" showInDefault="1" showInWebsite="0" showInStore="0">
+        <section id="sports" translate="label" type="text" sortOrder="8888" showInDefault="1" showInWebsite="0"
+                 showInStore="0">
             <label>Zanders Settings</label>
             <tab>zanders</tab>
             <resource>Zanders_Sports::configuration</resource>
@@ -35,6 +37,20 @@
                 <field id="message" translate="label" type="textarea" sortOrder="20" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Message</label>
+                </field>
+            </group>
+            <group id="calltoorder" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Zanders Call to Order</label>
+                <field id="list" translate="label" type="textarea" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>List</label>
+                    <comment>List of Products need to be Call to Order and Pick up Only</comment>
+                </field>
+                <field id="justcall" translate="label" type="textarea" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Shippable List</label>
+                    <comment>List of Products need to be Call to Order but can Ship</comment>
                 </field>
             </group>
         </section>

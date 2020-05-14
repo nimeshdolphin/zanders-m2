@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="zanders_show_specials" resource="default" comment="Zanders Eshow Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false"/>
+        <column xsi:type="text" name="description" nullable="true"/>
+        <column xsi:type="varchar" name="type" length="25" default="free" nullable="false"/>
+        <column xsi:type="int" name="percent_off" nullable="false" default="0"/>
+        <column xsi:type="decimal" name="markdown" scale="2" precision="10" nullable="false" default="0.00"/>
+        <column xsi:type="date" name="start_date" nullable="true"/>
+        <column xsi:type="date" name="end_date" nullable="true"/>
+        <column xsi:type="tinyint" name="allow_bo" nullable="false" default="0"/>
+        <column xsi:type="int" name="purchase_qty" nullable="false"/>
+        <column xsi:type="int" name="receive_qty" nullable="false"/>
+        <column xsi:type="int" name="multiples" nullable="false" default="0"/>
+        <column xsi:type="tinyint" name="stocking_dealer" nullable="false" default="0"/>
+        <column xsi:type="tinyint" name="has_pdf" nullable="false" default="0"/>
+        <column xsi:type="varchar" name="pdf_title" length="255" nullable="false"/>
+        <column xsi:type="tinyint" name="special_attention" nullable="false" default="0"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="ZANDERS_SHOW_SPECIALS_TITLE" indexType="fulltext">
+            <column name="title"/>
+        </index>
+    </table>
+
+    <table name="zanders_show_specials_manufacturers" resource="default" comment="Zanders Eshow Manufacturer Table"
+           charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="show_id" nullable="false" default="0"/>
+        <column xsi:type="int" name="manufacturer_id" nullable="false" default="0"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="zanders_show_orders" resource="default" comment="Zanders Eshow Order Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="show_id" nullable="false" default="0"/>
+        <column xsi:type="int" name="customer_number" nullable="false" default="0"/>
+        <column xsi:type="varchar" name="customer_name" length="255" nullable="false"/>
+        <column xsi:type="timestamp" name="date" nullable="true"/>
+        <column xsi:type="text" name="save" nullable="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="zanders_show_save" resource="default" comment="Zanders Eshow Save Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="show_id" nullable="false" default="0"/>
+        <column xsi:type="int" name="customer_id" nullable="false" default="0"/>
+        <column xsi:type="blob" name="selections" nullable="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="zanders_show_specials_purchase" resource="default" comment="Zanders Eshow Purchase Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="show_id" nullable="false" default="0"/>
+        <column xsi:type="int" name="item_id" nullable="false" default="0"/>
+        <column xsi:type="varchar" name="sku" length="255" nullable="false"/>
+        <column xsi:type="varchar" name="description" nullable="true" default="null"/>
+        <column xsi:type="int" name="min_qty" nullable="true" default="null"/>
+        <column xsi:type="int" name="max_qty" nullable="true" default="null"/>
+        <column xsi:type="decimal" name="custom_price" scale="2" precision="10" nullable="true" default="0.00"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="zanders_show_specials_receive" resource="default" comment="Zanders Eshow Receive Table" charset="utf8"
+           engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="show_id" nullable="false" default="0"/>
+        <column xsi:type="int" name="item_id" nullable="false" default="0"/>
+        <column xsi:type="varchar" name="sku" length="255" nullable="false"/>
+        <column xsi:type="varchar" name="description" nullable="true" default="null"/>
+        <column xsi:type="int" name="min_qty" nullable="true" default="null"/>
+        <column xsi:type="int" name="max_qty" nullable="true" default="null"/>
+        <column xsi:type="decimal" name="custom_price" scale="2" precision="10" nullable="true" default="0.00"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

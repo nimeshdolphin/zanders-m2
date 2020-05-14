@@ -46,6 +46,12 @@ class Data extends AbstractHelper
         return $isLoggedIn;
     }
 
+    public function getCustomerGroupId()
+    {
+        $customerGroupId = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_GROUP);
+        return $customerGroupId;
+    }
+
     public function getMediaUrl()
     {
         return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
