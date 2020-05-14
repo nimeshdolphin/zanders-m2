@@ -18,7 +18,7 @@ use Magento\Framework\App\Action\Action;
 <?php
 $_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
-$blockCustomer = $block->getLayout()->createBlock('Magento\Customer\Block\Account\Customer');
+$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
 ?>
 <?php if (!$_productCollection->count()) :?>
     <div class="message info empty"><div><?= $block->escapeHtml(__('We can\'t find products matching the selection.')) ?></div></div>
@@ -94,7 +94,6 @@ $blockCustomer = $block->getLayout()->createBlock('Magento\Customer\Block\Accoun
                                 </div>
                             <?php } ?>
                             <?php
-                                $themeHelper = $this->helper('Zanders\Theme\Helper\Data');
                                 $upc = $_product->getUpc();
                                 if(!empty($upc)):
                             ?>
@@ -103,16 +102,16 @@ $blockCustomer = $block->getLayout()->createBlock('Magento\Customer\Block\Accoun
                                      $block->escapeHtml($upc) ?></span>
                                 </div>
                             <?php endif;?>
-                            <?php if($viewMode == 'simple' & $blockCustomer->customerLoggedIn()){ ?>
+                            <?php if($viewMode == 'simple' & $sportsHelper->getCustomerGroupId()>=2){ ?>
                                 <div class="product-itemnumber">
-                                    <?= __('Available:'); ?> <span class="value"><?= $themeHelper->getStockQty($_product->getId()); ?></span>
+                                    <?= __('Available:'); ?> <span class="value"><?= $sportsHelper->getStockQty($_product->getId()); ?></span>
                                 </div>
                             <?php } ?>
                         </div>
-                        <?php if($blockCustomer->customerLoggedIn()){ ?>
+                        <?php if($sportsHelper->getCustomerGroupId()>=2){ ?>
                             <?php if($viewMode != 'simple'){ ?>
                                 <div class="product-itemnumber">
-                                    <?= __('Available:'); ?> <span class="value"><?= $themeHelper->getStockQty($_product->getId()); ?></span>
+                                    <?= __('Available:'); ?> <span class="value"><?= $sportsHelper->getStockQty($_product->getId()); ?></span>
                                 </div>
                             <?php } ?>
                             <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>

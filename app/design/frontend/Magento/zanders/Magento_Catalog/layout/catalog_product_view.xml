@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/productdetail.css" />
+    </head>
+    <body>
+        <referenceBlock name="reviews.tab" remove="true" />
+        <referenceBlock name="product.review.form" remove="true" />
+        <referenceBlock name="product.info.review" remove="true" />
+        <referenceBlock name="product.info.description" remove="true" />
+        <referenceBlock name="catalog.product.related" remove="true" />
+        <move element="breadcrumbs" destination="main" before="-"/>
+        <move element="product.info.social" destination="product.info.form.content" after="product.info.addtocart"/>
+        <referenceBlock name="product.info.details">
+            <block class="Magento\Catalog\Block\Product\View\Attributes" name="product.attributes" as="additional" template="Magento_Catalog::product/view/attributes.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Additional Information</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Catalog\Block\Product\View" name="product.name.after" template="Magento_Catalog::product/view/aftername.phtml" after="page.main.title"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.additional.price" template="Magento_Catalog::product/view/additional-price.phtml" after="product.info"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.availability" template="Magento_Catalog::product/view/availability.phtml" after="product.additional.price"/>
+        </referenceContainer>
+        <!--<referenceContainer name="product.info.main">
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.overview" template="Magento_Catalog::product/view/attribute.phtml" group="detailed_info" after="product.info.extrahint">
+                <arguments>
+                    <argument name="at_label" xsi:type="string">default</argument>
+                </arguments>
+            </block>
+        </referenceContainer>-->
+    </body>
+</page>

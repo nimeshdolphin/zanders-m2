@@ -27,8 +27,11 @@
 					</arguments>
 				</block>
 				<block class="Magento\Customer\Block\Account\Customer" name="top.customer.link.block" template="Magento_Customer::header/authentication.phtml" />
-				
+
             </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.additional">
+           <block class="Magento\Customer\Block\Form\Login" name="sidebar.customer.login" template="Magento_Catalog::sidebar/customerlogin.phtml" before="catalog.compare.sidebar"/>
         </referenceContainer>
         <move element="navigation.sections" destination="zanders_header"/>
         <move element="top.search" destination="zanders_header"/>

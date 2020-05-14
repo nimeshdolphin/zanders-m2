@@ -6,9 +6,6 @@
     <body>
         <move element="breadcrumbs" destination="main" before="-"/>
         <move element="category.description" destination="main" after="breadcrumbs" />
-        <referenceContainer name="sidebar.additional">
-           <block class="Magento\Customer\Block\Form\Login" name="sidebar.customer.login" template="Magento_Catalog::sidebar/customerlogin.phtml" before="catalog.compare.sidebar"/>
-        </referenceContainer>
         <referenceBlock name="product_list_toolbar">
             <block class="Zanders\Theme\Block\Outofstock" name="toolbar.outofstock" as="toolbarOutofstock" template="Magento_Catalog::product/list/toolbar/outofstock.phtml" cacheable="false"/>
         </referenceBlock>

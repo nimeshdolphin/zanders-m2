@@ -7,8 +7,8 @@
 /** @var \Magento\Customer\Block\Form\Login $block */
 ?>
 <?php
-    $blockObj= $block->getLayout()->createBlock('Magento\Customer\Block\Account\Customer');
-    if(!$blockObj->customerLoggedIn()){
+$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
+if(!$sportsHelper->isLoggedIn()){
 ?>
         <div class="block block-customer-login">
             <div class="block-title">

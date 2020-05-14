@@ -22,6 +22,8 @@ $viewMode = 'grid';
 $imageDisplayArea = 'category_page_grid';
 $showDescription = false;
 $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
+$customerGroupId = $sportsHelper->getCustomerGroupId();
 /**
  * Position for actions regarding image size changing in vde if needed
  */
@@ -69,9 +71,9 @@ $pos = $block->getPositioned();
 	                    	 $block->escapeHtml($upc) ?></span>
 	                	</div>
 	                <?php endif;?>
-	                <?php if($block->getCustomerGroupId() >= 2){ ?>
+	                <?php if($customerGroupId >= 2){ ?>
 	                		<div class="product-itemnumber">
-			                	<?= __('Available:'); ?> <span class="value"><?= $block->getStockQty($_product->getId()); ?></span>
+			                	<?= __('Available:'); ?> <span class="value"><?= $sportsHelper->getStockQty($_product->getId()); ?></span>
 				          	</div>
 				          	<?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
 							<?= /* @noEscape */ $block->getProductPrice($_product) ?>

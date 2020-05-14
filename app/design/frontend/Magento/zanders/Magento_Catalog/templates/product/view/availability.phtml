@@ -1,0 +1,14 @@
+<?php
+	$product = $block->getProduct();
+	$productId = $product->getId();
+	$stock = $this->helper('Zanders\Sports\Helper\Data')->getStockQty($productId);
+	$class = 'out-of-stock';
+	$label = __('Out of stock');
+	if($stock > 0){
+		$class = 'in-stock';
+		$label = __('In stock');
+	}
+?>
+<p class="availability <?php echo ' '.$class;?>">
+	<?= __('Availability:'); ?> <span><?= $label; ?></span>
+</p>

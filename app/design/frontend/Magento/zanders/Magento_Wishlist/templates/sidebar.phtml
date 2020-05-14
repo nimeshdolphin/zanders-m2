@@ -9,10 +9,8 @@
 
 <?php
 $wishlistHelper = $this->helper(\Magento\Wishlist\Helper\Data::class);
-?>
-<?php
-    $blockObj= $block->getLayout()->createBlock('Magento\Customer\Block\Account\Customer');
-    if($blockObj->customerLoggedIn()){
+$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
+if($sportsHelper->isLoggedIn()){
 ?>
 <?php if ($wishlistHelper->isAllow()) : ?>
     <div class="block block-wishlist" data-bind="scope: 'wishlist'">

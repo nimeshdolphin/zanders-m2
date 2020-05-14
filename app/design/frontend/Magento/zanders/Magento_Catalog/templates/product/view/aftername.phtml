@@ -1,0 +1,15 @@
+<?php
+	$product = $block->getProduct();
+	$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
+?>
+<p class="product-itemnumber">
+    <?= __('Item Number:'); ?> <span class="value"><?= $product->getSku(); ?></span>
+</p>
+<p class="email-friend"><a href="#"><?= __('Email to a Friend'); ?></a></p>
+<p class="alert-price link-price-alert">
+    <a href="#" title="<?= __('Sign up for price alert') ?>"><?= __('Sign up for price alert'); ?></a>
+</p>
+<p class="alert-stock link-stock-alert">
+    <a href="#" title="<?= __('Sign up to get notified when this product is back in stock'); ?>"><?= __('Sign up to get notified when this product is back in stock'); ?></a>
+</p>
+<p class="product-itemnumber"><?= __('Available:'); ?><span class="value"><?= $sportsHelper->getStockQty($product->getId()); ?></span></p>

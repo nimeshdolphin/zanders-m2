@@ -1,0 +1,7 @@
+<?php
+	$product = $block->getProduct();
+?>
+<div class="price-box">
+	<span class="label"><?= __('MSRP:'); ?></span>
+	<span class="price"><?= $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($product->getMsrp(),2),true,false); ?></span>
+</div>
