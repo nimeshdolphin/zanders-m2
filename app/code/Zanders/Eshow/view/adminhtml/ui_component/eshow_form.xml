@@ -309,8 +309,6 @@
                 <item name="sortOrder" xsi:type="number">20</item>
             </item>
         </argument>
-
-
         <field name="purchase_items">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -319,7 +317,7 @@
                     <item name="dataType" translate="true" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">textarea</item>
                     <item name="additionalInfo" xsi:type="string" translate="true">
-                        <![CDATA[<p>One Product per line<br>Item Number only<br>or Comma Seperated:<br>Item No, Min Qty, Max Qty, Price, Description</p>]]>
+                        <![CDATA[<p>One Product per line.<br><strong>Item Number</strong> only OR Comma Separated: <strong>Item No, Min Qty, Max Qty, Price, Description</strong></p>]]>
                     </item>
                     <item name="rows" xsi:type="string">10</item>
                 </item>
@@ -331,7 +329,6 @@
                 <item name="config" xsi:type="array">
                     <item name="buttonClasses" xsi:type="string">btn-add-products</item>
                     <item name="label" xsi:type="string" translate="true">Add Product(s)</item>
-                    <!--<item name="component" xsi:type="string">Zanders_Eshow/js/form/components/button</item>-->
                     <item name="actions" xsi:type="array">
                         <!--<item name="0" xsi:type="array">
                             <item name="targetName" xsi:type="string">ns=eshow_form, index=purchase_items</item>
@@ -339,9 +336,13 @@
                         </item>-->
                         <item name="0" xsi:type="array">
                             <item name="targetName" xsi:type="string">ns=eshow_form, index=dynamic_rows</item>
-                            <item name="actionName" xsi:type="string">selectOption</item>
+                            <item name="actionName" xsi:type="string">addPurchaseItems</item>
                             <item name="params" xsi:type="array">
-                                <item name="purchaseItems" xsi:type="string">purchase_items</item>
+                                <item name="0" xsi:type="array">
+                                    <item name="purchaseItems" xsi:type="string">
+                                        ns=eshow_form, index=purchase_items
+                                    </item>
+                                </item>
                             </item>
                         </item>
                     </item>
@@ -371,10 +372,11 @@
                         <item name="componentType" xsi:type="string">container</item>
                     </item>
                 </argument>
-                <field name="field_1" formElement="input">
+                <field name="sku" formElement="input">
                     <argument name="data" xsi:type="array">
                         <item name="config" xsi:type="array">
                             <item name="fit" xsi:type="boolean">false</item>
+                            <!--<item name="disabled" xsi:type="boolean">true</item>-->
                         </item>
                     </argument>
                     <settings>
@@ -382,10 +384,10 @@
                             <rule name="required-entry" xsi:type="boolean">true</rule>
                         </validation>
                         <dataType>text</dataType>
-                        <label>Field #1</label>
+                        <label>Item Number</label>
                     </settings>
                 </field>
-                <field name="field_2" formElement="input">
+                <field name="description" formElement="input">
                     <argument name="data" xsi:type="array">
                         <item name="config" xsi:type="array">
                             <item name="fit" xsi:type="boolean">false</item>
@@ -396,7 +398,52 @@
                             <rule name="required-entry" xsi:type="boolean">true</rule>
                         </validation>
                         <dataType>text</dataType>
-                        <label>Field #2</label>
+                        <label>Description</label>
+                    </settings>
+                </field>
+                <field name="min_qty" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="fit" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                            <rule name="validate-number" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label>Min. Qty.</label>
+                    </settings>
+                </field>
+                <field name="max_qty" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="fit" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                            <rule name="validate-number" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label>Max. Qty.</label>
+                    </settings>
+                </field>
+                <field name="custom_price" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="fit" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                            <rule name="validate-number" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label>Price</label>
                     </settings>
                 </field>
                 <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
