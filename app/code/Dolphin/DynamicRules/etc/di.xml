@@ -16,4 +16,5 @@
 			</argument>
 		</arguments>
 	</type>
+	<preference for="Magento\Catalog\Block\Product\ProductList\Related" type="Dolphin\DynamicRules\Rewrite\Magento\Catalog\Block\Product\ProductList\Related"/>
 </config>

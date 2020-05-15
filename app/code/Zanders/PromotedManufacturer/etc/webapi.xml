@@ -31,7 +31,7 @@
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
 		</resources>
 	</route>	
-	<route method="PUT" url="/V1/zanders-promotedmanufacturer/promotedmanufacturer/:promotedmanufacturerId">
+	<!-- <route method="PUT" url="/V1/zanders-promotedmanufacturer/promotedmanufacturer/:promotedmanufacturerId">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="save"/>
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_update"/>
@@ -42,5 +42,5 @@
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_delete"/>
 		</resources>
-	</route>
+	</route> -->
 </routes>

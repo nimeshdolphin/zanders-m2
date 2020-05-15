@@ -22,3 +22,17 @@
     font-weight: bold;
     font-size: 15px;
 }
+
+.box-collateral .owl-stage .owl-item {
+    text-align: center;
+    background: #fff;
+    -webkit-box-sizing: unset;
+    width: 225px;
+   /* margin-right: 20px !important;*/
+    position: relative;
+    z-index: 1;
+    float: left;
+    min-height: 400px;
+     
+    margin: 0 auto;
+}
