@@ -1,0 +1,6 @@
+<?php
+	$product = $block->getProduct();
+	$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
+	$qty = $sportsHelper->getStockQty($product->getId());
+?>
+<p class="product-itemnumber"><?= __('Available:'); ?><span class="value"><?= $qty ?></span></p>

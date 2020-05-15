@@ -9,8 +9,12 @@
         <referenceBlock name="product.info.review" remove="true" />
         <referenceBlock name="product.info.description" remove="true" />
         <referenceBlock name="catalog.product.related" remove="true" />
+        <referenceBlock name="product.info.sku" remove="true"/>
         <move element="breadcrumbs" destination="main" before="-"/>
         <move element="product.info.social" destination="product.info.form.content" after="product.info.addtocart"/>
+        <move element="alert.urls" destination="product.info.main" after="product.sku"/>
+        <move element="product.availability.stock" destination="product.info.main" after="alert.urls"/>
+        <move element="product.info.overview" destination="product.info.main" after="product.availability"/>
         <referenceBlock name="product.info.details">
             <block class="Magento\Catalog\Block\Product\View\Attributes" name="product.attributes" as="additional" template="Magento_Catalog::product/view/attributes.phtml" group="detailed_info">
                 <arguments>
@@ -19,16 +23,23 @@
             </block>
         </referenceBlock>
         <referenceContainer name="product.info.main">
-            <block class="Magento\Catalog\Block\Product\View" name="product.name.after" template="Magento_Catalog::product/view/aftername.phtml" after="page.main.title"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.sku" template="Magento_Catalog::product/view/sku.phtml" before="product.info.price"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.availability.stock" template="Magento_Catalog::product/view/stock.phtml" after="alert.urls"/>
             <block class="Magento\Catalog\Block\Product\View" name="product.additional.price" template="Magento_Catalog::product/view/additional-price.phtml" after="product.info"/>
             <block class="Magento\Catalog\Block\Product\View" name="product.availability" template="Magento_Catalog::product/view/availability.phtml" after="product.additional.price"/>
         </referenceContainer>
-        <!--<referenceContainer name="product.info.main">
-            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.overview" template="Magento_Catalog::product/view/attribute.phtml" group="detailed_info" after="product.info.extrahint">
-                <arguments>
-                    <argument name="at_label" xsi:type="string">default</argument>
-                </arguments>
-            </block>
-        </referenceContainer>-->
+        <referenceBlock name="productalert.price">
+            <action method="setSignupLabel">
+                <argument translate="true" name="value" xsi:type="string">Sign up for price alert</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="productalert.stock">
+            <action method="setSignupLabel">
+                <argument translate="true" name="value" xsi:type="string">Sign up to get notified when this product is back in stock</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="product.info.extrahint">
+            <block class="Magento\Catalog\Block\Product\View" name="product.customer.quote" template="Magento_Catalog::product/view/customerquote.phtml" before="product.info.warning.code"/>
+        </referenceContainer>
     </body>
 </page>

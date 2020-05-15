@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="zanders" translate="label" sortOrder="401" class="zanders-extensions">
+            <label>Zanders</label>
+        </tab>
+        <section id="sports" translate="label" type="text" sortOrder="8888" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Zanders Settings</label>
+            <tab>zanders</tab>
+            <resource>Zanders_Sports::configuration</resource>
+            <group id="homepage" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Home Page Setup</label>
+                <field id="topsellers" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Top sellers products</label>
+                </field>
+                <field id="featured" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Featured products</label>
+                </field>
+                <field id="daily" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Daily products</label>
+                </field>
+            </group>
+            <group id="zalert" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Zanders Message</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="message" translate="label" type="textarea" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Message</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

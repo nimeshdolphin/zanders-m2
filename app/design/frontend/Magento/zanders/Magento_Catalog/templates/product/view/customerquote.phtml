@@ -1,0 +1,7 @@
+<?php
+	$product = $block->getProduct();
+	$id = $block->getProduct()->getId();
+?>
+<div class="customer-qoute">
+    <div class="std"><a href="<?= $this->getUrl('zanders/index/quotecreate', ['product' => $id]); ?>" class="link-compare"><?= __('Create a Customer Quote for this Product'); ?></a></div>
+</div>

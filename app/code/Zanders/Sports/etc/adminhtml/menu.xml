@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_Sports
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!--Main Menu-->
+        <add id="Zanders_Sports::zanders_main" title="Zanders" translate="title" module="Zanders_Sports" sortOrder="100"
+             resource="Zanders_Sports::zanders_main"/>
+        <!--Category Menu-->
+        <add id="Zanders_Sports::zanders_catalog" title="Zanders" translate="title" module="Zanders_Sports"
+             sortOrder="100" parent="Magento_Catalog::catalog" dependsOnModule="Magento_Catalog"
+             resource="Zanders_Sports::zanders_catalog"/>
+    </menu>
+</config>

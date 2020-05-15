@@ -25,6 +25,7 @@
 .product-info-main .page-title-wrapper h1 {
     font-size: 20px;
     color: #fff;
+    margin-bottom: 8px !important;
 }
 
 .product-info-main .field.qty{
@@ -46,7 +47,7 @@
     background: #f4f4f4;
     padding: 10px;
     padding-bottom: 11px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-top: 10px !important;
 }
 .box-tocart .fieldset {
@@ -172,9 +173,10 @@
     background: #f4f4f4;
     color: #000000;
     width: calc(100% - 20px);
+    margin: 0 0 10px;
 }
 .product-info-price .price-box .price-container .price {
-    font-size: 26px;
+    font-size: 26px !important;
     color: #fff;
 }
 p.availability {
@@ -192,4 +194,46 @@ p.availability span {
 }
 p.availability.out-of-stock span {
     color: #d83820;
+}
+/*p.email-friend, p.alert-price.link-price-alert {
+    margin: 0;
+}
+p.email-friend a, p.alert-price.link-price-alert a {
+    color: #FF7A19;
+}*/
+p.product-itemnumber {
+    color: #fff;
+    text-transform: uppercase;
+}
+.product-info-main .product-info-price {
+    border: 0;
+    margin: 0;
+}
+.product-info-main .product-info-price .price-box.price-final_price span {
+    margin-bottom: 0;
+}
+.product-info-main .product.alert {
+    margin-bottom: 0;
+}
+.product-info-main .product.alert.stock {
+    margin-top: 0;
+}
+.product-info-main .product.alert a.action.alert {
+    color: #FF7A19;
+}
+.catalog-product-view .product-info-main .product.attribute.overview span.label {
+    font-size: 18px;
+    margin-bottom: 2px;
+    display: block;
+}
+.catalog-product-view .customer-qoute {
+    float: left;
+    padding: 10px;
+    background: #f4f4f4;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+}
+.catalog-product-view .customer-qoute a.link-compare {
+    color: #000;
+    font-weight: 600;
 }

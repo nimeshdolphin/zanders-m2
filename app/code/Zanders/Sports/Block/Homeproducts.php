@@ -11,10 +11,6 @@ class Homeproducts extends \Magento\Catalog\Block\Product\AbstractProduct
 
     protected $urlHelper;
 
-    protected $_customerSession;
-
-    protected $stockState;
-
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
@@ -22,8 +18,6 @@ class Homeproducts extends \Magento\Catalog\Block\Product\AbstractProduct
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Framework\Url\Helper\Data $urlHelper,
         \Zanders\Sports\Helper\Config $scopeConfig,
-        \Magento\Customer\Model\Session $customerSession,
-        \Magento\CatalogInventory\Api\StockStateInterface $stockState,
         array $data = []
     ) {
         $this->_categoryFactory = $categoryFactory;
@@ -31,8 +25,6 @@ class Homeproducts extends \Magento\Catalog\Block\Product\AbstractProduct
         $this->_catalogProductVisibility = $catalogProductVisibility;
         $this->urlHelper = $urlHelper;
         $this->scopeConfig = $scopeConfig;
-        $this->_customerSession = $customerSession;
-        $this->stockState = $stockState;
         parent::__construct($context, $data);
     }
 
@@ -64,25 +56,5 @@ class Homeproducts extends \Magento\Catalog\Block\Product\AbstractProduct
                 ->setVisibility($this->_catalogProductVisibility->getVisibleInCatalogIds())
                 ->addAttributeToFilter('sku', array('in' => $sku));
         return $collection;
-    }
-
-    public function getCustomerGroupId(){
-        $customerGroup = '';
-        if($this->_customerSession->isLoggedIn()){
-            $customerGroup = $this->_customerSession->getCustomer()->getGroupId();
-        }
-        return $customerGroup;
-    }
-
-    public function getCustomerLogin(){
-        if($this->_customerSession->isLoggedIn()){
-            return true;
-        }
-        return false;
-    }
-
-    public function getStockQty($productId, $websiteId = null)
-    {
-        return $this->stockState->getStockQty($productId, $websiteId);
     }
 }
