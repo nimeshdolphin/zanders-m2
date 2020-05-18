@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route method="POST" url="/V1/zanders-manufacturer/create">
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Zanders_Manufacturer::manufacturer"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/zanders-manufacturer/update">
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="update"/>
+        <resources>
+            <resource ref="Zanders_Manufacturer::manufacturer"/>
+        </resources>
+    </route>   
+    <route url="/V1/manufacturer/:manufacturerId" method="GET">
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Zanders_Manufacturer::manufacturer"/>
+        </resources>
+    </route>
+    <route url="/V1/" method="GET">
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Zanders_manufacturer/searchManufacturer::manufacturer"/>
+        </resources>
+    </route>
+    <route url="/V1/manufacturer/:manufacturerId" method="PUT">
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Zanders_Manufacturer::manufacturer"/>
+        </resources>
+    </route>
+    <route url="/V1/manufacturer/:manufacturerId" method="DELETE">
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Zanders_Manufacturer::manufacturer"/>
+        </resources>
+    </route>
+</routes>

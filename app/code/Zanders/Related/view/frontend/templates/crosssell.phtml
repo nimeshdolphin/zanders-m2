@@ -1,0 +1,87 @@
+	<?php
+
+		 if ($exist = count($block->getItems())) {
+            $type = 'crosssell';
+            $class = $type;
+
+            $image = 'related_products_list';
+            $title = __('More Choices:');
+            $items = $block->getItems();
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+            $description = false;
+            $canItemsAddToCart = false;
+            $helper = $this->helper('Zanders\Sports\Helper\Data');
+        }
+
+
+	?>
+
+    <?php if ($exist) :?>
+
+        <div class='box-collateral box-related_products'>
+        <h2>Replacement Items</h2>
+		<div class="owl-cross">
+               <!--  <ul> -->
+                <?php foreach ($items as $_item): ?>
+                   <!--  <li> -->
+                <?php $available = ''; ?>
+                <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
+                    <?php if (!$_item->getRequiredOptions()): ?>
+                        <?php $available = 'related-available'; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+ 
+                <div class="product-item">                   
+
+                    <?= /* @escapeNotVerified */ '<!-- ' . $image . '-->' ?>
+                    <a href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>" class="product photo product-item-photo">
+                        <?= $block->getImage($_item, $image)->toHtml() ?>
+                    </a>
+                    <div class="product details product-item-details">
+                        <strong class="product name product-item-name"><a class="product-item-link" title="<?= $block->escapeHtml($_item->getName()) ?>" href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>">
+                            <?= $block->escapeHtml($_item->getName()) ?></a>
+                        </strong>
+
+                        <div class="desc std">
+                            <?php echo __('Item Number: ');?><span style="font-weight: bold;"><?php echo $_item->getSku(); ?></span>
+                        </div>
+
+                        <?php
+                        $upc = $_item->getUpc();
+                        if(!empty($upc )):
+                        ?>
+                        <div class="desc std">
+                            <?php echo __('UPC') ?>: <span style="font-weight: bold;"><?php echo $this->escapeHtml($upc) ?></span>
+                        </div>
+                        <?php endif;?>
+
+                        <?php /* @escapeNotVerified */ // $block->getProductPrice($_item) ?>
+
+                        
+                        </div>
+                    </div>
+                <!--  </li> -->
+                <?php endforeach ?>
+                <!-- </ul> -->
+        </div>
+        </div>
+
+      <script>
+            require(["jquery","owlcarousel"],function($) {
+                $(document).ready(function() {
+                    $(".owl-cross").owlCarousel({
+                        navigation : true, // Show next and prev buttons
+                        autoPlay: false, //Set AutoPlay to 3 seconds
+                        items : 4,
+                        margin : 20
+                    });
+                });
+            });
+
+        
+    </script>
+
+    <?php endif; ?>
