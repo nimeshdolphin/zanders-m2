@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-	<module name="Dolphin_DynamicRules" setup_version="1.0.0">
-		<sequence>
-			<module name="magento_Catalog"/>
-            <module name="Zanders_Sports"/>
-        </sequence>
-    </module>    
-</config>

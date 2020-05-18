@@ -1,6 +1,7 @@
 	<?php
 
-		 $type = 'related';
+		 if ($exist = $block->getItems()->getSize()) {
+            $type = 'related';
             $class = $type;
 
             $image = 'related_products_list';
@@ -14,8 +15,15 @@
             $showCart = false;
             $templateType = null;
             $description = false;
+            $helper = $this->helper('Zanders\Sports\Helper\Data');
+        }
+            
+
 
 	?>
+
+    <?php if ($exist) :?>
+
         <div class='box-collateral box-related_products'>
         <h2>Related Products</h2>
 		<div class="owl-carousel">
@@ -30,6 +38,17 @@
                 <?php endif; ?>
  
                 <div class="product-item">
+
+                    <?php $allRelatedProductIds = $_item->getRelatedProductIds();     ?>
+                    <?php $allupsellProductIds =  $_item->getUpSellProductIds();   ?>
+                    
+                    <?php if((count($allRelatedProductIds) > 0) or (count($allupsellProductIds) > 0)) :  ?>
+                    <a href="javascript:;" data-href="<?php echo $this->getUrl('related/index/replacement') ?>id/<?php echo $_item->getId() ?>" class="open-popup">
+                            <img class="cross-popupicon" 
+                                src="<?php echo $helper->getMediaUrl().'images/related_icon.png'; ?>" />
+                    </a>  
+                    <?php  endif?>
+
                     <?= /* @escapeNotVerified */ '<!-- ' . $image . '-->' ?>
                     <a href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>" class="product photo product-item-photo">
                         <?= $block->getImage($_item, $image)->toHtml() ?>
@@ -52,18 +71,9 @@
                         </div>
                         <?php endif;?>
 
-                        <?= /* @escapeNotVerified */ $block->getProductPrice($_item) ?>
+                        <?php /* @escapeNotVerified */ // $block->getProductPrice($_item) ?>
 
                              
-
-                            <?php if ($canItemsAddToCart && !$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
-                                <?php if (!$_item->getRequiredOptions()): ?>
-                                    <div class="field choice related">
-                                        <input type="checkbox" class="checkbox related" id="related-checkbox<?= /* @escapeNotVerified */ $_item->getId() ?>" name="related_products[]" value="<?= /* @escapeNotVerified */ $_item->getId() ?>" />
-                                        <label class="label" for="related-checkbox<?= /* @escapeNotVerified */ $_item->getId() ?>"><span><?= /* @escapeNotVerified */ __('Add to Cart') ?></span></label>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endif; ?>
 
                             <?php if ($showAddTo || $showCart): ?>
                                 <div class="product actions product-item-actions">
@@ -117,9 +127,29 @@
                     $(".owl-carousel").owlCarousel({
                         navigation : true, // Show next and prev buttons
                         autoPlay: false, //Set AutoPlay to 3 seconds
-                        items : 5,
+                        items : 4,
                         margin : 20
                     });
                 });
             });
+
+        require(["jquery"],function($) {
+        $(document).ready(function() {
+         $(".open-popup").click(function () {   
+                var customurl = $(this).attr('data-href');
+                $.ajax({
+                    url: customurl,
+                    type: 'POST',                     
+                complete: function(response) {             
+                     alert(response); 
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        console.log('Error happens. Try again.');
+                    }
+                });
+            }); 
+        });
+    }); 
     </script>
+
+    <?php endif; ?>

@@ -1,7 +1,0 @@
-<?xml version="1.0" ?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
-	<menu>
-		<!-- <add id="Zanders::top_level" module="Zanders_PromotedManufacturer" resource="Magento_Backend::content" parent="Magento_Catalog::catalog" sortOrder="9999" title="Zanders"/> -->
-		<add action="zanders_promotedmanufacturer/promotedmanufacturer/index" id="Zanders_PromotedManufacturer::zanders_promotedmanufacturer_promotedmanufacturer" module="Zanders_PromotedManufacturer" parent="Zanders_Sports::zanders_catalog" resource="Magento_Backend::content" sortOrder="9999" title="Promoted Manufacturer"/>
-	</menu>
-</config>

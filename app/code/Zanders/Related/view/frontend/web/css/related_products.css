@@ -21,6 +21,7 @@
     border-bottom: 1px solid #fff;
     font-weight: bold;
     font-size: 15px;
+    padding-bottom: 10px;
 }
 
 .box-collateral .owl-stage .owl-item {
@@ -35,4 +36,40 @@
     min-height: 400px;
      
     margin: 0 auto;
+}
+
+img.cross-popupicon {
+    width: 24px !important;
+    position: absolute;
+    right: 8px;
+    top: 17px;
+}
+
+strong.product.name.product-item-name {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 0;
+    min-height: 90px;
+}
+.product-item a.product-item-link {
+    color: #000;
+    font-weight: bold;
+ }   
+
+ .catalog-product-view .owl-nav {
+    float: left;
+    position: absolute;
+    top: 2px;
+    right: 10px;
+}
+
+.catalog-product-view .owl-dots {
+    display: none;
+}
+
+.box-collateral.box-related_products {
+    float: left;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
 }
