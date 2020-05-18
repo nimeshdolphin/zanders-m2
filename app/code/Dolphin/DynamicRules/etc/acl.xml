@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Dolphin_DynamicRules::DynamicRules" sortOrder="10" title="DynamicRules">
+					<resource id="Dolphin_DynamicRules::DynamicRules_save" sortOrder="10" title="Save DynamicRules"/>
+					<resource id="Dolphin_DynamicRules::DynamicRules_delete" sortOrder="20" title="Delete DynamicRules"/>
+					<resource id="Dolphin_DynamicRules::DynamicRules_update" sortOrder="30" title="Update DynamicRules"/>
+					<resource id="Dolphin_DynamicRules::DynamicRules_view" sortOrder="40" title="View DynamicRules"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

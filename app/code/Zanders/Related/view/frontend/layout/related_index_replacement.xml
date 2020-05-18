@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="empty" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+    	<css src="Zanders_Related::css/related_products.css"/>
+    	<css src="Zanders_Related::css/owl.carousel.min.css"/>
+	</head>
+	<body> 
+		<referenceBlock name="header.container" remove="true" />       
+		<referenceContainer name="content">
+			<block  class="Magento\Catalog\Block\Product\ProductList\Related" name="related.products.custom" after='product.info.media' template="Zanders_Related::related.phtml"/>
+			<block class="Magento\Catalog\Block\Product\ProductList\Crosssell" name="product.info.crosssell.custom" template="Zanders_Related::crosssell.phtml"  after='related.products.custom' />
+			<block class="Magento\Catalog\Block\Product\ProductList\Upsell" name="product.info.upsell.custom" template="Zanders_Related::upsell.phtml" after='product.info.crosssell.custom'/>
+		</referenceContainer>
+	</body>
+</page>
+ 	

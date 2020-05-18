@@ -1,0 +1,12 @@
+{
+    "zanders_promotedmanufacturer_promotedmanufacturer": {
+        "column": {
+            "id": true,
+            "category_id": true,
+            "manufacturer_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
