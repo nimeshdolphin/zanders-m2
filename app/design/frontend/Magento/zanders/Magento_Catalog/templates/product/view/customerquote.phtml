@@ -1,7 +1,10 @@
 <?php
+$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
+if($sportsHelper->getCustomerGroupId()>=2){
 	$product = $block->getProduct();
 	$id = $block->getProduct()->getId();
 ?>
-<div class="customer-qoute">
-    <div class="std"><a href="<?= $this->getUrl('zanders/index/quotecreate', ['product' => $id]); ?>" class="link-compare"><?= __('Create a Customer Quote for this Product'); ?></a></div>
-</div>
+	<div class="customer-qoute">
+	    <div class="std"><a href="<?= $this->getUrl('zanders/index/quotecreate', ['product' => $id]); ?>" class="link-compare"><?= __('Create a Customer Quote for this Product'); ?></a></div>
+	</div>
+<?php } ?>

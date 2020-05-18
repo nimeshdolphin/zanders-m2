@@ -214,6 +214,7 @@ p.product-itemnumber {
 }
 .product-info-main .product.alert {
     margin-bottom: 0;
+    margin-top: 0;
 }
 .product-info-main .product.alert.stock {
     margin-top: 0;
@@ -236,4 +237,7 @@ p.product-itemnumber {
 .catalog-product-view .customer-qoute a.link-compare {
     color: #000;
     font-weight: 600;
+}
+a.action.mailto.friend {
+    color: #FF7A19;
 }

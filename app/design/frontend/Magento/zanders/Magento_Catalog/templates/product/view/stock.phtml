@@ -1,6 +1,9 @@
 <?php
+$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
+if($sportsHelper->getCustomerGroupId()>=2){
 	$product = $block->getProduct();
 	$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
 	$qty = $sportsHelper->getStockQty($product->getId());
 ?>
 <p class="product-itemnumber"><?= __('Available:'); ?><span class="value"><?= $qty ?></span></p>
+<?php } ?>

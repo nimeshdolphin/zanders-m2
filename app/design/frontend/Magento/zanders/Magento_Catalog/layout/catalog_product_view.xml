@@ -15,6 +15,8 @@
         <move element="alert.urls" destination="product.info.main" after="product.sku"/>
         <move element="product.availability.stock" destination="product.info.main" after="alert.urls"/>
         <move element="product.info.overview" destination="product.info.main" after="product.availability"/>
+        <move element="product.info.mailto" destination="product.info.main" after="product.sku"/>
+
         <referenceBlock name="product.info.details">
             <block class="Magento\Catalog\Block\Product\View\Attributes" name="product.attributes" as="additional" template="Magento_Catalog::product/view/attributes.phtml" group="detailed_info">
                 <arguments>

@@ -1,0 +1,100 @@
+.search-menu-cart .vertnav-container {
+    display: none !important;
+}
+.search-menu-cart .vertnav-container:hover {
+    display: block !important;
+}
+.search-menu-cart .menu-header:hover + .vertnav-container {
+    display: block !important;
+}
+h1.page-title {
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.sendfriend-product-send .page-main fieldset.common {
+    border: 0;
+    background: #fff;
+    padding: 22px 25px 25px 33px;
+    margin: 28px 0 0;
+}
+.sendfriend-product-send .page-main legend.legend {
+    border: 0;
+    margin-bottom: 5px;
+}
+.sendfriend-product-send .page-main legend.legend {
+    border: 0;
+    margin-bottom: 5px;
+    font-size: 22px;
+    color: #000;
+}
+.sendfriend-product-send .page-main .label {
+    color: #000;
+    font-size: 14px;
+    margin-bottom: 0 !important;
+    font-weight: 400 !important;
+}
+.actions-toolbar.bottom {
+    background: #fff;
+    padding: 15px 30px;
+}
+.actions-toolbar.bottom button {
+    background: #337810;
+    border: 0;
+    border-radius: 0;
+    padding: 8px 30px;
+    margin-right: 8px !important;
+	font-weight: 500;
+}
+.actions-toolbar.bottom button:hover {
+    background: #337810;
+    border: 0;
+}
+.actions-toolbar.bottom .primary{
+	float: right;
+}
+.actions-toolbar.bottom .secondary a.action.back {
+    display: block;
+    font-size: 14px;
+    color: #000;
+	margin-top: 8px;
+}
+button#add-recipient-button {
+    background: #337810;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px 30px;
+    margin-right: 12px;
+    margin-top: 8px;
+}
+.sendfriend-product-send .form.send.friend .fieldset .field {
+    width: 50%;
+}
+.sendfriend-product-send .form.send.friend .fieldset .field.text {
+    width: 100%;
+}
+.actions-toolbar.inner .secondary {
+    float: right !important;
+}
+#recipients-options button.remove {
+    display: block;
+    width: 11px;
+    height: 11px;
+    font-size: 0;
+    line-height: 0;
+    background: url(../images/btn_remove.gif) 0 0 no-repeat;
+    text-indent: -995em;
+    overflow: hidden;
+    margin-top: 20px;
+    margin-left: 96%;
+}
+.form.send.friend .additional {
+    margin-top: 10px;
+}
+.form.send.friend input[type="text"], .form.send.friend input[type="email"] {
+    height: 26px;
+}
