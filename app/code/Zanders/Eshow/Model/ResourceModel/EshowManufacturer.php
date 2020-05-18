@@ -17,7 +17,7 @@ class EshowManufacturer extends AbstractDb
     }
 
     /**
-     * Get Description data by sku
+     * Get Manufacturer data by show_id
      *
      * @param int $showId
      * @return array
@@ -35,7 +35,7 @@ class EshowManufacturer extends AbstractDb
     }
 
     /**
-     * Get Description data by sku
+     * Delete Manufacturer data
      *
      * @param string $showId
      * @param array $manufacturerIds

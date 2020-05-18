@@ -56,7 +56,7 @@ class ProductInfo extends \Magento\Backend\App\Action
                     'sku' => $product->getSku(),
                     'min_qty' => (isset($productData[1]) && $productData[1] > 0) ? (int)$productData[1] : 0,
                     'max_qty' => (isset($productData[2]) && $productData[2] > 0) ? (int)$productData[2] : 0,
-                    'price' => (isset($productData[3]) && $productData[3] > 0) ? $productData[3] : $product->getPrice(),
+                    'price' => (isset($productData[3]) && $productData[3] > 0) ? number_format($productData[3], 2) : number_format($product->getPrice(), 2),
                     'desc' => (isset($productData[4]) && trim($productData[4]) != '') ? $productData[4] : trim($product->getName())
                 ];
             }

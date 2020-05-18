@@ -301,6 +301,7 @@
             </argument>
         </field>
     </fieldset>
+
     <fieldset name="fieldset_purchase_items">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
@@ -324,24 +325,24 @@
             </argument>
         </field>
 
-        <button name="btn_add_products">
+        <button name="btn_add_purchase_products">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="buttonClasses" xsi:type="string">btn-add-products</item>
                     <item name="label" xsi:type="string" translate="true">Add Product(s)</item>
                     <item name="actions" xsi:type="array">
-                        <!--<item name="0" xsi:type="array">
-                            <item name="targetName" xsi:type="string">ns=eshow_form, index=purchase_items</item>
-                            <item name="actionName" xsi:type="string">clear</item>
-                        </item>-->
                         <item name="0" xsi:type="array">
-                            <item name="targetName" xsi:type="string">ns=eshow_form, index=dynamic_rows</item>
-                            <item name="actionName" xsi:type="string">addPurchaseItems</item>
+                            <item name="targetName" xsi:type="string">ns=eshow_form, index=purchase_items_table</item>
+                            <item name="actionName" xsi:type="string">getProductInfo</item>
                             <item name="params" xsi:type="array">
                                 <item name="0" xsi:type="array">
-                                    <item name="purchaseItems" xsi:type="string">
+                                    <item name="sourceElement" xsi:type="string">
                                         ns=eshow_form, index=purchase_items
                                     </item>
+                                    <item name="fillTableElement" xsi:type="string">
+                                        div.purchase_items_table table
+                                    </item>
+                                    <item name="fieldPrefix" xsi:type="string">pur</item>
                                 </item>
                             </item>
                         </item>
@@ -353,115 +354,81 @@
                 <title translate="true">Add Products</title>
             </settings>
         </button>
-        <dynamicRows name="dynamic_rows" component="Zanders_Eshow/js/dynamic-rows/dynamic-rows">
+
+        <htmlContent name="purchase_items_table" component="Zanders_Eshow/js/form/components/html">
             <settings>
-                <addButtonLabel translate="true">Add Record</addButtonLabel>
                 <additionalClasses>
-                    <class name="admin__field-wide">true</class>
+                    <class name="purchase_items_table">true</class>
                 </additionalClasses>
-                <componentType>dynamicRows</componentType>
-                <dndConfig>
-                    <param name="enabled" xsi:type="boolean">false</param>
-                </dndConfig>
             </settings>
-            <container name="record" component="Magento_Ui/js/dynamic-rows/record">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="isTemplate" xsi:type="boolean">true</item>
-                        <item name="is_collection" xsi:type="boolean">true</item>
-                        <item name="componentType" xsi:type="string">container</item>
+            <block name="html_purchase_items_table" class="Zanders\Eshow\Block\Adminhtml\Index\PurchasedItem">
+                <arguments>
+                    <argument name="template" xsi:type="string">Zanders_Eshow::purchase_items_table.phtml</argument>
+                </arguments>
+            </block>
+        </htmlContent>
+    </fieldset>
+
+    <fieldset name="fieldset_receive_items">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Receive Items</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+        <field name="receive_items">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="label" xsi:type="string" translate="true">Add Product(s)</item>
+                    <item name="dataType" translate="true" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        <![CDATA[<p>One Product per line.<br><strong>Item Number</strong> only OR Comma Separated: <strong>Item No, Min Qty, Max Qty, Price, Description</strong></p>]]>
                     </item>
-                </argument>
-                <field name="sku" formElement="input">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                            <!--<item name="disabled" xsi:type="boolean">true</item>-->
+                    <item name="rows" xsi:type="string">10</item>
+                </item>
+            </argument>
+        </field>
+
+        <button name="btn_add_receive_products">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="buttonClasses" xsi:type="string">btn-add-products</item>
+                    <item name="label" xsi:type="string" translate="true">Add Product(s)</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">ns=eshow_form, index=receive_items_table</item>
+                            <item name="actionName" xsi:type="string">getProductInfo</item>
+                            <item name="params" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="sourceElement" xsi:type="string">ns=eshow_form, index=receive_items</item>
+                                    <item name="fillTableElement" xsi:type="string">div.receive_items_table table</item>
+                                    <item name="fieldPrefix" xsi:type="string">rec</item>
+                                </item>
+                            </item>
                         </item>
-                    </argument>
-                    <settings>
-                        <validation>
-                            <rule name="required-entry" xsi:type="boolean">true</rule>
-                        </validation>
-                        <dataType>text</dataType>
-                        <label>Item Number</label>
-                    </settings>
-                </field>
-                <field name="description" formElement="input">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <validation>
-                            <rule name="required-entry" xsi:type="boolean">true</rule>
-                        </validation>
-                        <dataType>text</dataType>
-                        <label>Description</label>
-                    </settings>
-                </field>
-                <field name="min_qty" formElement="input">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <validation>
-                            <rule name="required-entry" xsi:type="boolean">true</rule>
-                            <rule name="validate-number" xsi:type="boolean">true</rule>
-                        </validation>
-                        <dataType>text</dataType>
-                        <label>Min. Qty.</label>
-                    </settings>
-                </field>
-                <field name="max_qty" formElement="input">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <validation>
-                            <rule name="required-entry" xsi:type="boolean">true</rule>
-                            <rule name="validate-number" xsi:type="boolean">true</rule>
-                        </validation>
-                        <dataType>text</dataType>
-                        <label>Max. Qty.</label>
-                    </settings>
-                </field>
-                <field name="custom_price" formElement="input">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <validation>
-                            <rule name="required-entry" xsi:type="boolean">true</rule>
-                            <rule name="validate-number" xsi:type="boolean">true</rule>
-                        </validation>
-                        <dataType>text</dataType>
-                        <label>Price</label>
-                    </settings>
-                </field>
-                <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <additionalClasses>
-                            <class name="some-class">true</class>
-                        </additionalClasses>
-                        <dataType>text</dataType>
-                        <label>Actions</label>
-                        <componentType>actionDelete</componentType>
-                    </settings>
-                </actionDelete>
-            </container>
-        </dynamicRows>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <displayAsLink>false</displayAsLink>
+                <title translate="true">Add Products</title>
+            </settings>
+        </button>
+
+        <htmlContent name="receive_items_table" component="Zanders_Eshow/js/form/components/html">
+            <settings>
+                <additionalClasses>
+                    <class name="receive_items_table">true</class>
+                </additionalClasses>
+            </settings>
+            <block name="html_receive_items_table" class="Zanders\Eshow\Block\Adminhtml\Index\ReceivedItem">
+                <arguments>
+                    <argument name="template" xsi:type="string">Zanders_Eshow::receive_items_table.phtml</argument>
+                </arguments>
+            </block>
+        </htmlContent>
     </fieldset>
 </form>

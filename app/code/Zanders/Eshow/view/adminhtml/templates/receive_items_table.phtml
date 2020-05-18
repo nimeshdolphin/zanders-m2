@@ -1,0 +1,64 @@
+<?php
+/** @var Zanders\Eshow\Block\Adminhtml\Index\ReceivedItem $block */
+?>
+
+<div class="admin__data-grid-wrap">
+    <p><strong><?= $block->escapeHtml(__('Product List')) ?></strong> :</p>
+    <p><?= $block->escapeHtml(__('0\'s will reset item')) ?></p>
+    <table class="data-grid">
+        <colgroup>
+            <col width="20%">
+            <col width="40%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+        </colgroup>
+        <thead>
+        <tr>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Item Number')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Description')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Min. Qty.')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Max. Qty.')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Price')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Remove')) ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $receivedItems = $block->getReceivedItems(); ?>
+        <?php foreach ($receivedItems as $key => $receivedItem): ?>
+            <tr>
+                <td>
+                    <?= $receivedItem['sku'] ?>
+                    <input type="hidden" name="recsku[<?= $receivedItem['sku'] ?>]"
+                           value="<?= $receivedItem['sku'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td>
+                    <input type="text" class="admin__control-text" name="recdesc[<?= $receivedItem['sku'] ?>]"
+                           value="<?= $receivedItem['desc'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td>
+                    <input type="text" class="admin__control-text" name="recminqty[<?= $receivedItem['sku'] ?>]"
+                           value="<?= $receivedItem['min_qty'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td>
+                    <input type="text" class="admin__control-text" name="recmaxqty[<?= $receivedItem['sku'] ?>]"
+                           value="<?= $receivedItem['max_qty'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td>
+                    <input type="text" class="admin__control-text" name="recprice[<?= $receivedItem['sku'] ?>]"
+                           value="<?= $receivedItem['price'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td class="data-grid-checkbox-cell">
+                    <label class="data-grid-checkbox-cell-inner">
+                        <input class="admin__control-checkbox" id="removerec<?= $receivedItem['sku'] ?>" type="checkbox"
+                               name="recremove[<?= $receivedItem['sku'] ?>]"
+                               value="1" data-form-part="eshow_form"/>
+                        <label for="removerec<?= $receivedItem['sku'] ?>"></label>
+                    </label>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
