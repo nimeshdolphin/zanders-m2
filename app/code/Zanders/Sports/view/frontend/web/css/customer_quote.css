@@ -62,3 +62,44 @@
     color: #000;
     font-size: 18px;
 }
+.column .actions-toolbar {
+    border: 0;
+    margin-top: 0;
+    background: #fff;
+    padding: 0 25px 25px;
+}
+.column .actions-toolbar .primary {
+    float: right;
+    margin-right: 0;
+}
+.column .actions-toolbar .primary button {
+    margin-right: 0 !important;
+    background: #50a725;
+    border: 0;
+    border-radius: 0;
+    padding: 8px 30px;
+}
+.column .actions-toolbar .primary button:hover {
+    background: #50a725;
+    border: 0;
+}
+.column .actions-toolbar p.required {
+    color: #991020;
+    text-align: right;
+}
+.column .actions-toolbar p.back-link {
+    float: left;
+    margin: 0;
+    margin-top: 5px;
+}
+.column .actions-toolbar p.back-link a {
+    color: #000;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.quote .fieldset > .field.description, .quote .fieldset > .field.notes {
+    width: 535px;
+}
+.quote .fieldset > .field.customerprice, .quote .fieldset > .field.quoteexpires {
+    clear: right;
+}

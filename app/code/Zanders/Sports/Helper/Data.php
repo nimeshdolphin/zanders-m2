@@ -63,6 +63,7 @@ class Data extends AbstractHelper
         $customerGroupId = '';
         if($this->isLoggedIn()){
             $customerGroupId = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_GROUP);
+            $customerGroupId = 3;
         }
         return $customerGroupId;
     }

@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+?>
+
+<?php
+$images = $block->getGalleryImages()->getItems();
+$count = count($images);
+$mainImage = current(array_filter($images, function ($img) use ($block) {
+    return $block->isMainImage($img);
+}));
+if (!empty($images) && empty($mainImage)) {
+    $mainImage = $block->getGalleryImages()->getFirstItem();
+}
+
+$helper = $block->getData('imageHelper');
+$mainImageData = $mainImage ?
+    $mainImage->getData('medium_image_url') :
+    $helper->getDefaultPlaceholderUrl('image');
+
+?>
+<p class="product-image product-image-zoom">
+    <img id="image" src="<?= $mainImageData; ?>" />
+</p>
+<div class="more-views">
+    <ul>
+        <?php if($count > 0){ ?>
+            <?php foreach($images as $_image){ ?>
+                <li>
+                    <a href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>"><img src="<?php echo $_image->getData('small_image_url'); ?>" width="250" height="169" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" /></a>
+                </li>
+            <?php } ?>
+        <?php } ?>
+    </ul>
+</div>

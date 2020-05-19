@@ -2,7 +2,7 @@
 $isLogin = $this->helper('Zanders\Sports\Helper\Data')->isLoggedIn();
 if($isLogin){
     $_product = $this->getProduct();
-    $_customer = $this->getDefaultShippingAddress();
+    //$_customer = $this->getDefaultShippingAddress();
 ?>
 <h2 class="quotetitle">Create Customer Quote for <?= $_product->getName(); ?></h2>
 <form class="form quote"
@@ -16,25 +16,25 @@ if($isLogin){
         <div class="field name required">
             <label class="label" for="name"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
             <div class="control">
-                <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('Name')) ?>" value="<?= $_customer->getName(); ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('Name')) ?>" value="" class="input-text" type="text" data-validate="{required:true}"/>
             </div>
         </div>
         <div class="field telephone">
             <label class="label" for="telephone"><span><?= $block->escapeHtml(__('Phone Number')) ?></span></label>
             <div class="control">
-                <input name="telephone" id="telephone" title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>" value="<?= $_customer->getTelephone(); ?>" class="input-text" type="text" />
+                <input name="telephone" id="telephone" title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>" value="" class="input-text" type="text" />
             </div>
         </div>
         <div class="field fax">
             <label class="label" for="fax"><span><?= $block->escapeHtml(__('Fax')) ?></span></label>
             <div class="control">
-                <input name="fax" id="fax" title="<?= $block->escapeHtmlAttr(__('Fax')) ?>" value="<?= $_customer->getFax(); ?>" class="input-text" type="text" />
+                <input name="fax" id="fax" title="<?= $block->escapeHtmlAttr(__('Fax')) ?>" value="" class="input-text" type="text" />
             </div>
         </div>
         <div class="field email required">
             <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
             <div class="control">
-                <input name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" value="<?= $_customer->getEmail(); ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
+                <input name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" value="" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
             </div>
         </div>
         <div class="field street">
@@ -49,7 +49,7 @@ if($isLogin){
         <div class="field city">
             <label class="label" for="city"><span><?= $block->escapeHtml(__('City')) ?></span></label>
             <div class="control">
-                <input name="city" id="city" title="<?= $block->escapeHtmlAttr(__('City')) ?>" value="<?= $_customer->getCity(); ?>" class="input-text" type="text"/>
+                <input name="city" id="city" title="<?= $block->escapeHtmlAttr(__('City')) ?>" value="" class="input-text" type="text"/>
             </div>
         </div>
         <div class="field region_id">
@@ -63,7 +63,7 @@ if($isLogin){
                     require([
                         "jquery"
                     ], function($){
-                        $('region_id').setAttribute('defaultValue',  "<?= $_customer->getRegionId(); ?>");
+                        //$('region_id').setAttribute('defaultValue',  "");
                     });
                 </script>
             </div>
@@ -71,7 +71,7 @@ if($isLogin){
         <div class="field zip">
             <label class="label" for="postcode"><span><?= $block->escapeHtml(__('Zip/Postal Code')) ?></span></label>
             <div class="control">
-                <input name="postcode" id="postcode" title="<?= $block->escapeHtmlAttr(__('Zip/Postal Code')) ?>" value="<?= $_customer->getPostcode(); ?>" class="input-text" type="text"/>
+                <input name="postcode" id="postcode" title="<?= $block->escapeHtmlAttr(__('Zip/Postal Code')) ?>" value="" class="input-text" type="text"/>
             </div>
         </div>
     </fieldset>
@@ -126,8 +126,16 @@ if($isLogin){
             </div>
         </div>
     </fieldset>
-    <fieldset class="fieldset contact-information">
+    <fieldset class="fieldset product-information">
         <legend class="legend"><span><?= $block->escapeHtml(__('Product Quote Information')) ?></span></legend><br />
+        <div class="field description">
+            <label class="label" for="description"><?= __('Description') ?></label>
+            <p class="value"><?= $_product->getName(); ?></p>
+        </div>
+        <div class="field cost">
+            <label class="label" for="description"><?= __('Cost') ?></label>
+            <p class="value"><?= $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($_product->getPrice(),2),true,false); ?></p>
+        </div>
         <div class="field customerprice required">
             <label class="label" for="customerprice"><span><?= $block->escapeHtml(__('Quoted Customer Price')) ?></span></label>
             <div class="control">
@@ -154,6 +162,8 @@ if($isLogin){
         </div>
     </fieldset>
     <div class="actions-toolbar">
+        <p class="required">* Required Fields</p>
+        <p class="back-link"><a href="<?= $_product->getProductUrl(); ?>"><small>&lt;&lt;</small><?= __('Back') ?></a></p>
         <div class="primary">
             <input type="hidden" name="hideit" id="hideit" value="" />
             <button type="submit" title="<?= $block->escapeHtmlAttr(__('Create Quote')) ?>" class="action submit primary">

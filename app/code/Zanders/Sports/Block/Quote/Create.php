@@ -7,22 +7,17 @@ class Create extends Template
 {
     protected $_productloader;
     protected $request;
-    protected $customerSession;
 
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
-        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
-        \Magento\Customer\Api\AddressRepositoryInterface $addressRepository,
         \Magento\Catalog\Model\ProductFactory $_productloader,
         \Magento\Framework\App\Request\Http $request,
-        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Customer\Model\Session $customer,
         array $data = []
     ) {
-        $this->customerRepository = $customerRepository;
-        $this->addressRepository = $addressRepository;
         $this->_productloader = $_productloader;
         $this->request = $request;
-        $this->customerSession = $customerSession;
+        $this->customer = $customer;
         parent::__construct($context, $data);
     }
 
@@ -37,18 +32,9 @@ class Create extends Template
      */
     public function getDefaultShippingAddress()
     {
-        ///echo $this->customerSession->getCustomerId();exit;
-        $address = array();
-        $customerId = 41502;
-        $customer = $this->customerRepository->getById($customerId);
-        $shippingAddressId  = $customer->getDefaultShipping();
-        try {
-            $address = $this->addressRepository->getById($shippingAddressId);
-        } catch (\Exception $e) {
-
-        }
-        print_r($address);exit;
-        return $address;
+        $customer = $this->customer;
+        $customerName =  $customer->getName();
+        echo $customerId = $customer->getId(); exit;
     }
 
     public function getProduct()
