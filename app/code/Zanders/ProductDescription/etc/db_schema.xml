@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="zanders_description" resource="default" comment="Zanders Description Table" charset="utf8"
            engine="innodb">
-        <column xsi:type="int" name="description_id" identity="true" unsigned="true" nullable="false"
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"
                 comment="Description Id"/>
         <column xsi:type="int" name="product_id" nullable="false" unsigned="true" default="0"/>
         <column xsi:type="varchar" name="sku" length="255" nullable="false"/>
@@ -12,7 +12,7 @@
         <column xsi:type="text" name="text" nullable="true"/>
         <column xsi:type="varchar" name="file_loc" length="255" nullable="true"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="description_id"/>
+            <column name="id"/>
         </constraint>
         <index referenceId="ZANDERS_DESCRIPTION_SKU" indexType="fulltext">
             <column name="sku"/>

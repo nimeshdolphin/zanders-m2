@@ -3,13 +3,13 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="zanders_promotion" resource="default" comment="Zanders Promotion Table" charset="utf8"
            engine="innodb">
-        <column xsi:type="int" name="promotion_id" identity="true" unsigned="true" nullable="false"
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"
                 comment="Promotion Id"/>
         <column xsi:type="varchar" name="title" length="255" nullable="false"/>
         <column xsi:type="tinyint" name="type" nullable="false" default="1"/>
         <column xsi:type="text" name="pdf" nullable="true"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="promotion_id"/>
+            <column name="id"/>
         </constraint>
         <index referenceId="ZANDERS_PROMOTION_TITLE" indexType="fulltext">
             <column name="title"/>
@@ -17,7 +17,7 @@
     </table>
     <table name="zanders_bogo" resource="default" comment="Zanders BOGO Promotion Table" charset="utf8"
            engine="innodb">
-        <column xsi:type="int" name="bogo_id" identity="true" unsigned="true" nullable="false"
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"
                 comment="BOGO Promotion Id"/>
         <column xsi:type="varchar" name="buy_one_sku" length="255" nullable="false"/>
         <column xsi:type="int" name="buy_one_id" nullable="false" default="0"/>
@@ -25,7 +25,7 @@
         <column xsi:type="int" name="get_one_id" nullable="false" default="0"/>
         <column xsi:type="text" name="details" nullable="true"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="bogo_id"/>
+            <column name="id"/>
         </constraint>
         <index referenceId="ZANDERS_BOGO_BUY_ONE_SKU_GET_ONE_SKU" indexType="fulltext">
             <column name="buy_one_sku"/>
@@ -34,14 +34,14 @@
     </table>
     <table name="zanders_toppromo" resource="default" comment="Zanders Top Promotion Table" charset="utf8"
            engine="innodb">
-        <column xsi:type="int" name="toppromo_id" identity="true" unsigned="true" nullable="false"
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"
                 comment="Top Promotion Id"/>
         <column xsi:type="varchar" name="title" length="255" nullable="false"/>
         <column xsi:type="varchar" name="image" length="500" nullable="false"/>
         <column xsi:type="varchar" name="link" length="500" nullable="false"/>
         <column xsi:type="int" name="sort_order" nullable="false" default="0"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="toppromo_id"/>
+            <column name="id"/>
         </constraint>
         <index referenceId="ZANDERS_TOPPROMO_TITLE" indexType="fulltext">
             <column name="title"/>

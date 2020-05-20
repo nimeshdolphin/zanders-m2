@@ -13,6 +13,6 @@ class CategoryCode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('zanders_categorycode', 'categorycode_id');   //here "zanders_categorycode" is table name and "categorycode_id" is the primary key of custom table
+        $this->_init('zanders_categorycode', 'id');   //here "zanders_categorycode" is table name and "id" is the primary key of custom table
     }
 }

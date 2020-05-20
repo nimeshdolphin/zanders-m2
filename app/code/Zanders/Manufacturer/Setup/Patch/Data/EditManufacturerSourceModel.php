@@ -52,14 +52,16 @@ class EditManufacturerSourceModel implements DataPatchInterface
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $attributeEntityType = \Magento\Catalog\Api\Data\ProductAttributeInterface::ENTITY_TYPE_CODE;
         $attributeId = $eavSetup->getAttributeId($attributeEntityType, 'manufacturer');
-        $eavSetup->updateAttribute(
-            $attributeEntityType,
-            $attributeId,
-            [
-                'frontend_model' => 'Zanders\Manufacturer\Model\Frontend\Style',
-                'source_model' => 'Zanders\Manufacturer\Model\Manufacturer\Source\Product'
-            ]
-        );
+        if ($attributeId) {
+            $eavSetup->updateAttribute(
+                $attributeEntityType,
+                $attributeId,
+                [
+                    'frontend_model' => 'Zanders\Manufacturer\Model\Frontend\Style',
+                    'source_model' => 'Zanders\Manufacturer\Model\Manufacturer\Source\Product'
+                ]
+            );
+        }
     }
 
     /**

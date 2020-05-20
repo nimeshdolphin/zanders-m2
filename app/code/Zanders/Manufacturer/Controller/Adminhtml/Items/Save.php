@@ -14,15 +14,15 @@ class Save extends \Zanders\Manufacturer\Controller\Adminhtml\Items
             try {
                 $model = $this->_objectManager->create('Zanders\Manufacturer\Model\Manufacturer');
                 $data = $this->getRequest()->getPostValue();
-                if(isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
-                    try{
+                if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
+                    try {
                         $uploaderFactory = $this->uploaderFactory->create(['fileId' => 'image']);
                         $uploaderFactory->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
                         $imageAdapter = $this->adapterFactory->create();
-                        $uploaderFactory->addValidateCallback('custom_image_upload',$imageAdapter,'validateUploadFile');
+                        $uploaderFactory->addValidateCallback('custom_image_upload', $imageAdapter, 'validateUploadFile');
                         $uploaderFactory->setAllowRenameFiles(true);
                         $uploaderFactory->setFilesDispersion(true);
-                        $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA);
+                        $mediaDirectory = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
                         $destinationPath = $mediaDirectory->getAbsolutePath('zanders/manufacturer');
                         $result = $uploaderFactory->save($destinationPath);
                         if (!$result) {
@@ -30,22 +30,22 @@ class Save extends \Zanders\Manufacturer\Controller\Adminhtml\Items
                                 __('File cannot be saved to path: $1', $destinationPath)
                             );
                         }
-                        
-                        $imagePath = 'zanders/manufacturer'.$result['file'];
+
+                        $imagePath = 'zanders/manufacturer' . $result['file'];
                         $data['image'] = $imagePath;
                     } catch (\Exception $e) {
                     }
                 }
-                if(isset($data['image']['delete']) && $data['image']['delete'] == 1) {
-                    $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA)->getAbsolutePath();
+                if (isset($data['image']['delete']) && $data['image']['delete'] == 1) {
+                    $mediaDirectory = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
                     $file = $data['image']['value'];
-                    $imgPath = $mediaDirectory.$file;
-                    if ($this->_file->isExists($imgPath))  {
+                    $imgPath = $mediaDirectory . $file;
+                    if ($this->_file->isExists($imgPath)) {
                         $this->_file->deleteFile($imgPath);
                     }
                     $data['image'] = NULL;
                 }
-                if (isset($data['image']['value'])){
+                if (isset($data['image']['value'])) {
                     $data['image'] = $data['image']['value'];
                 }
                 $inputFilter = new \Zend_Filter_Input(

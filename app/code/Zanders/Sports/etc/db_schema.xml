@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <!--Eli ERP Tables-->
+    <table name="eliinvoice" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="order_no" unsigned="true"/>
+        <column xsi:type="int" name="web_order_id" unsigned="true"/>
+        <column xsi:type="text" name="data"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="eliinvoice_items" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="order_no" unsigned="true"/>
+        <column xsi:type="varchar" name="item_number" length="255"/>
+        <column xsi:type="int" name="seq_no" unsigned="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="eliorder" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="order_no" unsigned="true"/>
+        <column xsi:type="int" name="web_order_id" unsigned="true"/>
+        <column xsi:type="text" name="order_info"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="eliorder_items" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="order_no" unsigned="true"/>
+        <column xsi:type="varchar" name="item_number" length="255"/>
+        <column xsi:type="int" name="seq_no" unsigned="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!--FFL Shipping Table-->
+    <table name="ffl_shipto_info" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="order_no" unsigned="true" nullable="true" default="null"/>
+        <column xsi:type="int" name="quote_id" unsigned="true" nullable="true" default="null"/>
+        <column xsi:type="varchar" name="cust_number" length="25"/>
+        <column xsi:type="varchar" name="ffl_number" length="25"/>
+        <column xsi:type="varchar" name="customer_name" length="255"/>
+        <column xsi:type="varchar" name="customer_phone" length="255"/>
+        <column xsi:type="varchar" name="cfd" length="10"/>
+        <column xsi:type="int" name="error" unsigned="true" nullable="true" default="null"/>
+        <column xsi:type="varchar" name="message" length="255"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="FFL_SHIPTO_INFO_CUST_NUMBER_FFL_NUMBER_CUSTOMER_NAME_CUSTOMER_PHONE_CFD" indexType="fulltext">
+            <column name="cust_number"/>
+            <column name="ffl_number"/>
+            <column name="customer_name"/>
+            <column name="customer_phone"/>
+            <column name="cfd"/>
+        </index>
+    </table>
+
+    <!--Webservice codes Table-->
+    <table name="webservice_codes" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="email" length="255"/>
+        <column xsi:type="varchar" name="passcode" length="255"/>
+        <column xsi:type="int" name="customer_id" unsigned="true"/>
+        <column xsi:type="int" name="customer_number" unsigned="true"/>
+        <column xsi:type="int" name="econtact_id" unsigned="true"/>
+        <column xsi:type="int" name="use_freight_policy" unsigned="true" nullable="true" default="null"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!--Zanders available Table-->
+    <table name="zanders_available" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="varchar" name="sku" length="60" nullable="false"/>
+        <column xsi:type="int" name="available" unsigned="true"/>
+        <column xsi:type="int" name="product_id" unsigned="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="sku"/>
+        </constraint>
+    </table>
+
+    <!--Zanders cacompliant Table-->
+    <table name="zanders_cacompliant" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="sku" length="255"/>
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="true" default="null"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!--Zanders flatrate Table-->
+    <table name="zanders_flatrate" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="name" length="255"/>
+        <column xsi:type="decimal" name="accessory" scale="2" precision="10"/>
+        <column xsi:type="decimal" name="firearm" scale="2" precision="10"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!--Zanders hits Table-->
+    <table name="zanders_hits" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="pageid" unsigned="true"/>
+        <column xsi:type="datetime" name="time" default="CURRENT_TIMESTAMP"/>
+        <column xsi:type="int" name="customer" unsigned="true" nullable="false" default="0"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!--Zanders restrictions Table-->
+    <table name="zanders_restrictions" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="sku_customer_number" length="128"/>
+        <column xsi:type="varchar" name="restricted_flag" length="40"/>
+        <column xsi:type="varchar" name="restricted_attribute" length="40"/>
+        <column xsi:type="datetime" name="time" default="CURRENT_TIMESTAMP"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!--Zanders videos Table-->
+    <table name="zanders_videos" resource="default" charset="utf8" engine="innodb">
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="itemno" length="255"/>
+        <column xsi:type="varchar" name="description" length="255"/>
+        <column xsi:type="varchar" name="link" length="255"/>
+        <column xsi:type="varchar" name="image" length="255"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!--Adding comments column to sales_order_payment Table-->
+    <table name="sales_order_payment">
+        <column xsi:type="varchar" name="comments" length="255"/>
+    </table>
+    <!--Adding comments column to quote_payment Table-->
+    <table name="quote_payment">
+        <column xsi:type="varchar" name="comments" length="255"/>
+    </table>
+</schema>

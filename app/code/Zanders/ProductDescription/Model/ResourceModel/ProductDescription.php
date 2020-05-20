@@ -13,7 +13,7 @@ class ProductDescription extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('zanders_description', 'description_id');
+        $this->_init('zanders_description', 'id');
     }
 
     /**

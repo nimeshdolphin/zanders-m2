@@ -43,7 +43,7 @@
         <column xsi:type="int" name="show_id" nullable="false" default="0"/>
         <column xsi:type="int" name="customer_number" nullable="false" default="0"/>
         <column xsi:type="varchar" name="customer_name" length="255" nullable="false"/>
-        <column xsi:type="timestamp" name="date" nullable="true"/>
+        <column xsi:type="datetime" name="date" nullable="true" default="CURRENT_TIMESTAMP"/>
         <column xsi:type="text" name="save" nullable="true"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>

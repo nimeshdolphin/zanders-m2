@@ -13,6 +13,6 @@ class Promotion extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('zanders_promotion', 'promotion_id');
+        $this->_init('zanders_promotion', 'id');
     }
 }

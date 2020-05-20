@@ -72,7 +72,7 @@ class Main extends Generic implements TabInterface
         $form->setHtmlIdPrefix('item_');
         $fieldset = $form->addFieldset('base_fieldset', ['legend' => __('Category Code Information')]);
         if ($model->getId()) {
-            $fieldset->addField('categorycode_id', 'hidden', ['name' => 'categorycode_id']);
+            $fieldset->addField('id', 'hidden', ['name' => 'id']);
         }
         $fieldset->addField(
             'category',

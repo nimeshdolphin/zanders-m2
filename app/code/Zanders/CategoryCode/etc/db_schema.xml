@@ -3,14 +3,14 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="zanders_categorycode" resource="default" comment="Zanders Category Code Table" charset="utf8"
            engine="innodb">
-        <column xsi:type="int" name="categorycode_id" identity="true" unsigned="true" nullable="false"
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"
                 comment="Category Code Id"/>
         <column xsi:type="varchar" name="code" length="255" nullable="false"/>
         <column xsi:type="varchar" name="category" length="255" nullable="false"/>
         <column xsi:type="int" name="cat_id" nullable="true" default="0"/>
         <column xsi:type="int" name="position" nullable="true"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="categorycode_id"/>
+            <column name="id"/>
         </constraint>
         <index referenceId="ZANDERS_CATEGORYCODE_CODE_CATEGORY" indexType="fulltext">
             <column name="code"/>

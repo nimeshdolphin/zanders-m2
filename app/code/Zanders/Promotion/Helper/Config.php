@@ -12,8 +12,6 @@ use Magento\Framework\App\Helper\Context;
 class Config extends AbstractHelper
 {
     const XML_PATH_ENABLED = 'sports/promotions/currentcatalog';
-    const XML_PATH_REFUND = 'payment_extra_charge/general/refund';
-    const XML_PATH_TITLE = 'payment_extra_charge/general/title';
 
     public function isEnabled()
     {

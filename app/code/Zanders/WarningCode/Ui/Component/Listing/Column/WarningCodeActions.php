@@ -54,7 +54,7 @@ class WarningCodeActions extends \Magento\Ui\Component\Listing\Columns\Column
                         'href' => $this->_urlBuilder->getUrl(
                             static::URL_PATH_EDIT,
                             [
-                                'id' => $item['warningcode_id']
+                                'id' => $item['id']
                             ]
                         ),
                         'label' => __('Edit')

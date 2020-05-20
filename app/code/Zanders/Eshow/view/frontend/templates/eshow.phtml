@@ -1,0 +1,17 @@
+<?php
+/**
+ * @category   Zanders
+ * @package    Zanders_Eshow
+ */
+
+/* @var $block Zanders\Eshow\Block\Eshow */
+?>
+<?php
+$eshow = $block->getEshow();
+?>
+<h2><?= __('Number') . ': ' . $eshow->getId(); ?></h2>
+<h2><?= $eshow->getTitle(); ?>
+    from <?= date_format(date_create($eshow->getStartDate()), "M d, Y") ?>
+    to <?= date_format(date_create($eshow->getEndDate()), "M d, Y") ?>
+</h2>
+

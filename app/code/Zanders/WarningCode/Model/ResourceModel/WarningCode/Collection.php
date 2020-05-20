@@ -8,7 +8,7 @@ namespace Zanders\WarningCode\Model\ResourceModel\WarningCode;
  
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
-    protected $_idFieldName = 'warningcode_id';
+    protected $_idFieldName = 'id';
     /**
      * Define model & resource model
      */

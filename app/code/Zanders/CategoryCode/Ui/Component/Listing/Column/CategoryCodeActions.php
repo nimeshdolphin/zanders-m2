@@ -54,7 +54,7 @@ class CategoryCodeActions extends \Magento\Ui\Component\Listing\Columns\Column
                         'href' => $this->_urlBuilder->getUrl(
                             static::URL_PATH_EDIT,
                             [
-                                'id' => $item['categorycode_id']
+                                'id' => $item['id']
                             ]
                         ),
                         'label' => __('Edit')

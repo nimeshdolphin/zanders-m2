@@ -33,10 +33,10 @@ class MassDelete extends \Magento\Backend\App\Action
     {
         $jobData = $this->collectionFactory->create();
         foreach ($jobData as $value) {
-            $templateId[]=$value['promotion_id'];
+            $templateId[]=$value['id'];
         }
-        $parameterData = $this->getRequest()->getParams('promotion_id');
-        $selectedAppsid = $this->getRequest()->getParams('promotion_id');
+        $parameterData = $this->getRequest()->getParams('id');
+        $selectedAppsid = $this->getRequest()->getParams('id');
         if (array_key_exists("selected", $parameterData)) {
             $selectedAppsid = $parameterData['selected'];
         }
@@ -48,11 +48,11 @@ class MassDelete extends \Magento\Backend\App\Action
             }
         }
         $collection = $this->collectionFactory->create();
-        $collection->addFieldToFilter('promotion_id', ['in'=>$selectedAppsid]);
+        $collection->addFieldToFilter('id', ['in'=>$selectedAppsid]);
         $delete = 0;
 
         foreach ($collection as $item) {
-            $this->deleteById($item->getPromotionId());
+            $this->deleteById($item->getId());
             $delete++;
         }
         $this->messageManager->addSuccessMessage(__('A total of %1 Records have been deleted.', $delete));

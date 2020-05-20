@@ -57,7 +57,7 @@ class Save extends \Magento\Backend\App\Action
                         $uploaderFactory->addValidateCallback('custom_image_upload', $imageAdapter, 'validateUploadFile');
                         $uploaderFactory->setAllowRenameFiles(true);
                         $uploaderFactory->setFilesDispersion(true);
-                        $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA);
+                        $mediaDirectory = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
                         $destinationPath = $mediaDirectory->getAbsolutePath('promotions/covers');
                         $result = $uploaderFactory->save($destinationPath);
                         if (!$result) {
@@ -71,7 +71,7 @@ class Save extends \Magento\Backend\App\Action
                     }
                 }
                 if (isset($data['image']['delete']) && $data['image']['delete'] == 1) {
-                    $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA)->getAbsolutePath();
+                    $mediaDirectory = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
                     $file = $data['image']['value'];
                     $imgPath = $mediaDirectory . $file;
                     if ($this->_file->isExists($imgPath)) {
@@ -82,9 +82,9 @@ class Save extends \Magento\Backend\App\Action
                 if (isset($data['image']['value'])) {
                     $data['image'] = $data['image']['value'];
                 }
-                $toppromo_id = $this->getRequest()->getParam('toppromo_id');
-                if ($toppromo_id) {
-                    $this->topPromoModel->load($toppromo_id);
+                $id = $this->getRequest()->getParam('id');
+                if ($id) {
+                    $this->topPromoModel->load($id);
                 }
                 $this->topPromoModel->setData($data);
                 $this->topPromoModel->save();
@@ -98,7 +98,7 @@ class Save extends \Magento\Backend\App\Action
                         return $resultRedirect->setPath(
                             '*/*/edit',
                             [
-                                'toppromo_id' => $this->topPromoModel->getToppromoId(),
+                                'id' => $this->topPromoModel->getId(),
                                 '_current' => true
                             ]
                         );
@@ -114,7 +114,7 @@ class Save extends \Magento\Backend\App\Action
             }
 
             $this->_getSession()->setFormData($data);
-            return $resultRedirect->setPath('*/*/edit', ['toppromo_id' => $this->getRequest()->getParam('toppromo_id')]);
+            return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
         return $resultRedirect->setPath('*/*/');
     }

@@ -8,7 +8,7 @@ namespace Zanders\CategoryCode\Model\ResourceModel\CategoryCode;
  
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
-    protected $_idFieldName = 'categorycode_id';
+    protected $_idFieldName = 'id';
     /**
      * Define model & resource model
      */

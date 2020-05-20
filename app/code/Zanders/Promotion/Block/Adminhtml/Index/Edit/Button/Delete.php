@@ -35,8 +35,8 @@ class Delete extends Generic implements ButtonProviderInterface
     public function getButtonData()
     {
         $data = [];
-        $promotion_id = $this->context->getRequest()->getParam('promotion_id');
-        if ($promotion_id) {
+        $id = $this->context->getRequest()->getParam('id');
+        if ($id) {
             $data = [
                 'label' => __('Delete'),
                 'class' => 'delete',
@@ -54,7 +54,7 @@ class Delete extends Generic implements ButtonProviderInterface
      */
     public function getDeleteUrl()
     {
-        $promotion_id = $this->context->getRequest()->getParam('promotion_id');
-        return $this->getUrl('*/*/delete', ['promotion_id' => $promotion_id]);
+        $id = $this->context->getRequest()->getParam('id');
+        return $this->getUrl('*/*/delete', ['id' => $id]);
     }
 }

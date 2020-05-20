@@ -42,39 +42,4 @@ class ProductDescription extends AbstractModel
     {
         $this->_init(ProductDescriptionResourceModel::class);
     }
-
-    /*public function getProductDescriptionByMethod($method, $storeId = false)
-    {
-        if (!$storeId) {
-            $storeId = $this->storeManager->getStore()->getId();
-        }
-
-        $customerGroupId = $this->customerSession->getCustomerGroupId();
-        $extraCharges = $this->promotionCollectionFactory->create();
-
-        $extraCharges
-            ->addFieldToFilter('stores', [
-                ['like' => '%' . $storeId . '%'],
-                ['like' => '%' . $storeId],
-                ['like' => $storeId . '%'],
-                ['eq' => $storeId],
-                ['eq' => 0]
-            ])
-            ->addFieldToFilter('customer_groups', [
-                ['like' => '%' . $customerGroupId . '%'],
-                ['like' => '%' . $customerGroupId],
-                ['like' => $customerGroupId . '%'],
-                ['eq' => $customerGroupId],
-                ['null' => true]
-            ])
-            ->addFieldToFilter('payment_methods', [
-                ['like' => '%' . $method . '%'],
-                ['like' => '%' . $method],
-                ['like' => $method . '%'],
-                ['eq' => $method]
-            ])
-            ->addFieldToFilter('status', 1);
-
-        return $extraCharges;
-    }*/
 }

@@ -30,10 +30,10 @@ class Save extends \Magento\Backend\App\Action
 
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
-            $bogo_id = $this->getRequest()->getParam('bogo_id');
+            $id = $this->getRequest()->getParam('id');
 
-            if ($bogo_id) {
-                $this->bogoModel->load($bogo_id);
+            if ($id) {
+                $this->bogoModel->load($id);
             }
 
             $this->bogoModel->setData($data);
@@ -49,7 +49,7 @@ class Save extends \Magento\Backend\App\Action
                         return $resultRedirect->setPath(
                             '*/*/edit',
                             [
-                                'bogo_id' => $this->bogoModel->getBogoId(),
+                                'id' => $this->bogoModel->getId(),
                                 '_current' => true
                             ]
                         );
@@ -65,7 +65,7 @@ class Save extends \Magento\Backend\App\Action
             }
 
             $this->_getSession()->setFormData($data);
-            return $resultRedirect->setPath('*/*/edit', ['bogo_id' => $this->getRequest()->getParam('bogo_id')]);
+            return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
         return $resultRedirect->setPath('*/*/');
     }

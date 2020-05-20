@@ -6,5 +6,8 @@
              module="Zanders_Eshow" sortOrder="105" parent="Magento_CatalogRule::promo"
              action="eshow/index/index"
              resource="Zanders_Eshow::eshow"/>
+        <add id="Zanders_Eshow::eshow_order" title="E-Show Orders" translate="title" module="Zanders_Eshow"
+             sortOrder="11" parent="Magento_Sales::sales_operation" action="eshow/order"
+             resource="Zanders_Eshow::eshow_order"/>
     </menu>
 </config>

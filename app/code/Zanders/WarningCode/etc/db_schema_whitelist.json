@@ -1,7 +1,7 @@
 {
     "zanders_warningcode": {
         "column": {
-            "warningcode_id": true,
+            "id": true,
             "warning_code": true,
             "warning_text": true
         },

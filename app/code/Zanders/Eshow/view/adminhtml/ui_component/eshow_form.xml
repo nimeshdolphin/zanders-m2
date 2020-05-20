@@ -44,6 +44,7 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
                 <item name="label" xsi:type="string" translate="true">E-Show Info</item>
                 <item name="sortOrder" xsi:type="number">10</item>
             </item>

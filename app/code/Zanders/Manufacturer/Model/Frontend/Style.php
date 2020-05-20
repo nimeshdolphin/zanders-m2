@@ -51,13 +51,16 @@ class Style extends \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFronten
             $this->urlInterface->getUrl("catalogsearch/result/index") . '?manufacturer=' . $manufacturer->getId() . '&q=' . $manufacturer->getName(),
             $manufacturer->getData('name')
         );
-        $manufacturerHtml[] = nl2br($manufacturer->getAddress(), true);
-        $manufacturerHtml[] = $manufacturer->getPhone();
-        $manufacturerHtml[] = sprintf(
-            '<a target="_blank" href="%s">%s</a>',
-            $this->fixUrl($manufacturer->getWeb()),
-            $manufacturer->getWeb()
-        );
+        if ($manufacturer->getAddress())
+            $manufacturerHtml[] = nl2br($manufacturer->getAddress(), true);
+        if ($manufacturer->getPhone())
+            $manufacturerHtml[] = $manufacturer->getPhone();
+        if ($manufacturer->getWeb())
+            $manufacturerHtml[] = sprintf(
+                '<a target="_blank" href="%s">%s</a>',
+                $this->fixUrl($manufacturer->getWeb()),
+                $manufacturer->getWeb()
+            );
         return implode('<br />', $manufacturerHtml);
     }
 

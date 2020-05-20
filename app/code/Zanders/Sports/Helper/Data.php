@@ -22,6 +22,11 @@ class Data extends AbstractHelper
     */
     protected $urlManager;
 
+    /*
+    * @var StockState
+    */
+    protected $stockState;
+
     /**
      * @var \Magento\Framework\App\Http\Context
      */
@@ -31,12 +36,14 @@ class Data extends AbstractHelper
         Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         UrlInterface $urlManager,
-        \Magento\Framework\App\Http\Context $httpContext
+        \Magento\Framework\App\Http\Context $httpContext,
+        \Magento\CatalogInventory\Api\StockStateInterface $stockState
     )
     {
         $this->storeManager = $storeManager;
         $this->urlManager = $urlManager;
         $this->httpContext = $httpContext;
+        $this->stockState = $stockState;
         parent::__construct($context);
     }
 
@@ -46,14 +53,22 @@ class Data extends AbstractHelper
         return $isLoggedIn;
     }
 
-    public function getCustomerGroupId()
-    {
-        $customerGroupId = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_GROUP);
-        return $customerGroupId;
-    }
-
     public function getMediaUrl()
     {
         return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    }
+
+    public function getCustomerGroupId()
+    {
+        $customerGroupId = '';
+        if($this->isLoggedIn()){
+            $customerGroupId = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_GROUP);
+        }
+        return $customerGroupId;
+    }
+
+    public function getStockQty($productId, $websiteId = null)
+    {
+        return $this->stockState->getStockQty($productId, $websiteId);
     }
 }

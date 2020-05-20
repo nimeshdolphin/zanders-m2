@@ -13,6 +13,6 @@ class TopPromo extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('zanders_toppromo', 'toppromo_id');
+        $this->_init('zanders_toppromo', 'id');
     }
 }

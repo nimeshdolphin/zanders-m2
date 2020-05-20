@@ -57,11 +57,6 @@ class WarningCode extends DataObject implements ArgumentInterface
             if (empty($warningCodeData)) $warningCodeData = $this->warningCode->getByCode('SF');
 
             return $warningCodeData['warning_text'];
-            /*return str_replace(
-                ['LEAD WARNING:', 'WARNING:'],
-                ['<strong>LEAD WARNING:</strong>', '<strong>WARNING:</strong>'],
-                $warningCodeData['warning_text']
-            );*/
         }
         return false;
     }

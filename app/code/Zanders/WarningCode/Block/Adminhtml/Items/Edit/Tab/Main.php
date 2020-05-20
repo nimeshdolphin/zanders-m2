@@ -72,7 +72,7 @@ class Main extends Generic implements TabInterface
         $form->setHtmlIdPrefix('item_');
         $fieldset = $form->addFieldset('base_fieldset', ['legend' => __('Warning Information')]);
         if ($model->getId()) {
-            $fieldset->addField('warningcode_id', 'hidden', ['name' => 'warningcode_id']);
+            $fieldset->addField('id', 'hidden', ['name' => 'id']);
         }
         $fieldset->addField(
             'warning_code',

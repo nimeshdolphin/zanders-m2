@@ -28,13 +28,13 @@ class PromotionActions extends \Magento\Ui\Component\Listing\Columns\Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
-                if (isset($item['promotion_id'])) {
+                if (isset($item['id'])) {
                     $item[$this->getData('name')] = [
                         'edit' => [
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_EDIT_PATH,
                                 [
-                                    'promotion_id' => $item['promotion_id']
+                                    'id' => $item['id']
                                 ]
                             ),
                             'label' => __('Edit')
@@ -43,7 +43,7 @@ class PromotionActions extends \Magento\Ui\Component\Listing\Columns\Column
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_DELETE_PATH,
                                 [
-                                    'promotion_id' => $item['promotion_id']
+                                    'id' => $item['id']
                                 ]
                             ),
                             'label' => __('Delete')

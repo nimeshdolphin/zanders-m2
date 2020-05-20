@@ -30,14 +30,14 @@
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">ZandersWarningCodeGridDataProvider</argument>
             <argument name="name" xsi:type="string">zanders_warningcode_index_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">warningcode_id</argument>
-            <argument name="requestFieldName" xsi:type="string">warningcode_id</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
                     <item name="update_url" xsi:type="url" path="mui/index/render"/>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">warningcode_id</item>
+                        <item name="indexField" xsi:type="string">id</item>
                     </item>
                 </item>
             </argument>
@@ -111,7 +111,7 @@
                         zanders_warningcode_index_listing.zanders_warningcode_index_listing.zanders_warningcode_index_listing_columns.ids
                     </item>
                     <item name="enabled" xsi:type="boolean">true</item>
-                    <item name="indexField" xsi:type="string">warningcode_id</item>
+                    <item name="indexField" xsi:type="string">id</item>
                     <item name="clientConfig" xsi:type="array">
                         <item name="saveUrl" xsi:type="url" path="zanders_warningcode/items/inlineEdit"/>
                         <item name="validateBeforeSave" xsi:type="boolean">false</item>
@@ -141,17 +141,17 @@
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">warningcode_id</item>
+                    <item name="indexField" xsi:type="string">id</item>
                 </item>
             </argument>
         </selectionsColumn>
-        <column name="warningcode_id">
+        <column name="id">
             <argument name="data" xsi:type="array">
                 <item name="js_config" xsi:type="array">
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
                 </item>
                 <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">warningcode_id</item>
+                    <item name="indexField" xsi:type="string">id</item>
                     <item name="filter" xsi:type="string">textRange</item>
                     <item name="sorting" xsi:type="string">desc</item>
                     <item name="label" xsi:type="string" translate="true">ID</item>
@@ -189,7 +189,7 @@
         <actionsColumn name="actions" class="Zanders\WarningCode\Ui\Component\Listing\Column\WarningCodeActions">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">warningcode_id</item>
+                    <item name="indexField" xsi:type="string">id</item>
                     <item name="urlEntityParamName" xsi:type="string">id</item>
                 </item>
             </argument>

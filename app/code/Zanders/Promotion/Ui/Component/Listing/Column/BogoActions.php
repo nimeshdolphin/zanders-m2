@@ -28,13 +28,13 @@ class BogoActions extends \Magento\Ui\Component\Listing\Columns\Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
-                if (isset($item['bogo_id'])) {
+                if (isset($item['id'])) {
                     $item[$this->getData('name')] = [
                         'edit' => [
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_EDIT_PATH,
                                 [
-                                    'bogo_id' => $item['bogo_id']
+                                    'id' => $item['id']
                                 ]
                             ),
                             'label' => __('Edit')
@@ -43,7 +43,7 @@ class BogoActions extends \Magento\Ui\Component\Listing\Columns\Column
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_DELETE_PATH,
                                 [
-                                    'bogo_id' => $item['bogo_id']
+                                    'id' => $item['id']
                                 ]
                             ),
                             'label' => __('Delete')

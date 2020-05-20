@@ -55,10 +55,19 @@
     </ul>
 <?php endif; ?>
 
-<h3><?= __("E-Show Promotions") ?></h3>
-<ul style="margin-bottom:20px;">
-    <li>Coming soon...</li>
-</ul>
+<?php $eshowPromotions = $block->getEshowPromotions(); ?>
+<?php if ($eshowPromotions->count() > 0): ?>
+    <h3><?= __("E-Show Promotions") ?></h3>
+    <ul style="margin-bottom:20px;">
+        <?php foreach ($eshowPromotions as $eshowPromotion): ?>
+            <li><a target="_blank"
+                   href="<?= $block->getUrl('zanders/index/eshow', ['id' => $eshowPromotion->getId()]) ?>">
+                    <?= __($eshowPromotion->getTitle()); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
 
 <?php $consumerPromotions = $block->getConsumerPromotions(); ?>
 <?php if ($consumerPromotions->count() > 0): ?>

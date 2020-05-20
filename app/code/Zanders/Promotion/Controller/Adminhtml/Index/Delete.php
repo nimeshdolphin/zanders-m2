@@ -31,7 +31,7 @@ class Delete extends Action
      */
     public function execute()
     {
-        $id = $this->getRequest()->getParam('promotion_id');
+        $id = $this->getRequest()->getParam('id');
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($id) {

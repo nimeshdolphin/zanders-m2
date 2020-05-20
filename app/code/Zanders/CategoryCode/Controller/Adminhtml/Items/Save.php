@@ -22,7 +22,7 @@ class Save extends \Zanders\CategoryCode\Controller\Adminhtml\Items
                         $uploaderFactory->addValidateCallback('custom_image_upload',$imageAdapter,'validateUploadFile');
                         $uploaderFactory->setAllowRenameFiles(true);
                         $uploaderFactory->setFilesDispersion(true);
-                        $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA);
+                        $mediaDirectory = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
                         $destinationPath = $mediaDirectory->getAbsolutePath('zanders/categorycode');
                         $result = $uploaderFactory->save($destinationPath);
                         if (!$result) {
@@ -37,7 +37,7 @@ class Save extends \Zanders\CategoryCode\Controller\Adminhtml\Items
                     }
                 }
                 if(isset($data['image']['delete']) && $data['image']['delete'] == 1) {
-                    $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA)->getAbsolutePath();
+                    $mediaDirectory = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
                     $file = $data['image']['value'];
                     $imgPath = $mediaDirectory.$file;
                     if ($this->_file->isExists($imgPath))  {

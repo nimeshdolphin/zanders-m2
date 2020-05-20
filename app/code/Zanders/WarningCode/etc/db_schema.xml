@@ -3,12 +3,12 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="zanders_warningcode" resource="default" comment="Zanders WarningCode Table" charset="utf8"
            engine="innodb">
-        <column xsi:type="int" name="warningcode_id" identity="true" unsigned="true" nullable="false"
+        <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"
                 comment="Warning Code Id"/>
         <column xsi:type="varchar" name="warning_code" length="255" nullable="false" comment="Warning Code"/>
         <column xsi:type="text" name="warning_text" nullable="false" comment="Warning Text"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="warningcode_id"/>
+            <column name="id"/>
         </constraint>
         <index referenceId="ZANDERS_WARNINGCODE_WARNING_CODE_WARNING_TEXT" indexType="fulltext">
             <column name="warning_code"/>

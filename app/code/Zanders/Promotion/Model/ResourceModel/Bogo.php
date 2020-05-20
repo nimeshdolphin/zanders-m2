@@ -20,7 +20,7 @@ class Bogo extends AbstractDb
 
     protected function _construct()
     {
-        $this->_init('zanders_bogo', 'bogo_id');
+        $this->_init('zanders_bogo', 'id');
     }
 
     /**

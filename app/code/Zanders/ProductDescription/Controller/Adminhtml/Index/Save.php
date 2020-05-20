@@ -55,7 +55,7 @@ class Save extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultRedirectFactory->create();
 
         if ($data) {
-            $description_id = $this->getRequest()->getParam('description_id');
+            $id = $this->getRequest()->getParam('id');
             $html = $data['html'];
             $text = preg_replace("/(?<=[^\r]|^)\n/", "\r\n", preg_replace("/[\r\n]+/", "\n", trim($this->filterManager->removeTags($html))));
             $skuList = explode("\n", str_replace(array("\r\n", "\r"), "\n", $data['sku']));
@@ -76,8 +76,8 @@ class Save extends \Magento\Backend\App\Action
                 $this->write($mediaDirectory, $textFilePath, $text);
 
                 $productDescription = $this->productDescriptionModel->unsetData();
-                if ($description_id) {
-                    $productDescription->load($description_id);
+                if ($id) {
+                    $productDescription->load($id);
                 }
                 $productDescription
                     ->setData('product_id', $product_id)
@@ -100,7 +100,7 @@ class Save extends \Magento\Backend\App\Action
                         return $resultRedirect->setPath(
                             '*/*/edit',
                             [
-                                'description_id' => $this->productDescriptionModel->getDescriptionId(),
+                                'id' => $this->productDescriptionModel->getId(),
                                 '_current' => true
                             ]
                         );
@@ -116,7 +116,7 @@ class Save extends \Magento\Backend\App\Action
             }
 
             $this->_getSession()->setFormData($data);
-            return $resultRedirect->setPath('*/*/edit', ['description_id' => $this->getRequest()->getParam('description_id')]);
+            return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
         return $resultRedirect->setPath('*/*/');
     }

@@ -13,7 +13,7 @@ class WarningCode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('zanders_warningcode', 'warningcode_id');
+        $this->_init('zanders_warningcode', 'id');
     }
 
     /**

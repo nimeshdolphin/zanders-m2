@@ -49,10 +49,10 @@ class Save extends \Magento\Backend\App\Action
 
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
-            $promotion_id = $this->getRequest()->getParam('promotion_id');
+            $id = $this->getRequest()->getParam('id');
 
-            if ($promotion_id) {
-                $this->promotionModel->load($promotion_id);
+            if ($id) {
+                $this->promotionModel->load($id);
             }
 
             $this->promotionModel->setData($data);
@@ -64,7 +64,7 @@ class Save extends \Magento\Backend\App\Action
                         $uploaderFactory = $this->uploaderFactory->create(['fileId' => 'pdf']);
                         $uploaderFactory->setAllowedExtensions(['pdf']);
                         $uploaderFactory->setAllowRenameFiles(false);
-                        $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA);
+                        $mediaDirectory = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
                         $destinationPath = $mediaDirectory->getAbsolutePath('promotions');
                         $newFileName = $promotion->getId() . "." . $uploaderFactory->getFileExtension();
                         $result = $uploaderFactory->save($destinationPath, $newFileName);
@@ -90,7 +90,7 @@ class Save extends \Magento\Backend\App\Action
                         return $resultRedirect->setPath(
                             '*/*/edit',
                             [
-                                'promotion_id' => $this->promotionModel->getPromotionId(),
+                                'id' => $this->promotionModel->getId(),
                                 '_current' => true
                             ]
                         );
@@ -106,7 +106,7 @@ class Save extends \Magento\Backend\App\Action
             }
 
             $this->_getSession()->setFormData($data);
-            return $resultRedirect->setPath('*/*/edit', ['promotion_id' => $this->getRequest()->getParam('promotion_id')]);
+            return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
         return $resultRedirect->setPath('*/*/');
     }
