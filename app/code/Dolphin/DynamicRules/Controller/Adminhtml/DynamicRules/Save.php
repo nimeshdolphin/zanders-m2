@@ -5,7 +5,6 @@ namespace Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules;
 
 use Magento\Framework\Exception\LocalizedException;
 
-
 class Save extends \Magento\Backend\App\Action
 {
 
@@ -56,7 +55,8 @@ class Save extends \Magento\Backend\App\Action
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the Dynamicrules.'));
+                $this->messageManager
+                ->addExceptionMessage($e, __('Something went wrong while saving the Dynamicrules.'));
             }
         
             $this->dataPersistor->set('dolphin_dynamicrules_dynamicrules', $data);
@@ -65,4 +65,3 @@ class Save extends \Magento\Backend\App\Action
         return $resultRedirect->setPath('*/*/');
     }
 }
-

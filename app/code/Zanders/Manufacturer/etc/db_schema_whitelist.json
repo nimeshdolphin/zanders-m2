@@ -1,0 +1,21 @@
+{
+    "zanders_manufacturer": {
+        "column": {
+            "id": true,
+            "name": true,
+            "address": true,
+            "serialized_display_on": true,
+            "serialized_text": true,
+            "phone": true,
+            "web": true,
+            "image_type": true,
+            "enable": true
+        },
+        "index": {
+            "ZANDERS_MANUFACTURER_NAME_ADDRESS_PHONE_WEB": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

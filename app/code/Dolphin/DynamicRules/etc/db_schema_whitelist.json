@@ -1,0 +1,14 @@
+{
+    "dynamic_rule": {
+        "column": {
+            "id": true,
+            "source_category": true,
+            "source_attributes": true,
+            "products": true,
+            "weight": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

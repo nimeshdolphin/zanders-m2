@@ -2,23 +2,23 @@
 
 
 namespace Zanders\PromotedManufacturer\Api\Data;
-
+ 
 
 interface PromotedManufacturerInterface extends \Magento\Framework\Api\ExtensibleDataInterface
 {
 
-    const id = 'id';
+    const Id = 'id';
     const CATEGORY_ID = 'category_id';
     const MANUFACTURER_ID = 'manufacturer_id';
 
     /**
-     * Get id
+     * Get Id
      * @return string|null
      */
     public function getId();
 
     /**
-     * Set id
+     * Set Id
      * @param string $promotedmanufacturerId
      * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterface
      */

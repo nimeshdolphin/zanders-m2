@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules;
 
-
 class Index extends \Magento\Backend\App\Action
 {
 
@@ -35,4 +34,3 @@ class Index extends \Magento\Backend\App\Action
             return $resultPage;
     }
 }
-

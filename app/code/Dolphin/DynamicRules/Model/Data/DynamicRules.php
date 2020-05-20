@@ -5,7 +5,6 @@ namespace Dolphin\DynamicRules\Model\Data;
 
 use Dolphin\DynamicRules\Api\Data\DynamicRulesInterface;
 
-
 class DynamicRules extends \Magento\Framework\Api\AbstractExtensibleObject implements DynamicRulesInterface
 {
 
@@ -124,4 +123,3 @@ class DynamicRules extends \Magento\Framework\Api\AbstractExtensibleObject imple
         return $this->setData(self::WEIGHT, $weight);
     }
 }
-

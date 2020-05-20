@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Model\ResourceModel;
 
-
 class DynamicRules extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
 
@@ -17,4 +16,3 @@ class DynamicRules extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_init('dolphin_dynamicrules_dynamicrules', 'id');
     }
 }
-

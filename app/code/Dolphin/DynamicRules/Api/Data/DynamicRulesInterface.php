@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Api\Data;
 
-
 interface DynamicRulesInterface extends \Magento\Framework\Api\ExtensibleDataInterface
 {
 
@@ -11,16 +10,16 @@ interface DynamicRulesInterface extends \Magento\Framework\Api\ExtensibleDataInt
     const PRODUCTS = 'products';
     const WEIGHT = 'weight';
     const SOURCE_CATEGORY = 'source_category';
-    const id = 'id';
+    const ID = 'id';
 
     /**
-     * Get id
+     * Get ID
      * @return string|null
      */
     public function getId();
 
     /**
-     * Set id
+     * Set ID
      * @param string $dynamicrulesId
      * @return \Dolphin\DynamicRules\Api\Data\DynamicRulesInterface
      */
@@ -93,4 +92,3 @@ interface DynamicRulesInterface extends \Magento\Framework\Api\ExtensibleDataInt
      */
     public function setWeight($weight);
 }
-

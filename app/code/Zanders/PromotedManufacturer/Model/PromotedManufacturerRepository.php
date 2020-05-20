@@ -174,8 +174,10 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 
 			}
 
-			$promotedManufacturerData = array('category_id' => $category_id, 'manufacturer_id' => $manufacturer_id);
-			$promotedManufacturerModel = $this->promotedManufacturerFactory->create()->setData($promotedManufacturerData);
+			$promotedManufacturerData = array('category_id' => $category_id, 
+			'manufacturer_id' => $manufacturer_id);
+			$promotedManufacturerModel = $this->promotedManufacturerFactory
+			->create()->setData($promotedManufacturerData);
 
 			$this->resource->save($promotedManufacturerModel);
 		} catch (\Exception $exception) {
@@ -201,15 +203,13 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 	/**
 	 * {@inheritdoc}
 	 */
-	public function List(
+	public function list(
 	) {
 		$collection = $this->promotedManufacturerCollectionFactory->create();
 
 		//$this->collectionProcessor->process($criteria, $collection);
 
 		$searchResults = $this->searchResultsFactory->create();
-		//$searchResults->setSearchCriteria($criteria);
-
 		$items = [];
 		foreach ($collection as $model) {
 			$items[] = $model->getDataModel();

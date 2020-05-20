@@ -6,7 +6,6 @@ namespace Dolphin\DynamicRules\Model\DynamicRules;
 use Dolphin\DynamicRules\Model\ResourceModel\DynamicRules\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
 
-
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
 
@@ -67,4 +66,3 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         return $this->loadedData;
     }
 }
-

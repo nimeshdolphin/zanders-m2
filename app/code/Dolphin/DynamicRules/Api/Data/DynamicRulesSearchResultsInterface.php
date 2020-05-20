@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Api\Data;
 
-
 interface DynamicRulesSearchResultsInterface extends \Magento\Framework\Api\SearchResultsInterface
 {
 
@@ -20,4 +19,3 @@ interface DynamicRulesSearchResultsInterface extends \Magento\Framework\Api\Sear
      */
     public function setItems(array $items);
 }
-

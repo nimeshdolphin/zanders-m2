@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Controller\Adminhtml;
 
-
 abstract class DynamicRules extends \Magento\Backend\App\Action
 {
 
@@ -36,4 +35,3 @@ abstract class DynamicRules extends \Magento\Backend\App\Action
         return $resultPage;
     }
 }
-

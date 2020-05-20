@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules;
 
-
 class Edit extends \Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules
 {
 
@@ -54,8 +53,8 @@ class Edit extends \Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules
             $id ? __('Edit Dynamicrules') : __('New Dynamicrules')
         );
         $resultPage->getConfig()->getTitle()->prepend(__('Dynamicruless'));
-        $resultPage->getConfig()->getTitle()->prepend($model->getId() ? __('Edit Dynamicrules %1', $model->getId()) : __('New Dynamicrules'));
+        $resultPage->getConfig()->getTitle()
+        ->prepend($model->getId() ? __('Edit Dynamicrules %1', $model->getId()) : __('New Dynamicrules'));
         return $resultPage;
     }
 }
-

@@ -7,7 +7,6 @@ use Dolphin\DynamicRules\Api\Data\DynamicRulesInterface;
 use Dolphin\DynamicRules\Api\Data\DynamicRulesInterfaceFactory;
 use Magento\Framework\Api\DataObjectHelper;
 
-
 class DynamicRules extends \Magento\Framework\Model\AbstractModel
 {
 
@@ -15,7 +14,6 @@ class DynamicRules extends \Magento\Framework\Model\AbstractModel
 
     protected $_eventPrefix = 'dolphin_dynamicrules_dynamicrules';
     protected $dynamicrulesDataFactory;
-
 
     /**
      * @param \Magento\Framework\Model\Context $context
@@ -58,4 +56,3 @@ class DynamicRules extends \Magento\Framework\Model\AbstractModel
         return $dynamicrulesDataObject;
     }
 }
-

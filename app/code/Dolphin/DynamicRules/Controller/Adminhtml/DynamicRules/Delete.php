@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules;
 
-
 class Delete extends \Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules
 {
 
@@ -41,4 +40,3 @@ class Delete extends \Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules
         return $resultRedirect->setPath('*/*/');
     }
 }
-

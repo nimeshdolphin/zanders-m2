@@ -5,7 +5,6 @@ namespace Dolphin\DynamicRules\Block\Adminhtml\DynamicRules\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
-
 class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
 
@@ -38,4 +37,3 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
         return $this->getUrl('*/*/delete', ['id' => $this->getModelId()]);
     }
 }
-

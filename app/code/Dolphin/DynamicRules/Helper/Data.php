@@ -6,175 +6,176 @@ use Dolphin\DynamicRules\Model\ResourceModel\DynamicRules\CollectionFactory as D
 use Magento\Framework\App\Helper\AbstractHelper;
 use Zanders\PromotedManufacturer\Model\ResourceModel\PromotedManufacturer\CollectionFactory as PromotedManufacturerCollectionFactory;
 
-class Data extends AbstractHelper {
+class Data extends AbstractHelper
+{
 
-	protected $_productCollectionFactory;
+    protected $_productCollectionFactory;
 
-	/**
-	 * @var $_registry
-	 */
-	protected $_registry;
+    /**
+     * @var $_registry
+     */
+    protected $_registry;
 
-	protected $_productRepository;
+    protected $_productRepository;
 
-	protected $_productloader;
+    protected $_productloader;
 
-	/**
-	 * @param \Magento\Framework\App\Helper\Context $context
-	 */
-	public function __construct(
-		\Magento\Framework\App\Helper\Context $context,
-		\Magento\Framework\Registry $registry,
-		\Magento\Catalog\Model\ProductRepository $productRepository,
-		DynamicRulesCollectionFactory $dynamicRulesCollectionFactory,
-		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-		PromotedManufacturerCollectionFactory $promotedManufacturerCollectionFactory,
-		\Magento\Catalog\Model\ProductFactory $_productloader
+    /**
+     * @param \Magento\Framework\App\Helper\Context $context
+     */
+    public function __construct(
+        \Magento\Framework\App\Helper\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Magento\Catalog\Model\ProductRepository $productRepository,
+        DynamicRulesCollectionFactory $dynamicRulesCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        PromotedManufacturerCollectionFactory $promotedManufacturerCollectionFactory,
+        \Magento\Catalog\Model\ProductFactory $_productloader
+    ) {
+        parent::__construct($context);
+        $this->_registry = $registry;
+        $this->_productRepository = $productRepository;
+        $this->dynamicRulesCollectionFactory = $dynamicRulesCollectionFactory;
+        $this->_productCollectionFactory = $productCollectionFactory;
+        $this->promotedManufacturerCollectionFactory = $promotedManufacturerCollectionFactory;
+        $this->_productloader = $_productloader;
+    }
 
-	) {
-		parent::__construct($context);
-		$this->_registry = $registry;
-		$this->_productRepository = $productRepository;
-		$this->dynamicRulesCollectionFactory = $dynamicRulesCollectionFactory;
-		$this->_productCollectionFactory = $productCollectionFactory;
-		$this->promotedManufacturerCollectionFactory = $promotedManufacturerCollectionFactory;
-		$this->_productloader = $_productloader;
-	}
+    public function getCurrentProduct()
+    {
+        return $this->_registry->registry('current_product');
+    }
 
-	public function getCurrentProduct() {
-		return $this->_registry->registry('current_product');
-	}
+    public function dynamicProducts()
+    {
+        $productId = $this->getCurrentProduct()->getId();
+        $product = $this->_productRepository->getById($productId);
+        $category = $product->getCategoryIds();
 
-	public function dynamicProducts() {
-		$productId = $this->getCurrentProduct()->getId();
-		$product = $this->_productRepository->getById($productId);
-		$category = $product->getCategoryIds();
+        $jsonData = [];
+        if (count($category) > 0) {
+            $collection = $this->dynamicRulesCollectionFactory->create()
+                ->addFieldToFilter('source_category', ['in' => $category])
+                ->setOrder('weight', 'asc');
 
-		$jsonData = array();
-		if (count($category) > 0) {
-			$collection = $this->dynamicRulesCollectionFactory->create()
-				->addFieldToFilter('source_category', array('in' => $category))
-				->setOrder('weight', 'asc');
+            //echo $collection->getSelect();exit;
+            foreach ($collection as $data) {
+                if ($data->getData('source_attributes')) {
+                    $result = str_replace("'", '"', $data->getData('source_attributes'));
+                    if ($this->isJson($result)) {
+                        $jsonData[$data->getData('id')] = json_decode($result, true);
+                        $ruleData[$data->getData('id')]['products'] = $data->getData('products');
+                        $ruleData[$data->getData('id')]['weight'] = $data->getData('weight');
+                        $ruleData[$data->getData('id')]['source_category'] = $data->getData('source_category');
+                    }
+                }
+            }
+        }
 
-			//echo $collection->getSelect();exit;
-			foreach ($collection as $data) {
-				if ($data->getData('source_attributes')) {
-					$result = str_replace("'", '"', $data->getData('source_attributes'));
-					if ($this->is_json($result)) {
-						$jsonData[$data->getData('id')] = json_decode($result, true);
-						$ruleData[$data->getData('id')]['products'] = $data->getData('products');
-						$ruleData[$data->getData('id')]['weight'] = $data->getData('weight');
-						$ruleData[$data->getData('id')]['source_category'] = $data->getData('source_category');
-					}
-				}
-			}
-		}
+        $dynamicRecords = [];
+        foreach ($jsonData as $ruleid => $attributes) {
 
-		$dynamicRecords = array();
-		foreach ($jsonData as $ruleid => $attributes) {
+            $exist = [];
+            foreach ($attributes as $key => $value) {
 
-			$exist = array();
-			foreach ($attributes as $key => $value) {
+                if (in_array($product->getData($key), $value) || in_array($product->getAttributeText($key), $value)) {
+                    $exist[] = '1';
+                } else {
+                    $exist[] = '0';
+                }
+            }
+            if (!in_array('0', $exist)) {
+                $dynamicRecords[] = $ruleid;
+                $exist = [];
+            }
+        }
 
-				if (in_array($product->getData($key), $value) or in_array($product->getAttributeText($key), $value)) {
-					$exist[] = '1';
-				} else {
-					$exist[] = '0';
-				}
-			}
-			if (!in_array('0', $exist)) {
-				$dynamicRecords[] = $ruleid;
-				$exist = array();
-			}
-		}
+        $products = '';
+        foreach ($dynamicRecords as $id) {
+            $data = $ruleData[$id];
+            $products = $products . ',' . $data['products'];
+            $categories[] = $data['source_category'];
 
-		$products = '';
-		foreach ($dynamicRecords as $id) {
-			$data = $ruleData[$id];
-			$products = $products . ',' . $data['products'];
-			$categories[] = $data['source_category'];
+        }
 
-		}
+        $products = array_filter(explode(',', $products));
+        $spoProducts = $this->getPromoted($products); /* Matching Products in Dynamic Rule */
 
-		$products = array_filter(explode(',', $products));
-		$spoProducts = $this->getPromoted($products); /* Matching Products in Dynamic Rule */
+        $ids = [];
+        $pro = [];
+        foreach ($products as $id) {
+            if (!in_array($id, $spoProducts)) {
+                $pro[] = $id;
+            }
+        }
 
-		$ids = array();
-		$pro = array();
-		foreach ($products as $id) {
-			if (!in_array($id, $spoProducts)) {
-				$pro[] = $id;
-			}
-		}
+        $spoProducts = [];
+        foreach ($pro as $id) {
+            $spoProducts[] = $id;
+        }
+        return $spoProducts;
+    }
 
-		$spoProducts = array();
-		foreach ($pro as $id) {
-			$spoProducts[] = $id;
-		}
-		//print_r($spoProducts);exit;
-		return $spoProducts;
-	}
+    public function isJson($string, $return_data = false)
+    {
+        $data = json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE) ? ($return_data ? $data : true) : false;
+    }
 
-	public function is_json($string, $return_data = false) {
-		$data = json_decode($string);
-		return (json_last_error() == JSON_ERROR_NONE) ? ($return_data ? $data : TRUE) : FALSE;
-	}
+    private function getPromoted($products)
+    {
 
-	private function getPromoted($products) {
+        $collection = $this->_productCollectionFactory->create();
+        $collection->addAttributeToSelect('*');
+        $collection->addFieldToFilter('entity_id', ['in' => $products]);
 
-		$collection = $this->_productCollectionFactory->create();
-		$collection->addAttributeToSelect('*');
-		$collection->addFieldToFilter('entity_id', ['in' => $products]);
+        $categories = [];
+        foreach ($collection as $cate) {
+            //print_r($cate->getCategoryIds()); exit;
+            foreach ($cate->getCategoryIds() as $id) {
+                $categories[] = $id;
+            }
+        }
 
-		$categories = array();
-		foreach ($collection as $cate) {
-			//print_r($cate->getCategoryIds()); exit;
-			foreach ($cate->getCategoryIds() as $id) {
-				$categories[] = $id;
-			}
-		}
+        $categoriesF = array_unique(array_filter($categories));
 
-		$categoriesF = array_unique(array_filter($categories));
+        if (count($categories)) {
 
-		if (count($categories)) {
+            $promoted = $this->promotedManufacturerCollectionFactory->create()
+                ->addFieldToFilter('category_id', ['in' => $categories]);
+            $man_ids =array();    
+            if ($promoted->count()) {
+                foreach ($promoted as $data) {
 
-			$promoted = $this->promotedManufacturerCollectionFactory->create()
-				->addFieldToFilter('category_id', array('in' => $categories));
+                    $data1 = explode(',', $data['manufacturer_id']);
+                    foreach ($data1 as $id) {
+                        $man_ids[] = $id;
+                    }
+                }
+            }
 
-			if ($promoted->count()) {
-				foreach ($promoted as $data) {
+            foreach ($products as $id) {
+                //$product = Mage::getModel('catalog/product')->load($id);
+                $product = $this->_productloader->create()->load($id);
+                if (in_array($product->getData('manufacturer'), $man_ids)) {
+                    //$spo[] = $product->getId();
+                    $s[$product->getId()] = $product->getData('manufacturer');
+                }
+            }
 
-					$data1 = explode(',', $data['manufacturer_id']);
-					foreach ($data1 as $id) {
-						$man_ids[] = $id;
-					}
-				}
-			}
+            //$man_ids = array_reverse($man_ids);
+            $spo = array();
+            foreach ($man_ids as $p) {
+                foreach ($s as $key => $value) {
+                    if ($p == $value) {
+                        $spo[] = $key;
+                    }
+                }
+            }
 
-			foreach ($products as $id) {
-				//$product = Mage::getModel('catalog/product')->load($id);
-				$product = $this->_productloader->create()->load($id);
-				if (in_array($product->getData('manufacturer'), $man_ids)) {
-					//$spo[] = $product->getId();
-					$s[$product->getId()] = $product->getData('manufacturer');
-				}
-			}
+            //echo "<pre>"; print_r($man_ids); print_r($s); print_r($spo);    //exit;
+            return $spo;
 
-			//$man_ids = array_reverse($man_ids);
-
-			foreach ($man_ids as $p) {
-				foreach ($s as $key => $value) {
-					if ($p == $value) {
-						$spo[] = $key;
-					}
-				}
-			}
-
-			//echo "<pre>"; print_r($man_ids); print_r($s); print_r($spo);	//exit;
-			return $spo;
-
-		}
-
-	}
-
+        }
+    }
 }

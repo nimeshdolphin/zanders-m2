@@ -17,7 +17,7 @@
             $description = false;
             $helper = $this->helper('Zanders\Sports\Helper\Data');
         }
-            
+
 
 
 	?>
@@ -36,17 +36,17 @@
                         <?php $available = 'related-available'; ?>
                     <?php endif; ?>
                 <?php endif; ?>
- 
+
                 <div class="product-item">
 
                     <?php $allRelatedProductIds = $_item->getRelatedProductIds();     ?>
                     <?php $allupsellProductIds =  $_item->getUpSellProductIds();   ?>
-                    
+
                     <?php if((count($allRelatedProductIds) > 0) or (count($allupsellProductIds) > 0)) :  ?>
                     <a href="javascript:;" data-href="<?php echo $this->getUrl('related/index/replacement') ?>id/<?php echo $_item->getId() ?>" class="open-popup">
-                            <img class="cross-popupicon" 
+                            <img class="cross-popupicon"
                                 src="<?php echo $helper->getMediaUrl().'images/related_icon.png'; ?>" />
-                    </a>  
+                    </a>
                     <?php  endif?>
 
                     <?= /* @escapeNotVerified */ '<!-- ' . $image . '-->' ?>
@@ -73,7 +73,7 @@
 
                         <?php /* @escapeNotVerified */ // $block->getProductPrice($_item) ?>
 
-                             
+
 
                             <?php if ($showAddTo || $showCart): ?>
                                 <div class="product actions product-item-actions">
@@ -119,7 +119,29 @@
                 <?php endforeach ?>
                 <!-- </ul> -->
         </div>
+
+        <div id='popup-modal' style='display:none;'>
+        <div id ="customer-container">
+            <div id='customcarosal'>
+            <script id="customer-template" type="text/x-magento-template">
+                <div  id="<%- data.id %>">
+                    <li>
+                        Name : <%- data.name %>
+                    </li>
+                    <li>
+                        Salary : <%- data.salary %>
+                    </li>
+                    <li>
+                        Location : <%- data.location %>
+                    </li>
+                </div>
+            </script>
+            </div>
         </div>
+        </div>
+
+
+        
 
       <script>
             require(["jquery","owlcarousel"],function($) {
@@ -133,23 +155,83 @@
                 });
             });
 
-        require(["jquery"],function($) {
-        $(document).ready(function() {
-         $(".open-popup").click(function () {   
+        require(["jquery","Magento_Ui/js/modal/modal",'mage/template',
+                "mage/mage","owlcarousel"],function($,modal,mageTemplate, alerts,owlcarousel)
+                {
+       		 
+         	$(".open-popup").click(function () {'$','modal'
                 var customurl = $(this).attr('data-href');
+                var options = {
+			        type: 'popup',
+			        responsive: true,
+			        innerScroll: false,
+			        title: 'Modal Title',
+			        modalClass: 'custom-modal',
+			        buttons: [{
+			 
+			            class: '',
+			            click: function () {
+			                this.closeModal();
+			                $('#popup-modal').html(" ");
+			            }
+			        }]
+			    };
+
                 $.ajax({
                     url: customurl,
-                    type: 'POST',                     
-                complete: function(response) {             
-                     alert(response); 
+                    type: 'POST',
+                	complete: function(response) {
+                        console.log(response);
+                        var res = response.responseJSON.related;
+                         console.log(res);
+                        var responseData  = $.parseJSON(response.responseJSON);    
+                        console.log(responseData);
+
+                       // console.log(response.responseText);
+                       // $html =  response.responseText;
+                       // $data = $($html).find('.box-related_products');
+                       // alert($data);
+                       // $('#popup-modal').append($data);
+                       // $('#popup-modal').modal(options).modal('openModal');
+                       // alert('done');
+                       // 
+                       
+                       $.each($.parseJSON('<?php echo $jsonCustomerData ?>'), function() {
+                        
+                        var progressTmpl = mageTemplate('#customer-template'),
+                                  tmpl;
+                        tmpl = progressTmpl({
+                            data: {
+                                name: this['name'],
+                                salary: this['salary'],
+                                location: this['location']
+                            }
+                        });
+
+                        $('#customer-container').after(tmpl);
+                        //  $("#customcarosal").owlCarousel({
+                        //     navigation : true, // Show next and prev buttons
+                        //     autoPlay: false, //Set AutoPlay to 3 seconds
+                        //     items : 4,
+                        //     margin : 20
+                        // });
+                        $('#popup-modal').modal(options).modal('openModal');
+
+                        });
+                        
                     },
                     error: function (xhr, status, errorThrown) {
                         console.log('Error happens. Try again.');
                     }
                 });
-            }); 
-        });
-    }); 
+            });
+
+    		});
+
     </script>
 
+ </div>   
     <?php endif; ?>
+
+    
+    

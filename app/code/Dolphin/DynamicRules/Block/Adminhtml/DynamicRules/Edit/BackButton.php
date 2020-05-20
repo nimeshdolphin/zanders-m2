@@ -5,7 +5,6 @@ namespace Dolphin\DynamicRules\Block\Adminhtml\DynamicRules\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
-
 class BackButton extends GenericButton implements ButtonProviderInterface
 {
 
@@ -32,4 +31,3 @@ class BackButton extends GenericButton implements ButtonProviderInterface
         return $this->getUrl('*/*/');
     }
 }
-

@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules;
 
-
 class InlineEdit extends \Magento\Backend\App\Action
 {
 
@@ -41,9 +40,11 @@ class InlineEdit extends \Magento\Backend\App\Action
             } else {
                 foreach (array_keys($postItems) as $modelid) {
                     /** @var \Dolphin\DynamicRules\Model\DynamicRules $model */
-                    $model = $this->_objectManager->create(\Dolphin\DynamicRules\Model\DynamicRules::class)->load($modelid);
+                    $model = $this->_objectManager
+                            ->create(\Dolphin\DynamicRules\Model\DynamicRules::class)->load($modelid);
                     try {
-                        $model->setData(array_merge($model->getData(), $postItems[$modelid]));
+                        $merge = array_merge($model->getData(), $postItems[$modelid]);
+                        $model->setData($merge);
                         $model->save();
                     } catch (\Exception $e) {
                         $messages[] = "[Dynamicrules ID: {$modelid}]  {$e->getMessage()}";
@@ -59,4 +60,3 @@ class InlineEdit extends \Magento\Backend\App\Action
         ]);
     }
 }
-

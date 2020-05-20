@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Ui\Component\Listing\Column;
 
-
 class DynamicRulesActions extends \Magento\Ui\Component\Listing\Columns\Column
 {
 
@@ -72,4 +71,3 @@ class DynamicRulesActions extends \Magento\Ui\Component\Listing\Columns\Column
         return $dataSource;
     }
 }
-

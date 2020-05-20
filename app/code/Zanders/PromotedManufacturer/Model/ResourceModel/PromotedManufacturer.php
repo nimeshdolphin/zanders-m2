@@ -14,7 +14,7 @@ class PromotedManufacturer extends \Magento\Framework\Model\ResourceModel\Db\Abs
      */
     protected function _construct()
     {
-        $this->_init('zanders_promotedmanufacturer_promotedmanufacturer', 'id');
+        $this->_init('promoted_manufacturer', 'id');
     }
 }
 

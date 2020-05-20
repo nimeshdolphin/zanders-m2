@@ -19,7 +19,7 @@
 		</resources>
 	</route>
 	<route method="GET" url="/V1/promotedmanufacturer_api/promotedmanufacturerList">
-		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="List"/>
+		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="list"/>
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
 		</resources>

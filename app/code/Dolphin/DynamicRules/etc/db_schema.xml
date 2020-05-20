@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-	<table comment="dolphin_dynamicrules_dynamicrules Table" engine="innodb" name="dolphin_dynamicrules_dynamicrules" resource="default">
+	<table comment="dolphin_dynamicrules_dynamicrules Table" engine="innodb" name="dynamic_rule" resource="default">
 		<column comment="Entity Id" identity="true" name="id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
 		<constraint referenceId="PRIMARY" xsi:type="primary">
 			<column name="id"/>

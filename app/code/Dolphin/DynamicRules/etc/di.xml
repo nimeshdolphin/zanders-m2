@@ -5,7 +5,7 @@
 	<preference for="Dolphin\DynamicRules\Api\Data\DynamicRulesSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 	<virtualType name="Dolphin\DynamicRules\Model\ResourceModel\DynamicRules\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
 		<arguments>
-			<argument name="mainTable" xsi:type="string">dolphin_dynamicrules_dynamicrules</argument>
+			<argument name="mainTable" xsi:type="string">dynamic_rule</argument>
 			<argument name="resourceModel" xsi:type="string">Dolphin\DynamicRules\Model\ResourceModel\DynamicRules\Collection</argument>
 		</arguments>
 	</virtualType>

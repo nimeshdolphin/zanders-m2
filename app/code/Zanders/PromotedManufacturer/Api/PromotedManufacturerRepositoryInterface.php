@@ -72,6 +72,6 @@ interface PromotedManufacturerRepositoryInterface {
 	 * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerSearchResultsInterface
 	 * @throws \Magento\Framework\Exception\LocalizedException
 	 */
-	public function List();
+	public function list();
 
 }

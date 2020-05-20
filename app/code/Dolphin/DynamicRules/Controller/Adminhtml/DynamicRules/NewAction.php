@@ -3,7 +3,6 @@
 
 namespace Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules;
 
-
 class NewAction extends \Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules
 {
 
@@ -35,4 +34,3 @@ class NewAction extends \Dolphin\DynamicRules\Controller\Adminhtml\DynamicRules
         return $resultForward->forward('edit');
     }
 }
-

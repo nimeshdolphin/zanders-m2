@@ -1,48 +1,90 @@
-<?php declare (strict_types = 1);
+<?php declare(strict_types=1);
+
 
 namespace Zanders\Related\Controller\Index;
 
-use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
-use Magento\Framework\App\Action\HttpGetActionInterface as HttpGetActionInterface;
-use Magento\Catalog\Controller\Product as ProductAction;
+use Magento\Catalog\Api\ProductRepositoryInterface;
 
-class Replacement extends ProductAction implements HttpGetActionInterface, HttpPostActionInterface {
+class Replacement extends \Magento\Framework\App\Action\Action
+{
 
-	protected $viewHelper;
+	protected $productRepositoryInterface;
+    protected $resultPageFactory;
+    protected $jsonHelper;
 
-	protected $resultPageFactory;
+    /**
+     * Constructor
+     *
+     * @param \Magento\Framework\App\Action\Context  $context
+     * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     */
+    public function __construct(
+    	ProductRepositoryInterface $productRepositoryInterface,
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        \Magento\Framework\Json\Helper\Data $jsonHelper,
+        \Psr\Log\LoggerInterface $logger
+    ) {
+    	$this->productRepositoryInterface = $productRepositoryInterface;
+        $this->resultPageFactory = $resultPageFactory;
+        $this->jsonHelper = $jsonHelper;
+        $this->logger = $logger;
+        parent::__construct($context);
+    }
 
-	/**
-	 * Constructor
-	 *
-	 * @param \Magento\Framework\App\Action\Context  $context
-	 * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-	 */
-	public function __construct(
-		\Magento\Framework\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $resultPageFactory,
-		\Magento\Catalog\Helper\Product\View $viewHelper
-	) {
-		$this->resultPageFactory = $resultPageFactory;
-		$this->viewHelper = $viewHelper;
-		parent::__construct($context);
-	}
+    /**
+     * Execute view action
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
+     */
+    public function execute()
+    {
+        try 
+        {	
+        	$productId = 53508;
+        	$product = $this->productRepositoryInterface->getById($productId);
+            $related = $product->getRelatedProducts();
+ 			$upsell = $product->getUpSellProducts();	
 
-	/**
-	 * Execute view action
-	 *
-	 * @return \Magento\Framework\Controller\ResultInterface
-	 */
-	public function execute() {
+ 			$relatedProduct = array();
+            if (count($related)) {
+                foreach ($related as $item) {
+                	$product = $this->productRepositoryInterface->getById($item->getId());
+                    $relatedProduct['id'] = $product->getId();
+                    $relatedProduct['name'] = $product->getName();
+                }
+            }
 
-		$params = new \Magento\Framework\DataObject();
+            $upsellProduct = array();
+            if (count($upsell)) {
+                foreach ($upsell as $item) {
+                	$product = $this->productRepositoryInterface->getById($item->getId());
+                    $upsellProduct['id'] = $product->getId();
+                    $upsellProduct['name'] =  $product->getName();
+                }
+            }
 
-		$productId = 53508;
-		$page = $this->resultPageFactory->create();
-		$page->getLayout()->getUpdate()->removeHandle('default');
-		$this->viewHelper->prepareAndRender($page, $productId, $this);
-		//echo $page;
-		//echo "aa";
-		return $page;
-	}
+            $related  = array('related'=>$relatedProduct,'upsell'=>$upsellProduct);
+            return $this->jsonResponse($related);
+
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
+            return $this->jsonResponse($e->getMessage());
+        } catch (\Exception $e) 
+        {
+            $this->logger->critical($e);
+            return $this->jsonResponse($e->getMessage());
+        }
+    }
+
+    /**
+     * Create json response
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
+     */
+    public function jsonResponse($response = '')
+    {
+        return $this->getResponse()->representJson(
+            $this->jsonHelper->jsonEncode($response)
+        );
+    }
 }

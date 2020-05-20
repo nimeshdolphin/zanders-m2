@@ -5,7 +5,6 @@ namespace Dolphin\DynamicRules\Block\Adminhtml\DynamicRules\Edit;
 
 use Magento\Backend\Block\Widget\Context;
 
-
 abstract class GenericButton
 {
 
@@ -41,4 +40,3 @@ abstract class GenericButton
         return $this->context->getUrlBuilder()->getUrl($route, $params);
     }
 }
-

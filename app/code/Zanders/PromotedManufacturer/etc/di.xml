@@ -5,7 +5,7 @@
 	<preference for="Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 	<virtualType name="Zanders\PromotedManufacturer\Model\ResourceModel\PromotedManufacturer\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
 		<arguments>
-			<argument name="mainTable" xsi:type="string">zanders_promotedmanufacturer_promotedmanufacturer</argument>
+			<argument name="mainTable" xsi:type="string">promoted_manufacturer</argument>
 			<argument name="resourceModel" xsi:type="string">Zanders\PromotedManufacturer\Model\ResourceModel\PromotedManufacturer\Collection</argument>
 		</arguments>
 	</virtualType>

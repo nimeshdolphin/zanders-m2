@@ -5,7 +5,6 @@ namespace Dolphin\DynamicRules\Block\Adminhtml\DynamicRules\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
-
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {
 
@@ -25,4 +24,3 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
         ];
     }
 }
-
