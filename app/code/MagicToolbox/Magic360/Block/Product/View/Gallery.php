@@ -104,15 +104,12 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
         $this->magicToolboxHelper = $objectManager->get(\MagicToolbox\Magic360\Helper\Data::class);
         $this->toolObj = $this->magicToolboxHelper->getToolObj();
         $this->collectionFactory = $objectManager->get(\Magento\Framework\Data\CollectionFactory::class);
+        $this->helperData = $objectManager->get(\MagicToolbox\Magic360\Helper\Data::class);
         $this->modelGalleryFactory = $objectManager->get(\MagicToolbox\Magic360\Model\GalleryFactory::class);
         $this->modelColumnsFactory = $objectManager->get(\MagicToolbox\Magic360\Model\ColumnsFactory::class);
         $this->magic360ImageHelper = $objectManager->get(\MagicToolbox\Magic360\Helper\Image::class);
         $this->standaloneMode = $this->toolObj->params->checkValue('display-spin', 'separately', 'product');
         $this->spinPosition = $this->toolObj->params->getValue('spin-position', 'product') - 1;
-        $this->_filesystem = $objectManager->get('\Magento\Framework\Filesystem');
-        $this->_mediapath = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
-        $this->_storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
-        $this->_mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 
         $version = $this->magicToolboxHelper->getMagentoVersion();
         if (version_compare($version, '2.2.5', '<')) {
@@ -349,31 +346,19 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
             $this->toolObj->params->setProfile('product');
             $magic360Data = [];
             // Sanket Add code
-            $magic360ImagesPim = $this->checkPimImages($product);
-            //echo "<pre>";
-            //print_r($magic360ImagesPim);
+            //$helperData = $this->helper('MagicToolbox\Magic360\Helper\Data');
+            $magic360ImagesPim = $this->helperData->checkPimImages($product);
             if(count($magic360ImagesPim) > 0) {
 
-                //$tool = $helper->loadTool('product');
-                //$columns = $rows['columns'] > $imagesCount ? $imagesCount : $rows['columns'];
                 $columns = count($magic360ImagesPim);
-
                 $this->toolObj->params->setValue('columns', $columns);
 
                 $this->renderedGalleryHtml[$id] = $this->toolObj->getMainTemplate($magic360ImagesPim, ['id' => "Magic360-product-{$id}"]);
                 $this->renderedGalleryHtml[$id] = '<div class="MagicToolboxContainer">'.$this->renderedGalleryHtml[$id].'</div>';
                 return $this;
-                /*$tool->params->setValue('columns', $columns, $tool->params->generalProfile);
-                $tool->params->setValue('columns', $columns, 'product');
-
-                Mage::register('magic360ClassName', 'magic360');
-                Mage::register('magic360Images', $magic360ImagesPim);
-                return $this;*/
             }
-            //echo "tets";exit;
 
             $images = $this->getGalleryImagesCollection($product);
-            //print_r($images);exit;
             $columns = $this->getColumns($id);
             if ($columns > $images->count()) {
                 $columns = $images->count();
@@ -452,52 +437,6 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
             }
         }
         return $this;
-    }
-
-
-    public function checkPimImages($product) {
-
-        $mediaDir = $this->_mediapath;
-        $mediaUrl = $this->_mediaUrl;
-        $pimImgPath = '360-pimcore'.DIRECTORY_SEPARATOR.'skus'.DIRECTORY_SEPARATOR.$product->getSku();
-        $pimImgDir = $mediaDir.DIRECTORY_SEPARATOR.$pimImgPath;
-        $magic360Images = array();
-        if(is_dir($pimImgDir)) {
-
-            $pimImgs = $this->parse_images($pimImgDir,$product->getSku());
-            foreach ($pimImgs as $pimImg) {
-                $magic360Images[] = array('medium'=>$mediaUrl.$pimImgPath.DIRECTORY_SEPARATOR.$pimImg,'img'=>$mediaUrl.$pimImgPath.DIRECTORY_SEPARATOR.$pimImg);
-            }
-
-            if(count($magic360Images) > 0) {
-                $pimImgExists = true;
-                $this->_coreRegistry->register('pimImgExists', true);
-            }
-        }
-        return $magic360Images;
-    }
-
-    public function remove_hidden_dirs($files_array){
-        foreach ($files_array as $key => $image_item) {
-            if (substr($image_item, 0, 1)==='.'){
-                unset($files_array[$key]);
-            }
-            // remove files that include substr "t(T)humb(s)"
-            if (preg_match('/.*[Tt]humb[s]*\.[a-zA-Z]{2,4}/ims',$image_item)){
-                unset($files_array[$key]);
-            }
-        }
-        return $files_array;
-    }
-
-    public function parse_images($images_dir, $sku){
-        $images = array();
-        if (!empty($sku)){
-            $images = $this->remove_hidden_dirs(array_slice(scandir($images_dir."/"), 2));
-        }
-
-        return $images;
-
     }
 
     /**

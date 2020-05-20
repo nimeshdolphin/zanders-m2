@@ -12,7 +12,7 @@
 .filter.block {
     background: #fff;
 }
-.page-title-wrapper {
+.catalog-category-view .page-title-wrapper {
     display: none;
 }
 .breadcrumbs {
@@ -521,4 +521,12 @@ h3.listing-module-title:after {
 }
 .page-products .products-simple .qty-box label{
     vertical-align: initial;
+}
+.catalogsearch-result-index h1.page-title {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 400;
+}
+.catalogsearch-result-index .search.results .block {
+    display: none;
 }

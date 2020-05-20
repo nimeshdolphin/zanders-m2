@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+body {
+    font: 12px/1.55 Montserrat, Helvetica, sans-serif;
+}
+.table-comparison .cell.label {
+    background: #d9e5ee;
+    border: 1px solid #cccccc;
+}
+.table-comparison .cell.product {
+    border: 1px solid #cccccc;
+}
+.table-comparison tbody tr:nth-child(odd){
+	background: #eeeded;
+}
+.table-comparison tbody tr:nth-child(even){
+	background: #f8f7f5;
+}
+.table-comparison td.cell.product.info {
+    text-align: center;
+	background: #f8f7f5;
+}
+.table-comparison button.action.tocart.primary {
+    background: #ea122b;
+    color: #fff;
+    display: inline-block;
+    padding: 0 20px;
+    height: 43px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.5s;
+    font: bold 14px/43px Montserrat, Helvetica, sans-serif;
+    border: 0;
+    border-radius: 0;
+}
+.table-comparison .product-item-actions .actions-secondary > .action span {
+    position: relative;
+}
+.table-comparison .action.towishlist:before{
+	display: none;
+}
+.table-comparison .secondary-addto-links {
+    width: 100%;
+}
+.table-comparison .product-item-actions .actions-primary + .actions-secondary > .action {
+    width: 100%;
+    font-size: 11px;
+    color: #991020;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0;
+}
+.table-comparison .product-item-name > a {
+    color: #203548;
+    font-size: 13px;
+    font-weight: bold;
+}
+.table-comparison .product-item-name {
+    margin: 0 !important;
+}
+.table-comparison .product-item-photo {
+    margin-bottom: 0;
+}
+.table-comparison .price-box {
+    margin: 5px 0;
+}
+.table-comparison .price-box .price-container .price {
+    font-weight: bold;
+    font-size: 13px;
+    color: #c76200;
+}
+.table-comparison .product-item-actions {
+    margin: 0;
+}

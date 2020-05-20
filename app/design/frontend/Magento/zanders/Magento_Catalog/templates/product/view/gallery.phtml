@@ -12,6 +12,9 @@
 ?>
 
 <?php
+$helper = $this->helper('MagicToolbox\Magic360\Helper\Data');
+$_product = $helper->getCurrentProduct();
+$mediaImageCount = $helper->checkPimImages($_product);
 $images = $block->getGalleryImages()->getItems();
 $count = count($images);
 $mainImage = current(array_filter($images, function ($img) use ($block) {
@@ -28,16 +31,31 @@ $mainImageData = $mainImage ?
 
 ?>
 <p class="product-image product-image-zoom">
-    <img id="image" src="<?= $mainImageData; ?>" />
+    <img id="image" src="<?= $mainImageData; ?>" title="<?= $this->escapeHtml($_product->getName()); ?>" alt="<?= $this->escapeHtml($_product->getName()); ?>" />
 </p>
 <div class="more-views">
     <ul>
         <?php if($count > 0){ ?>
             <?php foreach($images as $_image){ ?>
                 <li>
-                    <a href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>"><img src="<?php echo $_image->getData('small_image_url'); ?>" width="250" height="169" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" /></a>
+                    <a href="#"
+                       data-mage-init='{"popupWindow": {"windowURL":"<?php echo $this->getGalleryUrl($_image) ?>","windowName":"orderitems","width":300,"height":300,"top":0,"left":0,"resizable":1,"scrollbars":1}}'
+                       title="<?php echo $this->escapeHtml($_image->getLabel()) ?>"
+                       class="action-default scalable add primary">
+                        <img src="<?php echo $_image->getData('small_image_url'); ?>" width="250" height="169" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
+                    </a>
                 </li>
             <?php } ?>
+            <?php if (count($mediaImageCount) > 0): ?>
+                <li>
+                    <a href="#"
+                       data-mage-init='{"popupWindow": {"windowURL":"<?php echo $this->getUrl('magic360/popup/view',array('id'=>$_product->getId())); ?>","windowName":"orderitems","width":500,"height":500,"top":0,"left":0,"resizable":1,"scrollbars":1}}'
+                       title="<?php echo $this->escapeHtml($_image->getLabel()) ?>"
+                       class="action-default scalable add primary">
+                        <img src="<?php echo $this->getViewFileUrl('MagicToolbox_Magic360::images/icon_360.png'); ?>" width="225" height="169" alt="360 View" />
+                    </a>
+                </li>
+            <?php endif; ?>
         <?php } ?>
     </ul>
 </div>

@@ -335,7 +335,7 @@ address {
 }
 .page-layout-1column .column.main {
     float: right;
-    width: 1015px !important;
+    width: 1011px !important;
 }
 .minicart-wrapper .action.showcart.active:active:before{
     display: none;

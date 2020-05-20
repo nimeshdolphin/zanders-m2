@@ -158,6 +158,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->magic360ImageHelper = $magic360ImageHelperFactory->create();
         $this->coreRegistry = $registry;
         $this->objectManager = $objectManager;
+        $this->filesystem = $filesystem;
         parent::__construct($context);
     }
 
@@ -827,5 +828,48 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getConfigMap()
     {
         return $this->getUnserializer()->unserialize('a:3:{s:7:"default";a:4:{s:7:"General";a:1:{i:0;s:28:"include-headers-on-all-pages";}s:9:"Magic 360";a:23:{i:0;s:7:"magnify";i:1;s:15:"magnifier-width";i:2;s:15:"magnifier-shape";i:3;s:10:"fullscreen";i:4;s:4:"spin";i:5;s:18:"autospin-direction";i:6;s:12:"sensitivityX";i:7;s:12:"sensitivityY";i:8;s:15:"mousewheel-step";i:9;s:14:"autospin-speed";i:10;s:9:"smoothing";i:11;s:8:"autospin";i:12;s:14:"autospin-start";i:13;s:13:"autospin-stop";i:14;s:13:"initialize-on";i:15;s:12:"start-column";i:16;s:9:"start-row";i:17;s:11:"loop-column";i:18;s:8:"loop-row";i:19;s:14:"reverse-column";i:20;s:11:"reverse-row";i:21;s:16:"column-increment";i:22;s:13:"row-increment";}s:24:"Positioning and Geometry";a:3:{i:0;s:15:"thumb-max-width";i:1;s:16:"thumb-max-height";i:2;s:13:"square-images";}s:13:"Miscellaneous";a:8:{i:0;s:4:"icon";i:1;s:12:"show-message";i:2;s:7:"message";i:3;s:12:"loading-text";i:4;s:23:"fullscreen-loading-text";i:5;s:4:"hint";i:6;s:9:"hint-text";i:7;s:16:"mobile-hint-text";}}s:7:"product";a:4:{s:7:"General";a:1:{i:0;s:13:"enable-effect";}s:9:"Magic 360";a:23:{i:0;s:7:"magnify";i:1;s:15:"magnifier-width";i:2;s:15:"magnifier-shape";i:3;s:10:"fullscreen";i:4;s:4:"spin";i:5;s:18:"autospin-direction";i:6;s:12:"sensitivityX";i:7;s:12:"sensitivityY";i:8;s:15:"mousewheel-step";i:9;s:14:"autospin-speed";i:10;s:9:"smoothing";i:11;s:8:"autospin";i:12;s:14:"autospin-start";i:13;s:13:"autospin-stop";i:14;s:13:"initialize-on";i:15;s:12:"start-column";i:16;s:9:"start-row";i:17;s:11:"loop-column";i:18;s:8:"loop-row";i:19;s:14:"reverse-column";i:20;s:11:"reverse-row";i:21;s:16:"column-increment";i:22;s:13:"row-increment";}s:24:"Positioning and Geometry";a:5:{i:0;s:12:"display-spin";i:1;s:15:"thumb-max-width";i:2;s:16:"thumb-max-height";i:3;s:13:"square-images";i:4;s:13:"spin-position";}s:13:"Miscellaneous";a:4:{i:0;s:4:"icon";i:1;s:12:"show-message";i:2;s:7:"message";i:3;s:4:"hint";}}s:8:"category";a:4:{s:7:"General";a:1:{i:0;s:13:"enable-effect";}s:9:"Magic 360";a:23:{i:0;s:7:"magnify";i:1;s:15:"magnifier-width";i:2;s:15:"magnifier-shape";i:3;s:10:"fullscreen";i:4;s:4:"spin";i:5;s:18:"autospin-direction";i:6;s:12:"sensitivityX";i:7;s:12:"sensitivityY";i:8;s:15:"mousewheel-step";i:9;s:14:"autospin-speed";i:10;s:9:"smoothing";i:11;s:8:"autospin";i:12;s:14:"autospin-start";i:13;s:13:"autospin-stop";i:14;s:13:"initialize-on";i:15;s:12:"start-column";i:16;s:9:"start-row";i:17;s:11:"loop-column";i:18;s:8:"loop-row";i:19;s:14:"reverse-column";i:20;s:11:"reverse-row";i:21;s:16:"column-increment";i:22;s:13:"row-increment";}s:24:"Positioning and Geometry";a:3:{i:0;s:15:"thumb-max-width";i:1;s:16:"thumb-max-height";i:2;s:13:"square-images";}s:13:"Miscellaneous";a:3:{i:0;s:12:"show-message";i:1;s:7:"message";i:2;s:4:"hint";}}}');
+    }
+
+    public function checkPimImages($product) {
+
+        $mediaDir = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
+        $mediaUrl = $this->baseMediaUrl;
+        $pimImgPath = '360-pimcore'.DIRECTORY_SEPARATOR.'skus'.DIRECTORY_SEPARATOR.$product->getSku();
+        $pimImgDir = $mediaDir.DIRECTORY_SEPARATOR.$pimImgPath;
+        $magic360Images = array();
+        if(is_dir($pimImgDir)) {
+
+            $pimImgs = $this->parse_images($pimImgDir,$product->getSku());
+            foreach ($pimImgs as $pimImg) {
+                $magic360Images[] = array('medium'=>$mediaUrl.$pimImgPath.DIRECTORY_SEPARATOR.$pimImg,'img'=>$mediaUrl.$pimImgPath.DIRECTORY_SEPARATOR.$pimImg);
+            }
+        }
+        return $magic360Images;
+    }
+
+    public function remove_hidden_dirs($files_array){
+        foreach ($files_array as $key => $image_item) {
+            if (substr($image_item, 0, 1)==='.'){
+                unset($files_array[$key]);
+            }
+            // remove files that include substr "t(T)humb(s)"
+            if (preg_match('/.*[Tt]humb[s]*\.[a-zA-Z]{2,4}/ims',$image_item)){
+                unset($files_array[$key]);
+            }
+        }
+        return $files_array;
+    }
+
+    public function parse_images($images_dir, $sku){
+        $images = array();
+        if (!empty($sku)){
+            $images = $this->remove_hidden_dirs(array_slice(scandir($images_dir."/"), 2));
+        }
+
+        return $images;
+    }
+    public function getCurrentProduct()
+    {
+        return $this->coreRegistry->registry('current_product');
     }
 }

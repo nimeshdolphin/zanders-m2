@@ -9,7 +9,9 @@
         <referenceBlock name="product.info.review" remove="true" />
         <referenceBlock name="product.info.description" remove="true" />
         <referenceBlock name="catalog.product.related" remove="true" />
+        <referenceBlock name="catalog.product.upsell" remove="true" />
         <referenceBlock name="product.info.sku" remove="true"/>
+        <referenceBlock name="product.info.media.magic360" remove="true"/>
         <move element="breadcrumbs" destination="main" before="-"/>
         <move element="product.info.social" destination="product.info.form.content" after="product.info.addtocart"/>
         <move element="alert.urls" destination="product.info.main" after="product.sku"/>

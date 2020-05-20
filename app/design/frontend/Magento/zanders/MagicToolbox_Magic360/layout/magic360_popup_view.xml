@@ -14,7 +14,7 @@
             </block>
         </referenceContainer>
         <referenceContainer name="content">
-            <block class="MagicToolbox\Magic360\Block\Product\View\Gallery" name="product.info.media.magic360" template="product/view/gallery.phtml" />
+            <block class="MagicToolbox\Magic360\Block\Product\View\Gallery" name="product.info.media.magic360.custom" template="product/view/gallery.phtml" />
         </referenceContainer>
     </body>
 </page>

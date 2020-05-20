@@ -111,8 +111,8 @@
 }
 .product.info.detailed {
     margin-top: 50px;
-    float: left;
-    width: 100%;
+    float: right;
+    width: 1011px !important;
 }
 .product.data.items > .item.title > .switch {
     background: initial !important;
@@ -158,10 +158,6 @@
 }
 .catalog-product-view .fotorama__stage__frame .fotorama__img{
     width: 100%;
-}
-.catalog-product-view.page-layout-1column .product.media {
-    border: 6px solid #cccccc;
-    width: 531px;
 }
 .zanders-msg {
     float: left;
@@ -240,4 +236,29 @@ p.product-itemnumber {
 }
 a.action.mailto.friend {
     color: #FF7A19;
+}
+p.product-image.product-image-zoom {
+    margin: 0 0 7px;
+    width: 519px;
+    height: 355px;
+    border: 6px solid #cccccc;
+    background: #fff;
+}
+.more-views ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: -7px;
+}
+.more-views ul li a.action-default {
+    float: left;
+    width: 250px;
+    height: 169px;
+    border: 6px solid #ccc;
+    background: #ffffff;
+    overflow: hidden;
+}
+.more-views ul li {
+    float: left;
+    margin: 0 0 7px 7px;
 }

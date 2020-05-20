@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="empty" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="css/all.css"/>
+        <css src="css/catalog_compare.css"/>
+    </head>
+    <body>
+        <referenceBlock name="zanders_header" remove="true" />
+        <referenceBlock name="page.main.title" remove="true" />
+    </body>
+</page>
