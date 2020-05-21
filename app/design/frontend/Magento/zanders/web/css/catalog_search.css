@@ -1,0 +1,69 @@
+.page-layout-3columns .column.main {
+    margin-left: 310px;
+    width: 717px !important;
+}
+.breadcrumbs {
+    background: initial;
+    padding: 0 !important;
+	margin: 25px 0 15px;
+}
+.breadcrumbs a, .breadcrumbs a:hover, .breadcrumbs a:visited {
+    color: #fff;
+	text-decoration: none;
+}
+.breadcrumbs .item:not(:last-child):after {
+    content: '/';
+    color: #fff;
+    font-size: 15px;
+    margin: 0px 2px;
+    line-height: 15px;
+}
+.breadcrumbs strong, .breadcrumbs a:visited {
+    color: #fff !important;
+}
+
+.catalogsearch-advanced-index .form.search.advanced {
+    border: 0;
+    background: #fff;
+    padding: 22px 25px 12px 33px;
+    margin: 28px 0 0;
+    min-width: 645px;
+}
+h1.page-title {
+    margin: 0;
+    color: #fff;
+    font-size: 48px;
+    font-weight: 400;
+}
+.form.search.advanced .fieldset > .legend {
+    float: none;
+    font-weight: normal;
+    font-size: 24px;
+    border: 0;
+    background: none;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.form.search.advanced .fieldset > .field > .label {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+}
+.page-layout-3columns .sidebar-additional {
+    margin-top: 20px;
+}
+button.action.search.primary {
+    background: #50a725;
+    border: 0;
+    border-radius: 0;
+    padding: 8px 20px;
+	margin: 0;
+}
+.form.search.advanced .actions-toolbar .primary {
+    float: right;
+}
+.form.search.advanced .fieldset {
+    margin-bottom: 20px;
+}

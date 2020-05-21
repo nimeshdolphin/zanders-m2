@@ -140,7 +140,7 @@
                     <?php endif; ?>
                 <?php endforeach; ?>
                 </tbody>
-                <tbody>
+                <tbody class="bottom-part">
                     <tr>
                     <?php $index = 0; ?>
                     <?php $helper = $this->helper(Magento\Catalog\Helper\Output::class); ?>
@@ -190,7 +190,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="buttons-set"><a href="#" class="button" role="close-window"><span><?= __('Close Window'); ?></span></a></div>
+        <div class="buttons-set"><a href="#" class="button" role="close-window"><span><?= $block->escapeHtml(__('Close Window')) ?></span></a></div>
         <?php if (!$block->isRedirectToCartEnabled()) :?>
             <script type="text/x-magento-init">
             {

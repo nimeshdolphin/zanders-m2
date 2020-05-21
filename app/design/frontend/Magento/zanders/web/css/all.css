@@ -723,3 +723,17 @@ span.miniqty {
     color: #000;
     padding-left: 8px;
 }
+.block-hide-price a{
+    display: block;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    background: #991020;
+    padding: 5px 20px;
+    font-weight: 400;
+    font-size: 11px;
+}
+.block-hide-price {
+    float: right;
+    margin-top: -5px;
+}

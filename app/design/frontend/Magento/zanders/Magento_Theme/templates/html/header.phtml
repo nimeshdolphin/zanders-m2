@@ -13,6 +13,20 @@
 				<?= $this->getChildHtml("header.top.link.block"); ?>
 				<?= $this->getChildHtml("top.customer.link.block"); ?>
 			</ul>
+			<?php
+				$sportsHelper = $this->helper('Zanders\Sports\Helper\Data');
+				if($sportsHelper->isLoggedIn()){
+			?>
+				<div class="block-hide-price">
+					<a href="<?= $this->getUrl('zanders/index/toggleprice'); ?>">
+						<?php if($sportsHelper->getHidePrice()=='1'){ ?>
+							<?= __('Show Prices') ?>
+						<?php }else{ ?>
+							<?= __('Hide Prices') ?>
+						<?php }?>
+					</a>
+				</div>
+			<?php } ?>
 		 </div>
     </div>
 	<div class="search-menu-cart">

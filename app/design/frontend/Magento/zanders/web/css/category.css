@@ -33,6 +33,12 @@
 .breadcrumbs strong {
     color: #fff;
 }
+h1.page-title {
+    margin: 0;
+    color: #fff;
+    font-size: 48px;
+    font-weight: 400;
+}
 .category-view {
     display: none;
 }
@@ -529,4 +535,25 @@ h3.listing-module-title:after {
 }
 .catalogsearch-result-index .search.results .block {
     display: none;
+}
+.catalogsearch-advanced-result.page-products.page-layout-3columns .column.main {
+    margin-left: 300px;
+}
+.catalogsearch-advanced-result .search.found {
+    color: #fff;
+}
+.catalogsearch-advanced-result .search.summary strong {
+    color: #E17C24;
+}
+.catalogsearch-advanced-result li.item {
+    color: #000;
+}
+.search.summary {
+    margin: 10px 0;
+    border: 1px solid #e9d7c9;
+    background: #fff6f1;
+    padding: 10px;
+}
+.catalogsearch-advanced-result.page-products .search-menu-cart .vertnav-container{
+    display: block !important;
 }

@@ -1,0 +1,9 @@
+.search-menu-cart .vertnav-container {
+    display: none !important;
+}
+.search-menu-cart .vertnav-container:hover {
+    display: block !important;
+}
+.search-menu-cart .menu-header:hover + .vertnav-container {
+    display: block !important;
+}

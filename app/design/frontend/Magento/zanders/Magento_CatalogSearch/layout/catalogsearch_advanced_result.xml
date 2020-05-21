@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="3columns" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/category.css" />
+    </head>
+    <body>
+        <referenceBlock name="search.search_terms_log" remove="true"/>
+        <move element="breadcrumbs" destination="main" before="-"/>
+        <move element="zanders_alert" destination="main" after="breadcrumbs"/>
+        <move element="page.main.title" destination="main" after="breadcrumbs"/>
+    </body>
+</page>

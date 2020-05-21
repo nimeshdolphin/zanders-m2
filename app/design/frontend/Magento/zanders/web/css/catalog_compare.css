@@ -72,3 +72,36 @@ body {
 .table-comparison .product-item-actions {
     margin: 0;
 }
+.table-comparison .cell.remove .action.delete:before {
+    content: '';
+    float: right;
+    background-image: url(../images/btn_remove2.gif);
+    width: 72px;
+    height: 12px;
+}
+.table-comparison .cell.product.remove {
+    padding: 0;
+}
+.table-comparison .cell.product.remove a.action.delete {
+    margin: 0;
+}
+a.action.print.hidden-print {
+    background: url(../images/i_print.gif) 0 2px no-repeat;
+    padding: 2px 0 2px 25px;
+    font-weight: bold;
+    color: #575DC1;
+    float: right;
+    margin-bottom: 15px;
+}
+.buttons-set {
+    float: right;
+    margin-left: 5px;
+}
+.buttons-set a.button {
+    background: #50a725;
+    padding: 7px 30px;
+    color: #fff;
+}
+.table-comparison .bottom-part td.cell.product.info {
+    background: #fffada;
+}
