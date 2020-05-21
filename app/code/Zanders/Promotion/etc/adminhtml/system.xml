@@ -32,7 +32,6 @@
                     <label>Current Stuffer Label</label>
                 </field>
             </group>
-
         </section>
     </system>
 </config>

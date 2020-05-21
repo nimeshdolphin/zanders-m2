@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="zanders" translate="label" sortOrder="401" class="zanders-extensions">
+        <tab id="zanders" translate="label" sortOrder="1" class="zanders-extensions">
             <label>Zanders</label>
         </tab>
         <section id="sports" translate="label" type="text" sortOrder="8888" showInDefault="1" showInWebsite="0"
@@ -51,6 +51,166 @@
                        showInWebsite="1" showInStore="1">
                     <label>Shippable List</label>
                     <comment>List of Products need to be Call to Order but can Ship</comment>
+                </field>
+            </group>
+            <group id="californiaguns" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>E-Mail for Serialized CA Purchase</label>
+                <field id="send_to" translate="label" type="textarea" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>List</label>
+                    <comment>One E-Mail addresses per line</comment>
+                </field>
+            </group>
+            <group id="features" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Featured Products</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Height</label>
+                </field>
+                <field id="url" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>URL</label>
+                </field>
+                <field id="featuredlink" translate="label" type="textarea" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>List</label>
+                    <comment>Feature Image (Logged In Only)</comment>
+                </field>
+            </group>
+
+            <group id="zandersdefaults" translate="label" type="text" sortOrder="110" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Special Settings</label>
+                <field id="cod" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>COD</label>
+                </field>
+                <field id="hazmat" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Hazardous Chages</label>
+                </field>
+                <field id="pa" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Addition Shipping PA</label>
+                </field>
+                <field id="sh" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Addition Shipping SH</label>
+                </field>
+                <field id="w1" translate="label" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Addition Shipping W1</label>
+                </field>
+                <field id="w2" translate="label" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Addition Shipping W2</label>
+                </field>
+                <field id="cb" translate="label" type="text" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Addition Shipping CB</label>
+                </field>
+                <field id="tax" translate="label" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Tax</label>
+                </field>
+                <field id="fflemail" translate="label" type="text" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email For FFL File</label>
+                </field>
+                <field id="rsemail" translate="label" type="text" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email For Resale Certificate</label>
+                </field>
+                <field id="ffldropemail" translate="label" type="text" sortOrder="110" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email For FFL File(Drop Shipping)</label>
+                </field>
+                <field id="shippinglimit" translate="label" type="text" sortOrder="120" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Shipping Days Limit</label>
+                </field>
+                <field id="creditlimitenabled" translate="label" type="select" sortOrder="130" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Over Credit Limit Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="creditlimitmessage" translate="label" type="textarea" sortOrder="140" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Message for Over Credit Limit</label>
+                </field>
+                <field id="pastdueenabled" translate="label" type="select" sortOrder="150" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Account Past Due Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="pastduemessage" translate="label" type="textarea" sortOrder="160" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Message for Account Past Due</label>
+                </field>
+                <field id="fflexpenabled" translate="label" type="select" sortOrder="170" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>FFL has Expired Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="fflexpmessage" translate="label" type="textarea" sortOrder="180" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Message for FFL has Expired</label>
+                </field>
+                <field id="shipfree" translate="label" type="text" sortOrder="190" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Shippable Total Under Amount</label>
+                </field>
+                <field id="shipunderfee" translate="label" type="text" sortOrder="200" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Shippable Total Under Amount Fee</label>
+                </field>
+                <field id="shipextra" translate="label" type="text" sortOrder="210" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Additional Shippable Total Under Amount</label>
+                </field>
+                <field id="shipextrafee" translate="label" type="text" sortOrder="220" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Additional Shippable Total Under Amount Fee</label>
+                </field>
+                <field id="shipflatfirearmfee" translate="label" type="text" sortOrder="230" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Flat Rate Firearm Shipping Fee</label>
+                </field>
+                <field id="shipflatfee" translate="label" type="text" sortOrder="240" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Flat Rate Accessory Shipping Fee</label>
+                </field>
+                <field id="expeditedflatrate" translate="label" type="textarea" sortOrder="250" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Expedited Flat Rates</label>
+                    <comment>One Rate per line (Rate_Code,Price_Added)</comment>
+                </field>
+                <field id="exceptionstates" translate="label" type="text" sortOrder="260" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Flat Rate State Exceptions</label>
+                    <comment>Comma Separated List</comment>
+                </field>
+            </group>
+
+            <group id="mobileapi" translate="label" type="text" sortOrder="120" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Mobile Api</label>
+                <field id="soap_user" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Soap User</label>
+                </field>
+                <field id="soap_key" translate="label" type="password" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Soap API Key</label>
                 </field>
             </group>
         </section>

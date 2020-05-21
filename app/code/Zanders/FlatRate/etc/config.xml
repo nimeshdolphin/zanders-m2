@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <zandersship>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Zanders\FlatRate\Model\Carrier\Zandersship</model>
+                <name>Zanders Shipping</name>
+                <title>Shipping</title>
+                <debug>1</debug>
+                <specificerrmsg>This doesn't work Yet!</specificerrmsg>
+            </zandersship>
+        </carriers>
+    </default>
+</config>
