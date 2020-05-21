@@ -1,0 +1,27 @@
+.cms-page-view.page-layout-1column .search-menu-cart .vertnav-container {display: none !important;}
+.cms-page-view.page-layout-1column .search-menu-cart .vertnav-container:hover {display: block !important;}
+.cms-page-view.page-layout-1column .search-menu-cart .menu-header:hover + .vertnav-container {display: block !important;}
+.cms-page-view.page-layout-1column .column.main{width:  100% !important;}
+.cms-page-view.page-layout-1column .page-main{text-align: left;padding: 25px 25px 80px;}
+.breadcrumbs{background-color: #06466C;line-height: 1.25;margin: 0 0 6px;;padding: 0 !important;}
+.breadcrumbs li a {color: white !important;text-decoration: none;font-size: 14px;}
+.breadcrumbs .item:not(:last-child):after {content: '/';color: #fff;font-size: 15px; margin: 0px 2px;line-height: 15px;}
+.breadcrumbs strong {font-weight: normal;font-size: 14px;color: white;}
+.page-title {width: 100%;overflow: hidden;margin: 0 0 25px !important;}
+.cms-page-view .page-title h1,.cms-page-view h1.page-title {font-size: 48px;}
+.page-title h1, .page-title h2,h1.page-title {margin: 0;color: #fff;font-weight: 400;}
+.cms-page-view .column.main p {font-size: 18px;color: #fff;}
+.col2-set .col-1 {float: left;width: 48.5%;}
+.col2-set .col-2 {float: right;width: 48.5%;}
+.white-bg-holder {background: #fff;padding: 15px 25px 30px;}
+ul, ol {list-style: none;}
+.forms-list {padding: 0;}
+.forms-list li {border-bottom: 1px solid #991020;margin-left: 40px;padding: 15px 10px;font-size: 18px;position: relative;}
+.cms-zanders-forms .forms-list li:before {content: '\f1c1';font-family: 'Font Awesome 5 Free';font-weight: 900;position: absolute;top: 0;left: -40px;color: #991020;font-size: 40px;}
+.cms-zanders-forms .forms-list li#a-reader-link:before {content: '';width: 50px;height: 50px;background: url(../images/a-reader-icon.png) 0 50% no-repeat;background-size: 70%;}
+.forms-list li a {color: #000;text-decoration: none;font-weight: 600;}
+.dealer-links-list a {color: #fff;font-weight: 600;text-decoration: none;}
+.forms-list.without-icons li {margin-left: 0;margin-bottom: 0;}
+.white-bg-holder.eley-products-content {background: #fff url(../images/eley-products-content-bg.jpg) 100% 0 no-repeat;}
+.press-relases-list a {color: #fff;margin-bottom: 5px;text-decoration: none;}
+.white-bg-holder.recalls-content {background: #fff url(../images/recalls-bg.jpg) 100% 0 no-repeat;}

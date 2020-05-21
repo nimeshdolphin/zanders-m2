@@ -1,0 +1,15 @@
+.page-title{margin-top: 3rem !important;margin-bottom: 5px !important;}
+.page-title-wrapper h1 span{margin: 0;color: #fff;font-size: 48px; font-weight: 400;}
+.contact-index-index .column:not(.sidebar-additional) .form.contact{float: right !important;width: 1011px !important;}
+.fieldset{border: 0;background: #fff;padding: 22px 25px 12px 33px;margin: 28px 0 0;}
+.fieldset .legend {font-weight: normal;font-size: 24px;border: 0;background: none;color: #000;margin: 0 0 15px;padding: 0;position: relative;}
+.actions-toolbar {border: 0;margin-top: 0;background: #fff;padding: 0 25px 25px;}
+.primary,button{float: right !important;}
+.primary p.required{margin: 0 0 10px;font-size: 11px;text-align: right;color: #991020;}
+button.submit.primary span{height: 30px;color: #fff;border: 0;background: none;font: 400 14px/28px Montserrat, sans-serif;padding: 0;}
+button.action.primary   {float: right !important;margin-left: 5px !important;background: #50a725;padding: 0 30px;border: 0;cursor: pointer;border-radius: 0;margin-right: 0 !important;}
+.contact-index-index .fieldset > .field > .label, .fieldset > .fields > .field > .label{float: left;color: #000;font-weight: 400;font-size: 14px;position: relative;z-index: 0;}
+.fieldset .field {float: left;width: 275px;margin: 0 0 8px;}
+.fieldset .field.telephone{ width: 100%;}
+.fieldset .field.comment,.fieldset .field.comment textarea{width: 535px;height: 10em;}
+.fieldset .field .control{display: block;clear: both;width: 260px;}
