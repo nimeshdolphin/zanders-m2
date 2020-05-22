@@ -121,37 +121,82 @@
         </div>
 
         <div id='popup-modal' style='display:none;'>
-        <div id ="customer-container">
-            <div id='customcarosal'>
+        <div id ="customer-container">            
             <script id="customer-template" type="text/x-magento-template">
-                <div  id="<%- data.id %>">
-                    <li>
-                        Name : <%- data.name %>
-                    </li>
-                    <li>
-                        Salary : <%- data.salary %>
-                    </li>
-                    <li>
-                        Location : <%- data.location %>
-                    </li>
+                <div  class='custommodel product-item' id="<%- data.id %>">
+                    <div>
+                        <a href=<%- data.url %> ><img max-width="152" max-height="190" src=<%- data.image %> /></a>
+                    </div>
+                    <div class='product details product-item-details'>
+                        <strong class="product name product-item-name"> 
+                            <a class='product-item-link' href=<%- data.url %> ><%- data.name %> </a> 
+                        </strong>
+                    </div>
+                    <div>
+                        Item Number : <span style="font-weight: bold;"><%- data.itemnumber %></span>
+                    </div>
+                    <div>
+                        Item UPC : <%- data.upc %>
+                    </div>
                 </div>
             </script>
+            <div class='related'>
+                <h2>Related Products</h2>
+                <div id='relatedcustom' class="owl-carousel">
+
+                </div>
+            </div>
+        </div>
+        <div id ="customer-container-upsell">            
+            <script id="customer-template-upsell" type="text/x-magento-template">
+                <div  class='custommodelupsell product-item' id="<%- data.id %>">
+                    <div>
+                        <a href=<%- data.url %> ><img max-width="152" max-height="190" src=<%- data.image %> /></a>
+                    </div>
+                    <div class='product details product-item-details'>
+                        <strong class="product name product-item-name">
+                            <a class='product-item-link' href=<%- data.url %> ><%- data.name %> </a>
+                        </strong>
+                    </div>
+                     <div>
+                        Item Number : <span style="font-weight: bold;"><%- data.itemnumber %></span>
+                    </div>
+                    <div>
+                        Item UPC : <%- data.upc %>
+                    </div>
+                </div>
+            </script>
+            <div class='upsell' style="clear: left;">
+                <h2>Alternative Products</h2>
+                <div id='upsellcustom' class="owl-carousel">
+
+                </div>
             </div>
         </div>
         </div>
-
-
-        
 
       <script>
             require(["jquery","owlcarousel"],function($) {
                 $(document).ready(function() {
                     $(".owl-carousel").owlCarousel({
+                        loop:false,
                         navigation : true, // Show next and prev buttons
                         autoPlay: false, //Set AutoPlay to 3 seconds
-                        items : 4,
+                        responsive:{
+                            0:{
+                                items:1
+                            },
+                            600:{
+                                items:3
+                            },
+                            1000:{
+                                items:4
+                            }
+                        },
                         margin : 20
                     });
+
+                   
                 });
             });
 
@@ -164,8 +209,8 @@
                 var options = {
 			        type: 'popup',
 			        responsive: true,
-			        innerScroll: false,
-			        title: 'Modal Title',
+			        innerScroll: true,
+			        title: 'Products',
 			        modalClass: 'custom-modal',
 			        buttons: [{
 			 
@@ -173,6 +218,8 @@
 			            click: function () {
 			                this.closeModal();
 			                $('#popup-modal').html(" ");
+                            $(".upsellcustom").remove();
+                            $(".upsellcustom").remove();
 			            }
 			        }]
 			    };
@@ -181,43 +228,87 @@
                     url: customurl,
                     type: 'POST',
                 	complete: function(response) {
-                        console.log(response);
-                        var res = response.responseJSON.related;
-                         console.log(res);
-                        var responseData  = $.parseJSON(response.responseJSON);    
-                        console.log(responseData);
-
-                       // console.log(response.responseText);
-                       // $html =  response.responseText;
-                       // $data = $($html).find('.box-related_products');
-                       // alert($data);
-                       // $('#popup-modal').append($data);
-                       // $('#popup-modal').modal(options).modal('openModal');
-                       // alert('done');
-                       // 
-                       
-                       $.each($.parseJSON('<?php echo $jsonCustomerData ?>'), function() {
+                        //console.log(response);
                         
+                        $('#relatedcustom').empty();
+                        $("#upsellcustom").empty();
+
+                        response = $.parseJSON(response.responseText);
+                        var related = response.related;        
+                        var upsell = response.upsell;
+                
+                       $.each(upsell, function() {
+                        var progressTmpl = mageTemplate('#customer-template-upsell'),
+                                  tmpl;
+                        tmpl = progressTmpl({
+                            data: {
+                                name: this['name'],
+                                id: this['id'],
+                                image: this['image'],
+                                itemnumber: this['itemnumber'],
+                                upc: this['upc'],
+                                url: this['url']
+                            }
+                        });
+
+                        $('#customer-container-upsell').after(tmpl);                        
+                        $(".custommodelupsell").appendTo("#upsellcustom");    
+
+                        });
+
+                       $.each(related, function() {
                         var progressTmpl = mageTemplate('#customer-template'),
                                   tmpl;
                         tmpl = progressTmpl({
                             data: {
                                 name: this['name'],
-                                salary: this['salary'],
-                                location: this['location']
+                                id: this['id'],
+                                image: this['image'],
+                                itemnumber: this['itemnumber'],
+                                upc: this['upc'],
+                                url: this['url']
                             }
                         });
 
-                        $('#customer-container').after(tmpl);
-                        //  $("#customcarosal").owlCarousel({
-                        //     navigation : true, // Show next and prev buttons
-                        //     autoPlay: false, //Set AutoPlay to 3 seconds
-                        //     items : 4,
-                        //     margin : 20
-                        // });
-                        $('#popup-modal').modal(options).modal('openModal');
+                        $('#customer-container').after(tmpl);                        
+                        $(".custommodel").appendTo("#relatedcustom");    
 
                         });
+
+                       if(related.length==0)
+                       {
+                          $('#customer-container').css('display','none');  
+                       }
+                       else
+                       {
+                          $('#customer-container').css('display','block');  
+                       }
+
+                       if(upsell.length==0)
+                       {
+                          $('#customer-container-upsell').css('display','none');  
+                       }
+                       else
+                       {
+                          $('#customer-container-upsell').css('display','block');  
+                       }
+
+                    $(".relatedcustom").owlCarousel({
+                        navigation : true, // Show next and prev buttons
+                        autoPlay: false, //Set AutoPlay to 3 seconds
+                        items : 4,
+                        margin : 20
+                    });
+
+                    $(".upsellcustom").owlCarousel({
+                        navigation : true, // Show next and prev buttons
+                        autoPlay: false, //Set AutoPlay to 3 seconds
+                        items : 4,
+                        margin : 20
+                    });
+
+                        //$("#relatedcustom").trigger('refresh.owl.carousel');
+                    $('#popup-modal').modal(options).modal('openModal');    
                         
                     },
                     error: function (xhr, status, errorThrown) {
@@ -234,4 +325,6 @@
     <?php endif; ?>
 
     
-    
+   <style type="text/css">
+       .custommodel, .custommodelupsell { width: 226px; float: left; text-align: center; margin-bottom: 22px;}
+   </style> 
