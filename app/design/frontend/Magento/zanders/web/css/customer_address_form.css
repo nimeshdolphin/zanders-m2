@@ -1,0 +1,25 @@
+.account.customer-address-form .form-address-edit{border: 0;
+    background: #fff;
+    padding: 22px 25px 12px 33px;
+    margin: 0;
+    font-size: 14px;
+    color: #000;}
+.account.customer-address-form .fieldset{
+    float: left;
+    width: 100%;}
+.account .fieldset .legend {font-weight: normal;font-size: 24px;border: 0;background: none;color: #000;margin: 0 0 15px;padding: 0;position: relative;}
+.account .fieldset .field label {color: #000;font-weight: 400;font-size: 14px;}
+p.required {color: #991020;font-size: 11px;text-align: right;}
+.account.customer-address-form .actions-toolbar .primary {float: right;}
+.account.customer-address-form .actions-toolbar > .secondary .action.back{display: block;text-transform: uppercase;color: #000;text-decoration: none;}
+.form-address-edit .actions-toolbar .primary button.action {margin-right: 0px;background: #50a725;box-shadow: none;color: #fff;border: 0;border-radius: 0;padding: 0 30px;height: 30px;font: 400 14px/28px Montserrat, sans-serif;}
+.form-address-edit .checkbox:checked {background-color: #e9ecee;border: 1px solid #adb8c0;color: #99a1a7;}
+.form-address-edit .checkbox:checked:after {content: '\f00c';font-size: 14px;font-family: 'Font Awesome 5 Free';font-weight: 900;position: absolute;top: 2px;left: 2px;color: #000;}
+.form-address-edit input[type="checkbox"]{-webkit-appearance: none;background-color: #fff;border: 1px solid #000;padding: 9px;border-radius: 0px;display: inline-block;position: relative;top: 5px;}
+.form-address-edit select{height: 28px;padding: 0 5px;font: normal 14px/24px Montserrat;    padding-right: 30px;}
+p.required {color: #991020;font-size: 11px;text-align: right;}
+.fieldset .field .control{display: block;clear: both;width: 260px;}
+.form-address-edit .fieldset .field input[type="text"]{width: 254px !important;padding: 0 5px;font: normal 14px/24px Montserrat;border: 1px solid #ddd;height: 26px;color: #000;}
+.form-address-edit .fieldset .field.city,.form-address-edit .fieldset .field.zip,.form-address-edit .fieldset .field.country {float: left;width: 275px;}
+.form-address-edit .fieldset .field.region,.message.info{float: left;width: 50%;}
+.form-address-edit .fieldset .field.choice{float: none;width: 50%;margin: 0;}

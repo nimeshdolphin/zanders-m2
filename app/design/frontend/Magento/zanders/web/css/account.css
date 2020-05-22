@@ -1,9 +1,5 @@
-.search-menu-cart .vertnav-container {
-    display: none !important;
-}
-.search-menu-cart .vertnav-container:hover {
-    display: block !important;
-}
-.search-menu-cart .menu-header:hover + .vertnav-container {
-    display: block !important;
-}
+.search-menu-cart .vertnav-container {display: none !important;}
+.search-menu-cart .vertnav-container:hover {display: block !important;}
+.search-menu-cart .menu-header:hover + .vertnav-container {display: block !important;}
+.page-title-wrapper h1.page-title, .page-title-wrapper h2.page-title{margin: 0;color: #fff;font-size: 48px;font-weight: 400;}
+.page-title {width: 100%;margin: 0 0 25px !important;}

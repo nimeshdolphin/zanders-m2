@@ -3,4 +3,9 @@
     <head>
 		<css src="css/account.css" />
     </head>
+    <body>
+    	<move element="breadcrumbs" destination="main" before="-"/>
+        <move element="zanders_alert" destination="main" after="breadcrumbs"/>
+        <move element="page.main.title" destination="main" after="breadcrumbs"/>
+    </body>
 </page>

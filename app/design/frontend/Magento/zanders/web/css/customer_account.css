@@ -1,0 +1,15 @@
+.col2-set,.col2-set .box-title{float: left;width: 100%;}
+.col2-set .col-1 {float: left;width: 48.5%;}
+.col2-set .col-2 {float: right;width: 48.5%;}
+.col-2 .box-title h3,.col2-set .box-title h3{line-height: unset;}
+.account.customer-account-index .col2-set {margin: 0 0 15px;}
+.col-2 .box-title{float: left;width: 100%;}
+.box-account {background: #fff url(../images/bkg_account_box.gif) 0 0 repeat-x;border: 1px solid #ccc;border-color: #ccc #999 #999 #ccc;padding: 15px;margin: 0 0 20px;display: flow-root;}
+.box-account .box-head {border-bottom: 1px solid #d9dde3;margin: 0 0 10px;text-align: right;float: left;width: 100%;}
+.account.customer-account-index .box-info .box-head h2 {background-image: url(../images/i_ma-info.gif);float: left;margin: 0;font-size: 13px;font-weight: bold;text-transform: uppercase;background-position: 0 0;background-repeat: no-repeat;padding-left: 21px;color: #203254;line-height: unset;}
+.account.customer-account-index .box .box-title h3, .dashboard .box .box-title h4 {float: left;font-size: 13px;font-weight: bold;margin: 0;}
+.account.customer-account-index .box-title {background: url(../images/bkg_divider1.gif) 0 100% repeat-x;padding: 0 0 2px;margin: 0 0 8px;text-align: right;}
+.col-1 .box-content p a{color: #203254;}
+.account.customer-account-index .box-info h4 {font-size: 11px;font-weight: bold;text-transform: uppercase;margin: 0 0 5px;color: #000;}
+.welcome-msg-dashboard{margin: 0 8em 1.5em 0;color: #fff;}
+.welcome-msg-dashboard p{margin: 0;}

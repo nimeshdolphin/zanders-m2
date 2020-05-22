@@ -1,0 +1,12 @@
+.account .addresses-list {background: #fff;padding: 15px;display: flex;}
+.col2-set .col-1 {float: left;width: 48.5%;}
+.col2-set .col-2 {float: right;width: 48.5%;padding-left: 30px;}
+.col2-set .block .block-title{margin: 0 !important;border: 0 !important;}
+.col2-set .block .block-title strong{font-weight: bold !important;font-size: 13px !important;color: #203254;text-transform: uppercase;}
+.account.customer-address-index .actions-toolbar{border: 0;margin-top: 0;background: #fff;padding: 0 25px 25px;}
+.block-addresses-list .block-content p {font-weight: bold;background: none;border: 0;padding: 0;margin: 0 0 10px;}
+.block-addresses-default .block-content .box{background: #fff url(../images/bkg_account_box.gif) 0 0 repeat-x;border: 1px solid #ccc;padding: 10px 13px;margin: 0 0 10px;float: left !important;width: 95% !important;}
+.account.customer-address-index .column.main .block:not(.widget) .box-title > span{font-weight: bold;font-size: 13px;}
+.account.customer-address-index .col2-set .block{margin-bottom: 0}
+.account.customer-address-index .actions-toolbar .primary{display: none;}
+.account.customer-address-index .actions-toolbar > .secondary .action.back{display: block;text-transform: uppercase;color: #000;text-decoration: none;}
