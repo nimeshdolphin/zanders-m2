@@ -1,0 +1,42 @@
+.account main#maincontent {min-height: 400px;padding: 25px 25px 80px;text-align: left;}
+.products-grid.wishlist ol.product-items li {width: 100%;margin-left: 0;margin-bottom: 0;position: relative;}
+.products-grid.wishlist ol.product-items li a.product-item-photo {width: 15%;padding: 10px;border-right: 1px solid #d9dde3;float: left;margin: 0;}
+.products-grid.wishlist ol.product-items li strong.product-item-name {width: 50%;float: left;padding: 10px;margin: 0;}
+.field.comment-box {width: 49%;float: left;padding: 10px;margin: 0;}
+.products-grid .product-item-info:hover {background: none;box-shadow: none;border: none;margin: 0;padding: 0;}
+.products-grid.wishlist .product-item-comment {height: 110px;margin: 0;}
+.products-grid.wishlist ol.product-items li .product-item-inner {    overflow: visible !important;    clip: unset !important;    width: 30% !important;    box-shadow: none;    left: unset;    margin-top: 0px !important;
+    padding: 10px !important;    right: 0;    float: left;    border-left: 1px solid #d9dde3 !important;
+    border-bottom: none !important; position: absolute !important;    height: 196px !important;}
+.products-grid.wishlist .product-item-actions .action.delete {    position: absolute;    right: 10px;    top: 0;
+    border-left: 1px solid #d9dde3;    height: 196px;    margin: 0;    padding: 10px;}
+table#wishlist-table th {    background: #d9e5ee;    font-weight: bold;    padding: 2px 8px !important;
+    color: #0a263c;    white-space: nowrap;    vertical-align: middle !important;}
+.products-grid.wishlist ol.product-items li .product-item-inner .box-tocart {
+    margin-bottom: 0;
+}
+.products-grid.wishlist ol.product-items li .product-item-inner .box-tocart fieldset.fieldset {
+    margin-bottom: 0;
+}
+.products-grid.wishlist .product-item-actions .action.edit:before { display:none; }
+.products-grid.wishlist .product-item-actions .action.edit > span {
+    clip: unset;
+    font-size: 14px;
+    width: auto;
+    overflow: visible;
+    color: #000;
+}
+.product-items .odd {background: #f8f7f5;}
+.product-items .even {background: #eeeded;}
+.wishlist-index-index .toolbar.wishlist-toolbar.top{padding-top: 25px !important;}
+.wishlist-index-index .toolbar.wishlist-toolbar{border: 0;margin-top: 0;background: #fff;padding: 0 25px 25px;margin-bottom: 0;}
+.form-wishlist-items .actions-toolbar{border: 0;background: #fff;padding: 2em 25px 25px;}
+.account .form-wishlist-items .actions-toolbar .primary {float: right;}
+.account .form-wishlist-items .actions-toolbar > .secondary .action.back{display: block;text-transform: uppercase;color: #000;text-decoration: none;}
+.form-wishlist-items .actions-toolbar .primary button.action {margin-right: 0px;background: #50a725;box-shadow: none;color: #fff;border: 0;border-radius: 0;padding: 0 30px;height: 30px;font: 400 14px/28px Montserrat, sans-serif;}
+.form-wishlist-items .price-wrapper  span.price {font-weight: bold;font-size: 13px;color: #c76200;}
+.box-tocart .field.qty label{display: none;}
+.product-item-actions .actions-primary button{border: 0;margin-right: 10px;background: #ea122b;color: #fff;display: inline-block;padding: 0 20px;height: 43px;text-decoration: none;text-transform: uppercase;transition: all 0.5s;font: bold 14px/43px Montserrat, Helvetica, sans-serif;}
+.product-item-actions .actions-primary button:hover{background-color: #991020;border: 0;}
+.wishlist-index-index .product-item-inner{background: transparent !important;}
+.form-wishlist-items .products-grid .product-item-info:not(:hover):not(.active) .product-item-inner{margin: 0px !important;}
