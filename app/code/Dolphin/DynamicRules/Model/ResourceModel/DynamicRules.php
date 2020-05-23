@@ -13,6 +13,6 @@ class DynamicRules extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('dolphin_dynamicrules_dynamicrules', 'id');
+        $this->_init('dynamic_rule', 'id');
     }
 }

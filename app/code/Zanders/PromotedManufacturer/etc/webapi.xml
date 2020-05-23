@@ -1,46 +1,33 @@
 <?xml version="1.0" ?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-	<route method="POST" url="/V1/promotedmanufacturer_api/save">
+	<route method="POST" url="/V1/promotedmanufacturer/save">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="save"/>
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_save"/>
 		</resources>
 	</route>
-	<route method="POST" url="/V1/promotedmanufacturer_api/update">
+	<route method="POST" url="/V1/promotedmanufacturer/update">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="update"/>
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_update"/>
 		</resources>
 	</route>
-	<route method="GET" url="/V1/promotedmanufacturer_api/list">
+	<!-- <route method="GET" url="/V1/promotedmanufacturer">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="getList"/>
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
 		</resources>
-	</route>
-	<route method="GET" url="/V1/promotedmanufacturer_api/promotedmanufacturerList">
+	</route> -->
+	<route method="GET" url="/V1/promotedmanufacturer">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="list"/>
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
 		</resources>
 	</route>
-	
-	<route method="GET" url="/V1/promotedmanufacturer_api/get/:promotedmanufacturerId">
+	<route method="GET" url="/V1/promotedmanufacturer/get/:id">
 		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="get"/>
 		<resources>
 			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_view"/>
 		</resources>
-	</route>	
-	<!-- <route method="PUT" url="/V1/zanders-promotedmanufacturer/promotedmanufacturer/:promotedmanufacturerId">
-		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="save"/>
-		<resources>
-			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_update"/>
-		</resources>
 	</route>
-	<route method="DELETE" url="/V1/zanders-promotedmanufacturer/promotedmanufacturer/:promotedmanufacturerId">
-		<service class="Zanders\PromotedManufacturer\Api\PromotedManufacturerRepositoryInterface" method="deleteById"/>
-		<resources>
-			<resource ref="Zanders_PromotedManufacturer::PromotedManufacturer_delete"/>
-		</resources>
-	</route> -->
 </routes>

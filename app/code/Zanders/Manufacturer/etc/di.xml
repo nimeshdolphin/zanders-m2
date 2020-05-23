@@ -55,7 +55,7 @@
     <virtualType name="Zanders\Manufacturer\Model\ResourceModel\Manufacturer\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">zanders_manufacturer</argument>
+            <argument name="mainTable" xsi:type="string">manufacturers</argument>
             <argument name="resourceModel" xsi:type="string">Zanders\Manufacturer\Model\ResourceModel\Manufacturer
             </argument>
         </arguments>

@@ -127,13 +127,11 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 				}
 
 			}
-			if($category_id!='')
-			{
-				$promotedManufacturerModel->setCategoryId($category_id);	
+			if ($category_id != '') {
+				$promotedManufacturerModel->setCategoryId($category_id);
 			}
-			if($manufacturer_id != '')
-			{
-				$promotedManufacturerModel->setManufacturerId($manufacturer_id);	
+			if ($manufacturer_id != '') {
+				$promotedManufacturerModel->setManufacturerId($manufacturer_id);
 			}
 			$promotedManufacturerModel->save();
 
@@ -174,10 +172,10 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 
 			}
 
-			$promotedManufacturerData = array('category_id' => $category_id, 
-			'manufacturer_id' => $manufacturer_id);
+			$promotedManufacturerData = array('category_id' => $category_id,
+				'manufacturer_id' => $manufacturer_id);
 			$promotedManufacturerModel = $this->promotedManufacturerFactory
-			->create()->setData($promotedManufacturerData);
+				->create()->setData($promotedManufacturerData);
 
 			$this->resource->save($promotedManufacturerModel);
 		} catch (\Exception $exception) {
@@ -191,11 +189,11 @@ class PromotedManufacturerRepository implements PromotedManufacturerRepositoryIn
 	/**
 	 * {@inheritdoc}
 	 */
-	public function get($promotedManufacturerId) {
+	public function get($id) {
 		$promotedManufacturer = $this->promotedManufacturerFactory->create();
-		$this->resource->load($promotedManufacturer, $promotedManufacturerId);
+		$this->resource->load($promotedManufacturer, $id);
 		if (!$promotedManufacturer->getId()) {
-			throw new NoSuchEntityException(__('PromotedManufacturer with id "%1" does not exist.', $promotedManufacturerId));
+			throw new NoSuchEntityException(__('PromotedManufacturer with id "%1" does not exist.', $id));
 		}
 		return $promotedManufacturer->getDataModel();
 	}

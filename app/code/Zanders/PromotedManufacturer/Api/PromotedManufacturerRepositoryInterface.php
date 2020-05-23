@@ -32,11 +32,11 @@ interface PromotedManufacturerRepositoryInterface {
 
 	/**
 	 * Retrieve PromotedManufacturer
-	 * @param string $promotedmanufacturerId
+	 * @param string $id
 	 * @return \Zanders\PromotedManufacturer\Api\Data\PromotedManufacturerInterface
 	 * @throws \Magento\Framework\Exception\LocalizedException
 	 */
-	public function get($promotedmanufacturerId);
+	public function get($id);
 
 	/**
 	 * Retrieve PromotedManufacturer matching the specified criteria.

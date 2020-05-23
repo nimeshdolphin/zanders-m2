@@ -13,6 +13,6 @@ class Manufacturer extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('zanders_manufacturer', 'id');
+        $this->_init('manufacturers', 'id');
     }
 }

@@ -46,9 +46,14 @@ class Data extends AbstractHelper
         return $this->_registry->registry('current_product');
     }
 
-    public function dynamicProducts()
+    public function dynamicProducts($productId = '')
     {
-        $productId = $this->getCurrentProduct()->getId();
+
+        if($productId == '') 
+        {    
+            $productId = $this->getCurrentProduct()->getId();
+        }
+        //$productId = $this->getCurrentProduct()->getId();
         $product = $this->_productRepository->getById($productId);
         $category = $product->getCategoryIds();
 
