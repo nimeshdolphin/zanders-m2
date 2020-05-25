@@ -1,0 +1,85 @@
+/* Pager */
+/* TODO replace import from pager.css with actual content. see import at the top */
+/* Data Table */
+.data.table { width:100%; border:1px solid #bebcb7; }
+.data.table .odd  { background:#f8f7f5; }
+.data.table .even { background:#eeeded; }
+.data.table .sortcol { cursor: pointer; padding-right: 20px; background-repeat: no-repeat; background-position: right center; }
+.data.table .nosort { cursor: default; }
+.data.table .sortasc { background-color: #DDFFAC; background-image: url(https://testgz.shop2.gzanders.com/skin/frontend/zanders/new/images/up.gif); }
+.data.table .sortdesc { background-color: #DDFFAC; background-image: url(https://testgz.shop2.gzanders.com/skin/frontend/zanders/new/images/down.gif); }
+/*.data.table tr.odd:hover,
+.data.table tr.even:hover { background:#ebf1f6; }*/
+.data.table td.last,
+.data.table th.last { border-right:0; }
+.data.table tr.last th,
+.data.table tr.last td { border-bottom:0 !important; }
+.data.table th { padding:3px 8px; font-weight:bold; }
+.data.table td { padding:3px 8px; }
+
+.data.table thead th { font-weight:bold; border-right:1px solid #c2d3e0; padding:2px 8px; color:#0a263c; white-space:nowrap; vertical-align:middle; }
+.data.table thead th.wrap { white-space:normal; }
+.data.table thead th a,
+.data.table thead th a:hover { color:#fff; }
+.data.table thead th { background:url(https://testgz.shop2.gzanders.com/skin/frontend/zanders/new/images/bkg_th.gif) repeat-x 0 100% #d9e5ee; }
+.data.table thead th .tax-flag { font-size:11px; white-space:nowrap; }
+
+.data.table tfoot { border-bottom:1px solid #d9dde3; }
+.data.table tfoot tr.first td { background:url(https://testgz.shop2.gzanders.com/skin/frontend/zanders/new/images/bkg_tfoot.gif) 0 0 repeat-x; }
+.data.table tfoot tr { background-color:#dee5e8 !important; }
+.data.table tfoot td { padding-top:1px; padding-bottom:1px; border-bottom:0; border-right:1px solid #d9dde3; }
+.data.table tfoot strong { font-size:16px; }
+
+.data.table tbody th,
+.data.table tbody td { border-bottom:1px solid #d9dde3; border-right:1px solid #d9dde3; }
+/* Bundle products tables */
+.data.table tbody.odd tr { background:#f8f7f5 !important; }
+.data.table tbody.even tr { background:#f6f6f6 !important; }
+.data.table tbody.odd tr td,
+.data.table tbody.even tr td { border-bottom:0; }
+.data.table tbody.odd tr.border td,
+.data.table tbody.even tr.border td { border-bottom:1px solid #d9dde3; }
+
+.data.table tbody td .option-label { font-weight:bold; font-style:italic; }
+.data.table tbody td .option-value { padding-left:10px; }
+.order-products-toolbar{margin-bottom: 0px;
+    font-size: 14px;
+    padding: 0;
+    line-height: 14px;
+    height: 36px;
+    text-align: center;}
+.pager .pages .current {
+    font-weight: bold;
+    font-size: 16px;
+}
+.order-products-toolbar .pager .pages .item{margin: 0;}
+.order-products-toolbar .pager .pages .items li.current strong.page{
+background: transparent;
+    font-size: 14px;
+}
+.order-products-toolbar .pager .pages .items li.current strong.page .label{position: relative;}
+.order-products-toolbar .pager .pages .items li a.page,.order-products-toolbar .pager .pages .items li a.action {
+    color: white;
+    text-decoration: none;
+   	font-size: 14px;
+    line-height: 14px;
+}
+.order-products-toolbar .pager .pages .items li a.action.next{
+    box-shadow: unset;
+    border-radius: 0;
+    padding: 0 8px;
+    background: transparent;
+    border: 0;
+    margin: 0;
+}
+.order-products-toolbar .pager .pages .items li a.action.next span{position: relative;}
+.order-products-toolbar .pager .pages .items li a.action.next:before,.order-products-toolbar .pager .pages .items li a.action.next span.label{display: none;}
+.order-products-toolbar .pager .limiter select.limiter-options {    padding: 0px 25px 0px 6px;
+    margin: 0 5px 1px;
+    vertical-align: middle;
+    height: 22px;
+    background-color: #ffffff;
+    box-shadow: unset;
+    border-radius: 0;}
+.account .data.table .col.actions .action.order{font-weight: bold;
+    color: #dc6809 !important;}
