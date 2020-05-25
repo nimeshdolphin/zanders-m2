@@ -1,0 +1,207 @@
+.search-menu-cart .vertnav-container {
+    display: none !important;
+}
+.search-menu-cart .vertnav-container:hover {
+    display: block !important;
+}
+.search-menu-cart .menu-header:hover + .vertnav-container {
+    display: block !important;
+}
+.page-layout-1column.checkout-cart-index .column.main{
+	width: 1322px !important;
+}
+h1.page-title {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+.checkout-cart-index .cart-container {
+    display: grid;
+    width: 100%;
+    margin-top: 38px;
+}
+.checkout-cart-index .cart-container .form-cart {
+    width: 100%;
+    float: left;
+    padding: 0;	
+    background: #fff;
+}
+.cart.table-wrapper .cart tbody td{
+	border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+.checkout-cart-index .cart.table-wrapper .item .col.item {
+    display: table-cell;
+}
+.checkout-cart-index .cart.table-wrapper .cart thead tr th {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    white-space: nowrap;
+    padding: 2px 8px;
+}
+td.col.wishlist {
+    text-align: center;
+}
+.cart.table-wrapper input.checkbox {
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 9px;
+    border-radius: 0px;
+    display: inline-block;
+    position: relative;
+    height: 26px;
+    width: 26px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.cart.table-wrapper .checkbox:checked:after {
+    content: '\f00c';
+    font-size: 14px;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    color: #000;
+}
+.cart.table-wrapper .col.qty .input-text {
+    border-color: #000;
+    height: 32px;
+}
+.checkout-cart-index .cart.table-wrapper td.col .cart-price span.price {
+    font-size: 18px;
+    color: #000;
+    line-height: 24px;
+    padding: 10px;
+    font-weight: 400;
+}
+.cart.table-wrapper .product-item-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 8px;
+    color: black;
+    line-height: 18px;
+}
+.checkout-cart-index .cart.table-wrapper .product-item-name a:hover {
+    text-decoration: none;
+}
+td.col.item-number {
+    font-weight: bold;
+    font-size: 16px;
+}
+.checkout-cart-index .cart.table-wrapper .product-item-photo{
+    padding-right: 0;
+    padding-left: 10px;
+}
+.checkout-cart-index .cart.table-wrapper .cart thead tr th.col.price {
+    text-align: center;
+}
+.checkout-cart-index .cart.table-wrapper .cart thead tr .col.subtotal {
+    text-align: center;
+}
+.checkout-cart-index .zanders-msg {
+    margin: 20px 0;
+}
+.checkout-cart-index .page-title-wrapper {
+    display: inline-block;
+}
+a.chckout-btn {
+    background: #991020 url(../images/checkout-btn-icon.png) 15px 50% no-repeat;
+    padding: 0 15px 0 60px;
+    height: 72px;
+    display: inline-block;
+    float: right;
+    font: normal 28px/70px Montserrat, Helvetica, sans-serif;
+    color: #fff;
+}
+a.chckout-btn:hover {
+    text-decoration: none;
+    background-color: #750311;
+}
+.cart-container .form-cart .actions.main .clear {
+    display: inline-block;
+    color: #fff;
+    border: 0;
+    background: #991020;
+    font: 400 18px/48px Montserrat, sans-serif;
+    padding: 0px 10px;
+    border-radius: 0;
+    vertical-align: top;
+    box-shadow: none;
+    float: left;
+    margin-left: 5px;
+}
+.cart-container .form-cart .actions.main .continue {
+    display: inline-block;
+    background: #50a725;
+    font: 400 18px/48px Montserrat, sans-serif;
+    color: #fff;
+    padding: 0 10px;
+    float: left;
+}
+.cart-container .form-cart .actions.main .continue:hover {
+    text-decoration: none;
+}
+.cart-container .form-cart .actions.main .continue:before {
+    content: "\f060";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 24px;
+    margin-right: 20px;
+    display: inline-block;
+    float: left;
+} 
+.cart-container .form-cart .actions.main .clear:before {
+    content: "\f12d";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 24px;
+    margin-right: 20px;
+    display: inline-block;
+    float: left;
+}
+.cart-container button.action.update {
+    background: #cb5c12;
+    border: 0;
+    color: #fff;
+    border-radius: 0;
+    font: 400 18px/48px Montserrat, sans-serif;
+    padding: 0 10px;
+    vertical-align: top;
+    box-shadow: none;
+}
+.cart-container button.action.update:before {
+    content: "\f079";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 24px;
+    margin-right: 20px;
+    display: inline-block;
+    float: left;
+}
+.cart-container .cart.main.actions {
+    background: #06466C;
+    padding-top: 15px;
+}
+.cart-container .table-wrapper {
+    margin-bottom: 0;
+    padding-top: 0;
+}
+.cart.table-wrapper .actions-toolbar>.action-delete:before {
+    content: "\f00d";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-color: #BF1010;
+    color: white;
+    font-size: 32px;
+    line-height: 32px;
+}

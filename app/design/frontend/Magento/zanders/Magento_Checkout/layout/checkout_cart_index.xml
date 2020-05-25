@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/cart.css" />
+    </head>
+    <body>
+    	<move element="page.main.title" destination="content" before="checkout.top.button"/>
+    	<referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="checkout.top.button"
+                   template="Magento_Checkout::cart/checkout_btn.phtml" after="zanders_alert"/>
+        </referenceContainer>
+        <referenceBlock name="checkout.cart.item.renderers.simple.actions.edit" remove="true" />
+        <referenceBlock name="checkout.cart.item.renderers.simple.actions.move_to_wishlist" remove="true" />
+    </body>
+</page>
