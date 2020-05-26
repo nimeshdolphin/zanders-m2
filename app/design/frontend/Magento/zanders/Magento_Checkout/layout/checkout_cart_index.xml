@@ -8,7 +8,10 @@
     	<referenceContainer name="content">
             <block class="Magento\Framework\View\Element\Template" name="checkout.top.button"
                    template="Magento_Checkout::cart/checkout_btn.phtml" after="zanders_alert"/>
+            <block class="Magento\Framework\View\Element\Template" name="freight.policy"
+                   template="Magento_Checkout::cart/freight_policy.phtml" before="checkout.cart.shipping"/>
         </referenceContainer>
+        <referenceBlock name="checkout.cart.coupon" remove="true" />
         <referenceBlock name="checkout.cart.item.renderers.simple.actions.edit" remove="true" />
         <referenceBlock name="checkout.cart.item.renderers.simple.actions.move_to_wishlist" remove="true" />
     </body>

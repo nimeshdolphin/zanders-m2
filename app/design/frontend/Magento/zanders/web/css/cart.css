@@ -205,3 +205,42 @@ a.chckout-btn:hover {
     font-size: 32px;
     line-height: 32px;
 }
+.cart.table-wrapper .actions-toolbar>.action-delete {
+    right: 20px;
+}
+.cart-summary .checkout-methods-items .action.primary.checkout {
+    width: 100%;
+    background: #991020 url(../images/checkout-btn-icon.png) 15px 50% no-repeat;
+    padding: 0 15px 0 60px;
+    height: 72px;
+    display: inline-block;
+    float: right;
+    font: normal 28px/70px Montserrat, Helvetica, sans-serif;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+}
+.cart-summary{
+    width: 500px !important;
+    background: rgba(97,97,97, 0.65)
+}
+.cart.table-wrapper .actions-toolbar>.action-delete:hover:before {
+    color: #fff;
+}
+.columns {
+    margin-top: 15px;
+}
+.freight-policy {
+    color: #fff;
+    padding: 25px 25px 40px;
+    border: 1px solid #fff;
+}
+.freight-policy h4 {
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 25px;
+}
+.freight-policy p {
+    font-size: 14px;
+}

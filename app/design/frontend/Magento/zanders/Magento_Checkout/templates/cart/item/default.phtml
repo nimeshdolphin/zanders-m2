@@ -75,7 +75,7 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
             </div>
         </td>
         <td data-th="<?= $block->escapeHtmlAttr(__('Move to Wishlist')) ?>" class="col wishlist">
-            <input type="checkbox" value="1" name="cart[7139829][wishlist]" title="Move to Wishlist" class="checkbox">
+            <input type="checkbox" value="1" name="cart[<?php echo $_item->getId() ?>][wishlist]" title="Move to Wishlist" class="checkbox">
         </td>
         <?php if ($canApplyMsrp) :?>
             <td class="col msrp" data-th="<?= $block->escapeHtmlAttr(__('Price')) ?>">
