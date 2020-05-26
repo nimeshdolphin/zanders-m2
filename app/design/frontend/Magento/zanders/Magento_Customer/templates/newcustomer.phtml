@@ -1,0 +1,25 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Form\Login\Info $block */
+?>
+<?php if ($block->getRegistration()->isAllowed()) : ?>
+<div class="block block-new-customer">
+    <div class="block-title">
+        <strong id="block-new-customer-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('New Dealers')) ?></strong>
+    </div>
+    <div class="block-content" aria-labelledby="block-new-customer-heading">
+        <p>'test To qualify as a Zanders' Sporting Goods Dealer is simple. We require a signed copy of your Federal Firearms License, a copy of your Retail Merchant's License, and a copy of any State License your state may require for retail gun sales.  <br /> For more information please contact us by phone at 1-800-851-4373 or use the contact us button below.'</p>
+        <?php /*<div class="actions-toolbar">
+            <div class="primary">
+                <a href="<?= $block->escapeUrl($block->getCreateAccountUrl()) ?>" class="action create primary"><span><?= $block->escapeHtml(__('Create an Account')) ?></span></a>
+            </div>
+        </div>*/?>
+        <div class="actions-toolbar">
+        <button type="button" title="New dealer sign-up" class="button" onclick="window.open('https://www.123formbuilder.com/form-5299807')"><span><span>NEW DEALER SIGN-UP</span></span></button></div>
+    </div>
+</div>
+<?php endif; ?>

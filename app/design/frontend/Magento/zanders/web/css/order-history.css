@@ -83,3 +83,7 @@ background: transparent;
     border-radius: 0;}
 .account .data.table .col.actions .action.order{font-weight: bold;
     color: #dc6809 !important;}
+.nobr {
+    white-space: nowrap !important;
+}
+.nobr a{color: #2f2f2f;}
