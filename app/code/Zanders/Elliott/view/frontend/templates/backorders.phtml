@@ -1,0 +1,71 @@
+<?php
+/** @var \Zanders\Elliott\Block\BackOrders $block */
+?>
+<?php
+$_orders = $block->getBackorderList();
+
+$_ordernolink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_NO', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_NO') ? 'DESC' : 'ASC'));
+$_orderdatelink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_DATE', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_DATE') ? 'DESC' : 'ASC'));
+$_orderpolink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_PURCH_ORDER_NO', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_PURCH_ORDER_NO') ? 'DESC' : 'ASC'));
+$_itemnumlink = $block->getUrl('*/*/*', array('sortby' => 'LINE_ITM_ITEM_NO', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'LINE_ITM_ITEM_NO') ? 'DESC' : 'ASC'));
+$_itemdesclink = $block->getUrl('*/*/*', array('sortby' => 'LINE_ITM_DESC1', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'LINE_ITM_DESC1') ? 'DESC' : 'ASC'));
+$_itembolink = $block->getUrl('*/*/*', array('sortby' => 'LINE_ITM_QTY_BCK_ORD', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'LINE_ITM_QTY_BCK_ORD') ? 'DESC' : 'ASC'));
+?>
+<?php if (count($_orders)): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <col width="1"/>
+            <col width="1"/>
+            <col width="1"/>
+            <col width="1"/>
+            <col/>
+            <col width="1"/>
+            <col width="1"/>
+            <thead>
+            <tr>
+                <th><a style="color:#0a263c;" href="<?php echo $_ordernolink; ?>"><?= __('Order #') ?></a></th>
+                <th><a style="color:#0a263c;" href="<?php echo $_orderpolink; ?>"><?= __('P.O. #') ?></a></th>
+                <th><a style="color:#0a263c;" href="<?php echo $_orderdatelink; ?>"><?= __('Order Date') ?></a></th>
+                <th><a style="color:#0a263c;" href="<?php echo $_itemnumlink; ?>"><?= __('Item Number') ?></a></th>
+                <th>
+                    <span class="nobr">
+                        <a style="color:#0a263c;" href="<?php echo $_itemdesclink; ?>"><?= __('Item Description') ?></a>
+                    </span>
+                </th>
+                <th>
+                    <span class="nobr">
+                        <a style="color:#0a263c;" href="<?php echo $_itembolink; ?>"><?= __('Quantity') ?></a>
+                    </span>
+                </th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $_odd = ''; ?>
+            <?php foreach ($_orders as $_order): ?>
+                <tr>
+                    <td><?php echo trim($_order->ORDER_NO); ?></td>
+                    <td><?php echo trim($_order->ORDER_PURCH_ORDER_NO); ?></td>
+                    <td>
+                        <span class="nobr"><?php echo $block->formatDate(substr($_order->ORDER_DATE, 0, 4) . '-' . substr($_order->ORDER_DATE, 4, 2) . '-' . substr($_order->ORDER_DATE, 6, 2), \IntlDateFormatter::MEDIUM) ?></span>
+                    </td>
+                    <td><?php echo trim($_order->LINE_ITM_ITEM_NO); ?></td>
+                    <td><?php echo trim($_order->LINE_ITM_DESC1) . ' ' . trim($_order->LINE_ITM_DESC2); ?></td>
+                    <td><em><?php echo intval($_order->LINE_ITM_QTY_BCK_ORD); ?></em></td>
+                    <td class="a-center">
+                        <span class="nobr">
+                            <a href="<?php echo $block->getUrl('zanders/orders/order', array('number' => trim($_order->ORDER_NO))); ?>">
+                                <?= __('View Order') ?>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?= $block->escapeHtml(__('You have no open orders. See invoices for past orders.')) ?></span>
+    </div>
+<?php endif ?>

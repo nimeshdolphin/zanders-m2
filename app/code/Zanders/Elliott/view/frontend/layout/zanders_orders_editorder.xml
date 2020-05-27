@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_Elliott
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Zanders\Elliott\Block\EditOrder" name="elliott.order.edit"
+                   template="Zanders_Elliott::edit_order.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,6 @@
+<?php
+/** @var \Zanders\Sports\Block\Message $block */
+?>
+<?php if ($block->showMessage() && $block->getMessage()): ?>
+    <div class="zanders-msg"><?= $block->getMessage() ?></div>
+<?php endif; ?>

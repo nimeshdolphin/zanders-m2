@@ -160,7 +160,7 @@
                 <label translate="true">Link</label>
             </settings>
         </column>
-        <column name="sort_order">
+        <column name="sort">
             <settings>
                 <filter>text</filter>
                 <editor>

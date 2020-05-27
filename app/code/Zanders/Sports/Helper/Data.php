@@ -9,9 +9,15 @@ namespace Zanders\Sports\Helper;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\UrlInterface;
+use Magento\Framework\Filesystem\DirectoryList;
 
 class Data extends AbstractHelper
 {
+    /*
+    * @var DirectoryList
+     */
+    protected $directoryList;
+
     /*
     * @var StoreManager
     */
@@ -32,18 +38,34 @@ class Data extends AbstractHelper
      */
     private $httpContext;
 
+    /*
+    * @var CustomerSession
+    */
+    protected $customerSession;
+
+    /*
+    * @var CustomerFactory
+    */
+    protected $customerFactory;
+
     public function __construct(
         Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         UrlInterface $urlManager,
         \Magento\Framework\App\Http\Context $httpContext,
-        \Magento\CatalogInventory\Api\StockStateInterface $stockState
+        \Magento\CatalogInventory\Api\StockStateInterface $stockState,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Customer\Model\CustomerFactory $customerFactory,
+        DirectoryList $directoryList
     )
     {
         $this->storeManager = $storeManager;
         $this->urlManager = $urlManager;
         $this->httpContext = $httpContext;
         $this->stockState = $stockState;
+        $this->customerSession = $customerSession;
+        $this->customerFactory = $customerFactory;
+        $this->directoryList = $directoryList;
         parent::__construct($context);
     }
 
@@ -58,17 +80,37 @@ class Data extends AbstractHelper
         return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
     }
 
+    public function getSecureUrl($url, $params = array())
+    {
+        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_LINK, true);
+    }
+
     public function getCustomerGroupId()
     {
         $customerGroupId = '';
         if($this->isLoggedIn()){
             $customerGroupId = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_GROUP);
+            $customerGroupId = 3;
         }
         return $customerGroupId;
+    }
+
+    public function getHidePrice()
+    {
+        return $this->httpContext->getValue(\Zanders\CustomerSession\Model\Customer\Context::CONTEXT_CUSTOMER_HIDEPRICE);
     }
 
     public function getStockQty($productId, $websiteId = null)
     {
         return $this->stockState->getStockQty($productId, $websiteId);
+    }
+
+    public function getCustomerId(){
+        return $this->httpContext->getValue(\Zanders\CustomerSession\Model\Customer\Context::CONTEXT_CUSTOMER_ID);
+    }
+
+    public function getRelativePath($path)
+    {
+        return $this->directoryList->getPath($path);
     }
 }

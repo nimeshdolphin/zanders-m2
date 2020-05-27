@@ -42,7 +42,7 @@
     <!--FFL Shipping Table-->
     <table name="ffl_shipto_info" resource="default" charset="utf8" engine="innodb">
         <column xsi:type="int" name="id" identity="true" unsigned="true" nullable="false"/>
-        <column xsi:type="int" name="order_no" unsigned="true" nullable="true" default="null"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="true" default="null"/>
         <column xsi:type="int" name="quote_id" unsigned="true" nullable="true" default="null"/>
         <column xsi:type="varchar" name="cust_number" length="25"/>
         <column xsi:type="varchar" name="ffl_number" length="25"/>

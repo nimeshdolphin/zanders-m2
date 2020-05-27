@@ -1,0 +1,156 @@
+{
+    "eliinvoice": {
+        "column": {
+            "id": true,
+            "order_no": true,
+            "web_order_id": true,
+            "data": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "eliinvoice_items": {
+        "column": {
+            "id": true,
+            "order_no": true,
+            "item_number": true,
+            "seq_no": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "eliorder": {
+        "column": {
+            "id": true,
+            "order_no": true,
+            "web_order_id": true,
+            "order_info": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "eliorder_items": {
+        "column": {
+            "id": true,
+            "order_no": true,
+            "item_number": true,
+            "seq_no": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ffl_shipto_info": {
+        "column": {
+            "id": true,
+            "order_no": true,
+            "quote_id": true,
+            "cust_number": true,
+            "ffl_number": true,
+            "customer_name": true,
+            "customer_phone": true,
+            "cfd": true,
+            "error": true,
+            "message": true
+        },
+        "index": {
+            "FFL_SHIPTO_INFO_CUST_NUMBER_FFL_NUMBER_CSTR_NAME_CSTR_PHONE_CFD": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "webservice_codes": {
+        "column": {
+            "id": true,
+            "email": true,
+            "passcode": true,
+            "customer_id": true,
+            "customer_number": true,
+            "econtact_id": true,
+            "use_freight_policy": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_available": {
+        "column": {
+            "sku": true,
+            "available": true,
+            "product_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_cacompliant": {
+        "column": {
+            "id": true,
+            "sku": true,
+            "entity_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_flatrate": {
+        "column": {
+            "id": true,
+            "name": true,
+            "accessory": true,
+            "firearm": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_hits": {
+        "column": {
+            "id": true,
+            "pageid": true,
+            "time": true,
+            "customer": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_restrictions": {
+        "column": {
+            "id": true,
+            "sku_customer_number": true,
+            "restricted_flag": true,
+            "restricted_attribute": true,
+            "time": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_videos": {
+        "column": {
+            "id": true,
+            "itemno": true,
+            "description": true,
+            "link": true,
+            "image": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "sales_order_payment": {
+        "column": {
+            "comments": true
+        }
+    },
+    "quote_payment": {
+        "column": {
+            "comments": true
+        }
+    }
+}

@@ -1,0 +1,200 @@
+<?php
+/** @var \Zanders\Elliott\Block\PrintOrder $block */
+?>
+<?php
+$_orderinfo = $block->getOrder();
+$_order = $_orderinfo->NewDataSet->OrderHeader;
+$_subtotal = floatval($_order->ORDER_TOTAL_SALE_AMT);
+$_freight = floatval($_order->ORD_FREIGHT_AMOUNT);
+$_misc = floatval($_order->ORDER_MISC_CHRG_AMT);
+$_tax = floatval($_order->ORD_SALES_TAX_AMT_1) + floatval($_order->ORD_SALES_TAX_AMT_2) + floatval($_order->ORD_SALES_TAX_AMT_3);
+$_grandtotal = $_subtotal + $_freight + $_misc + $_tax;
+$_trackingnumbers = $block->getTracking($_orderinfo->NewDataSet);
+?>
+<?php if (is_object($_order)) : ?>
+
+    <div class="page-title title-buttons">
+        <h1><?= __(sprintf('Order #%s', $_order->ORDER_NO)) ?></h1>
+    </div>
+
+    <div class="order-date">
+        <span class="label"><?= $block->escapeHtml(__('Order Date')) ?>:</span>
+        <date><?= $block->formatDate($_order->ORDER_DATE, \IntlDateFormatter::LONG) ?></date>
+    </div>
+
+    <div class="block block-order-details-view">
+        <div class="block-title">
+            <strong><?= $block->escapeHtml(__('Order Information')) ?></strong>
+        </div>
+        <div class="block-content">
+            <div class="box box-order-shipping-address">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Shipping Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <address>
+                        <?= __($_order->ORDER_SHIP_TO_NAME); ?><br/>
+                        <?= __($_order->ORDER_SHIP_TO_ADDR_1); ?><br/>
+                        <?php echo trim($_order->ORDER_SHIP_TO_ADDR_2) != '' ? __($_order->ORDER_SHIP_TO_ADDR_2) . '<br/>' : ''; ?>
+                        <?= sprintf('%s, %s %s', $_order->ORDER_SHIP_TO_CITY, $_order->ORDER_SHIP_TO_ST, $_order->ORDER_SHIP_TO_ZIPCD); ?>
+                    </address>
+                </div>
+            </div>
+            <div class="box box-order-shipping-method">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Shipping Method')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <p>
+                        <span class="nobr">
+                            <?php echo $block->getShippingMethod(strval($_order->ORDER_SHIP_VIA_CODE)); ?>
+                        </span>
+                    </p>
+                    <?php if (trim($_order->ORDER_SHIP_INSTRUC1) != '' || trim($_order->ORDER_SHIP_INSTRUC2) != ''): ?>
+                        <p>
+                            <strong>Instructions: </strong><span><?= __($_order->ORDER_SHIP_INSTRUC1 . ' ' . $_order->ORDER_SHIP_INSTRUC2); ?></span>
+                        </p>
+                    <?php endif; ?>
+                    <?php if (count($_trackingnumbers) > 0) : ?>
+                        <p>
+                            <strong>Tracking Numbers: </strong><br/>
+                            <?php foreach ($_trackingnumbers as $tnum) : ?>
+                                <span>
+                                    <?= __($tnum['shipVia']); ?>
+                                    <a target="_blank"
+                                       href="<?= __($tnum['url']); ?>"><?= __($tnum['trackingNumber']); ?></a>
+                                </span>
+                                <br/>
+                            <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <div class="block-content">
+            <div class="box box-order-billing-address">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Billing Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <address>
+                        <?= __($_order->ORDER_BILL_TO_NAME); ?><br/>
+                        <?= __($_order->ORDER_BILL_TO_ADDR_1); ?><br/>
+                        <?php echo trim($_order->ORDER_BILL_TO_ADDR_2) != '' ? __($_order->ORDER_BILL_TO_ADDR_2) . '<br/>' : ''; ?>
+                        <?= sprintf('%s, %s %s', $_order->ORDER_BILL_TO_CITY, $_order->ORDER_BILL_TO_ST, $_order->ORDER_BILL_TO_ZIPCD); ?>
+                    </address>
+                </div>
+            </div>
+
+            <div class="box box-order-billing-method">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Payment Method')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <p><?= __($block->getTerms(strval($_order->ORDER_TERMS_CODE))); ?></p>
+                    <p>
+                        <strong>Purchase Order Number: </strong>
+                        <span class="nobr"><?= __($_order->ORDER_PURCH_ORDER_NO); ?></span>
+                    </p>
+                    <p>
+                        <strong>Ship/Pick Up Date: </strong>
+                        <span class="nobr"><?= __($block->formatDate($_order->ORDER_SHIPPING_DATE . ' CST')); ?></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="items order-links">
+        <li class="nav item current">
+            <strong><?= $block->escapeHtml(__('Items Ordered')) ?></strong>
+        </li>
+    </ul>
+    <div class="order-details-items ordered">
+        <div class="table-wrapper order-items">
+            <table class="data table table-order-items" id="my-orders-table" summary="<?= __('Items Ordered') ?>">
+                <col/>
+                <col width="1"/>
+                <col width="1"/>
+                <col width="1"/>
+                <col width="1"/>
+                <thead>
+                <tr>
+                    <th class="col name"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                    <th class="col sku"><?= $block->escapeHtml(__('SKU')) ?></th>
+                    <th class="col price"><?= $block->escapeHtml(__('Price')) ?></th>
+                    <th class="col qty"><?= $block->escapeHtml(__('Qty')) ?></th>
+                    <th class="col subtotal"><?= $block->escapeHtml(__('Subtotal')) ?></th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr class="subtotal first">
+                    <th colspan="4" class="mark">Sales Amount</th>
+                    <td class="amount">
+                        <?php echo $block->formatPrice($_subtotal) ?>
+                    </td>
+                </tr>
+                <tr class="shipping">
+                    <th colspan="4" class="mark">Shipping</th>
+                    <td class="amount">
+                        <?php echo $block->formatPrice($_freight) ?>
+                    </td>
+                </tr>
+                <tr class="misc">
+                    <th colspan="4" class="mark">Misc. Charges</th>
+                    <td class="amount">
+                        <?php echo $block->formatPrice($_misc) ?>
+                    </td>
+                </tr>
+                <tr class="salestax">
+                    <th colspan="4" class="mark">Sales Tax</th>
+                    <td class="amount">
+                        <?php echo $block->formatPrice($_tax) ?>
+                    </td>
+                </tr>
+                <tr class="grandtotal last">
+                    <th colspan="4" class="mark"><strong>Grand Total</strong></th>
+                    <td class="amount">
+                        <strong><?php echo $block->formatPrice($_grandtotal) ?></strong>
+                    </td>
+                </tr>
+                </tfoot>
+                <?php $_items = $_orderinfo->NewDataSet->OrderLineItems; ?>
+                <?php $_index = 0; ?>
+                <?php $_count = count($_items); ?>
+                <?php foreach ($_items as $_item): ?>
+                    <tbody>
+                    <tr class="border" id="order-item-row-<?php echo $_item->LINE_ITM_SEQ_NO ?>">
+                        <td class="col name">
+                            <h3 class="product-name"><?php echo $block->escapeHtml(trim($_item->LINE_ITM_DESC1) . ' ' . trim($_item->LINE_ITM_DESC2)) ?></h3>
+                        </td>
+                        <td class="col sku"><?php echo $block->escapeHtml($block->splitInjection(trim($_item->LINE_ITM_ITEM_NO))) ?></td>
+                        <td class="col price"><?php echo $block->formatPrice($_item->LINE_ITM_UNIT_PRICE) ?></td>
+                        <td class="col qty">
+                            <span class="nobr">
+                                <?php if ($_item->LINE_ITM_QTY_ORDRD > 0): ?>
+                                    <?= __('Ordered'); ?>:
+                                    <strong><?php echo $_item->LINE_ITM_QTY_ORDRD * 1 ?></strong><br/>
+                                <?php endif; ?>
+                                <?php if ($_item->LINE_ITM_QTY_TO_SHIP > 0): ?>
+                                    <?= __('To Ship'); ?>:
+                                    <strong><?php echo $_item->LINE_ITM_QTY_TO_SHIP * 1 ?></strong><br/>
+                                <?php endif; ?>
+                                <?php if ($_item->LINE_ITM_QTY_BCK_ORD > 0): ?>
+                                    <?= __('Back Ordered'); ?>:
+                                    <strong><?php echo $_item->LINE_ITM_QTY_BCK_ORD * 1 ?></strong><br/>
+                                <?php endif; ?>
+                            </span>
+                        </td>
+                        <td class="col subtotal"><?php echo $block->formatPrice(floatval($_item->LINE_ITM_UNIT_PRICE) * floatval($_item->LINE_ITM_QTY_ORDRD)) ?></td>
+                    </tr>
+                    </tbody>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+<?php else : ?>
+    <div class="message info empty">
+        <span><?= $block->escapeHtml(__('This order cannot be viewed at this time. Please Check Invoices.')) ?></span>
+    </div>
+<?php endif; ?>

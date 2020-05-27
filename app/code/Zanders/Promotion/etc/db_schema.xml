@@ -39,7 +39,7 @@
         <column xsi:type="varchar" name="title" length="255" nullable="false"/>
         <column xsi:type="varchar" name="image" length="500" nullable="false"/>
         <column xsi:type="varchar" name="link" length="500" nullable="false"/>
-        <column xsi:type="int" name="sort_order" nullable="false" default="0"/>
+        <column xsi:type="int" name="sort" nullable="false" default="0"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>

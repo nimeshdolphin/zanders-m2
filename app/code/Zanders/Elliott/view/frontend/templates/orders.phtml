@@ -1,0 +1,81 @@
+<?php
+/** @var \Zanders\Elliott\Block\Orders $block */
+?>
+<?php
+$_orders = $block->getOrders();
+
+$_ordernolink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_NO', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_NO') ? 'DESC' : 'ASC'));
+$_orderdatelink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_DATE', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_DATE') ? 'DESC' : 'ASC'));
+$_shiptolink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_SHIP_TO_NAME', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_SHIP_TO_NAME') ? 'DESC' : 'ASC'));
+$_ordertotallink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_TOTAL_SALE_AMT', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_TOTAL_SALE_AMT') ? 'DESC' : 'ASC'));
+$_orderstatuslink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_SELECTION_CODE', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_SELECTION_CODE') ? 'DESC' : 'ASC'));
+$_orderpolink = $block->getUrl('*/*/*', array('sortby' => 'ORDER_PURCH_ORDER_NO', 'sortdir' => ($block->getOrderSortDir() == 'ASC' && $block->getOrderSortBy() == 'ORDER_PURCH_ORDER_NO') ? 'DESC' : 'ASC'));
+?>
+<?php if (count($_orders)): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <col width="1"/>
+            <col width="1"/>
+            <col width="1"/>
+            <col/>
+            <col width="1"/>
+            <col width="1"/>
+            <col width="1"/>
+            <thead>
+            <tr>
+                <th><a style="color:#0a263c;" href="<?php echo $_ordernolink; ?>"><?= __('Order #') ?></a></th>
+                <th><a style="color:#0a263c;" href="<?php echo $_orderpolink; ?>"><?= __('Purchase Order #') ?></a></th>
+                <th><a style="color:#0a263c;" href="<?php echo $_orderdatelink; ?>"><?= __('Date') ?></a></th>
+                <th><a style="color:#0a263c;" href="<?php echo $_shiptolink; ?>"><?= __('Ship To') ?></a></th>
+                <th>
+                    <span class="nobr">
+                        <a style="color:#0a263c;" href="<?php echo $_ordertotallink; ?>"><?= __('Order Total') ?></a>
+                    </span>
+                </th>
+                <th>
+                    <span class="nobr">
+                        <a style="color:#0a263c;" href="<?php echo $_orderstatuslink; ?>"><?= __('Order Status') ?></a>
+                    </span>
+                </th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $_odd = ''; ?>
+            <?php foreach ($_orders as $_order): ?>
+                <tr>
+                    <td><?php echo $_order->ORDER_NO ?></td>
+                    <td><?php echo $_order->ORDER_PURCH_ORDER_NO; ?></td>
+                    <td>
+                        <span class="nobr"><?php echo $block->formatDate($_order->ORDER_DATE . " 12:00:00", \IntlDateFormatter::MEDIUM) ?></span>
+                    </td>
+                    <td><?php echo $block->escapeHtml($_order->ORDER_SHIP_TO_NAME) ?></td>
+                    <td><?php
+                        $_subtotal = floatval($_order->ORDER_TOTAL_SALE_AMT);
+                        $_freight = floatval($_order->ORD_FREIGHT_AMOUNT);
+                        $_misc = floatval($_order->ORDER_MISC_CHRG_AMT);
+                        $_tax = floatval($_order->ORD_SALES_TAX_AMT_1) + floatval($_order->ORD_SALES_TAX_AMT_2) + floatval($_order->ORD_SALES_TAX_AMT_3);
+                        $_grandtotal = $_subtotal + $_freight + $_misc + $_tax;
+                        echo $block->formatPrice($_grandtotal) ?></td>
+                    <td><em><?php
+                            if (floatval($_order->ORDER_TOTAL_SALE_AMT) <= 0) {
+                                echo "Back Order";
+                            } else {
+                                echo $block->getStatus($_order->ORDER_SELECTION_CODE);
+                            }
+                            ?></em></td>
+                    <td class="a-center">
+                <span class="nobr"><a
+                            href="<?php echo $block->getUrl('zanders/orders/order') ?>number/<?php echo $_order->ORDER_NO; ?>"><?= __('View Order') ?></a>
+                </span>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?= $block->escapeHtml(__('You have no open orders. See invoices for past orders.')) ?></span>
+    </div>
+<?php endif ?>

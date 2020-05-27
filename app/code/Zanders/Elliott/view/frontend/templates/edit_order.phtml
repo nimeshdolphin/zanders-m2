@@ -1,0 +1,469 @@
+<?php
+/** @var \Zanders\Elliott\Block\EditOrder $block */
+?>
+<?php
+$_orderinfo = $block->getOrder();
+$_notallowed = array('C', 'A', 'F');
+$_order = $_orderinfo->NewDataSet->OrderHeader;
+$orderNo = (string)$_order->ORDER_NO;
+$_subtotal = floatval($_order->ORDER_TOTAL_SALE_AMT);
+$_freight = floatval($_order->ORD_FREIGHT_AMOUNT);
+$_misc = floatval($_order->ORDER_MISC_CHRG_AMT);
+$_tax = floatval($_order->ORD_SALES_TAX_AMT_1) + floatval($_order->ORD_SALES_TAX_AMT_2) + floatval($_order->ORD_SALES_TAX_AMT_3);
+$_grandtotal = $_subtotal + $_freight + $_misc + $_tax;
+$_trackingnumbers = $block->getTrackingFromNotes($_orderinfo->NewDataSet);
+$_customer = $block->getCustomer();
+?>
+    <style type="text/css">
+        body .page-main {
+            background: #999 !important;
+        }
+
+        .fieldset .field {
+            display: inline-block;
+            width: 350px;
+            margin: 0 0 10px 10px;
+        }
+
+        .fieldset .field.clear {
+            clear: both;
+        }
+    </style>
+<?php if (is_object($_order)) : ?>
+
+    <div class="order-date">
+        <span class="label"><?= $block->escapeHtml(__('Order Date')) ?>:</span>
+        <date><?= $block->formatDate($_order->ORDER_DATE, \IntlDateFormatter::LONG) ?></date>
+    </div>
+
+    <?php if ($_order->ORDER_FRGHT_PAY_CODE == 'H' && !in_array($_order->ORDER_RELEASE_FLAG, $_notallowed)) { ?>
+        <div class="actions-toolbar order-actions-toolbar">
+            <div class="actions">
+                <a href="<?php echo $block->getUrl('zanders/orders/releaseorder', ['number' => $orderNo]) ?>"
+                   class="action release">Release Order</a>
+            </div>
+        </div>
+    <?php } ?>
+
+    <form class="form edit-order"
+          action="<?php echo $block->getUrl('zanders/orders/updateorder') ?>"
+          id="order-edit-form"
+          method="post"
+          data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+          data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset">
+            <input type="hidden" name="order_no" value="<?php echo $orderNo ?>"/>
+            <input type="hidden" name="shipping[customer_number]" value="<?php echo $_customer->getNumber(); ?>"/>
+            <?php echo $block->getBlockHtml('formkey') ?>
+            <div class="field company required">
+                <label for="shipping:company"
+                       class="label required"><?= $block->escapeHtml(__('FFL Number (First 3 and Last 5, No Dashes)')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" id="shipping:company" name="shipping[company]" value=""
+                           title="<?= __('FFL Number'); ?>" class="input-text"/>
+                </div>
+                <script type="text/javascript">
+                    require([
+                        'jquery',
+                        'domReady!'// wait for dom ready
+                    ], function ($) {
+                        $('input[id="shipping:company"]').on('change', function (e) {
+                            let thisRef = $(this);
+                            if (thisRef.val().length >= 8) {
+                                $.ajax({
+                                    url: "<?php echo $block->getUrl('zanders/index/ffldropship') ?>fflnumber/" + thisRef.val()
+                                }).success(function (response) {
+                                    console.log(response);
+
+                                    $('#fflupload').show();
+                                    let iframeUrl = '<?php echo $block->getUrl('zanders/index/fflfile') ?>fflnumber/' + thisRef.val();
+                                    $('#fflfileupload').html('<iframe src="' + iframeUrl + '" width="100%" height="45" border="0" id="ffluploadframe"></iframe>');
+
+                                    let ffladd = response;
+
+                                    $('input[id="shipping:firstname"]').val('');
+                                    $('input[id="shipping:fflexp"]').val('');
+                                    $('input[id="shipping:street1"]').val('');
+                                    $('input[id="shipping:street2"]').val('');
+                                    $('input[id="shipping:city"]').val('');
+                                    $('input[id="shipping:postcode"]').val('');
+                                    $('select[name="region_id"]').val(0);
+                                    if (ffladd.SearchShipToResult.NoOfSearchResult > 0) {
+                                        $('input[id="shipping:firstname"]').val(ffladd.SearchShipToResult.ShipToRecord.shipToRecord.ShipToName);
+                                        $('input[id="shipping:fflexp"]').val(ffladd.SearchShipToResult.ShipToRecord.shipToRecord.ShipToFFLExpDate.substring(0, 10));
+                                        $('input[id="shipping:street1"]').val(ffladd.SearchShipToResult.ShipToRecord.shipToRecord.ShipToAddress1);
+                                        $('input[id="shipping:street2"]').val(ffladd.SearchShipToResult.ShipToRecord.shipToRecord.ShipToAddress2);
+                                        $('input[id="shipping:city"]').val(ffladd.SearchShipToResult.ShipToRecord.shipToRecord.ShipToCity);
+                                        $('input[id="shipping:postcode"]').val(ffladd.SearchShipToResult.ShipToRecord.shipToRecord.ShipToZipCode);
+                                        $('select[name="region_id"]').val(ffladd.SearchShipToResult.ShipToRecord.shipToRecord.ShipToStateCode);
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
+            </div>
+            <div class="field fflexp required">
+                <label for="shipping:fflexp"
+                       class="label required"><?= $block->escapeHtml(__('FFL Expiration Date (YYYY-MM-DD)')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" id="shipping:fflexp" name="shipping[fflexp]" value=""
+                           title="<?= $block->escapeHtml(__('FFL Expiration Date (YYYY-MM-DD)')) ?>"
+                           class="input-text required"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="field cfd">
+                <label for="shipping:cfd"
+                       class="label"><?= $block->escapeHtml(__('California Firearms Licensee Check Number')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" name="shipping[cfd]" value=""
+                           title="<?= $block->escapeHtml(__('California Firearms Licensee Check Number')) ?>"
+                           class="input-text" id="shipping:cfd"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="field customername required">
+                <label for="shipping:customername"
+                       class="label required"><?= $block->escapeHtml(__('Customer Name')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" name="shipping[customername]" value=""
+                           title="<?= $block->escapeHtml(__('Customer Name')) ?>" class="input-text"
+                           id="shipping:customername"/>
+                </div>
+            </div>
+            <div class="field customertelephone required">
+                <label for="shipping:customertelephone"
+                       class="label required"><?= $block->escapeHtml(__('Customer Telephone')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" name="shipping[customertelephone]" value=""
+                           title="<?= __('Customer Telephone') ?>" class="input-text"
+                           id="shipping:customertelephone"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="field firstname required">
+                <label for="shipping:firstname"
+                       class="label required"><?= $block->escapeHtml(__('Name')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" id="shipping:firstname" name="shipping[firstname]" value=""
+                           title="First Name" class="input-text required-entry">
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="field street1 required">
+                <label for="shipping:street1"
+                       class="label required"><?= $block->escapeHtml(__('Address')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" title="<?= __('Street Address') ?>"
+                           name="shipping[street][]" id="shipping:street1" value=""
+                           class="input-text required-entry"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="field street2">
+                <div class="control">
+                    <input type="text" title="<?= __('Street Address') ?>"
+                           name="shipping[street][]" id="shipping:street2" value=""
+                           class="input-text"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="field city required">
+                <label for="shipping:city"
+                       class="label required"><?= $block->escapeHtml(__('City')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" title="<?= __('City') ?>" name="shipping[city]"
+                           value=""
+                           class="input-text <?php echo $block->getAttributeValidationClass('city') ?>"
+                           id="shipping:city"/>
+                </div>
+            </div>
+            <div class="field region required">
+                <label for="region_id" class="label"><span><?php echo __('State/Province') ?></span></label>
+                <div class="control">
+                    <select id="region_id" name="region_id" title="<?php echo __('State/Province') ?>"
+                            class="validate-select" style="display:none;">
+                        <option value=""><?php echo __('Please select a region, state or province.') ?></option>
+                    </select>
+                    <input type="text" id="region" name="region" value=""
+                           class="input-text <?php echo $block->getAttributeValidationClass('region') ?>"
+                           style="display:none;">
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="field postcode required">
+                <label for="shipping:postcode"
+                       class="label required"><?= $block->escapeHtml(__('Zip/Postal Code')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" title="<?= __('Zip/Postal Code') ?>"
+                           name="shipping[postcode]" id="shipping:postcode" value=""
+                           class="input-text validate-zip-international <?php echo $block->getAttributeValidationClass('postcode') ?>"/>
+                </div>
+            </div>
+            <div class="field country_id required">
+                <label for="country_id"
+                       class="label required"><?= $block->escapeHtml(__('Country')) ?>
+                </label>
+                <div class="control">
+                    <?php echo $block->getCountryHtmlSelect() ?>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="field telephone required">
+                <label for="shipping:telephone"
+                       class="label required"><?= $block->escapeHtml(__('Telephone')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" name="shipping[telephone]" value=""
+                           title="<?= __('Telephone') ?>"
+                           class="input-text <?php echo $block->getAttributeValidationClass('telephone') ?>"
+                           id="shipping:telephone"/>
+                </div>
+            </div>
+            <div class="field fax">
+                <label for="shipping:fax"
+                       class="label"><?= $block->escapeHtml(__('Fax')) ?>
+                </label>
+                <div class="control">
+                    <input type="text" name="shipping[fax]" value=""
+                           title="<?= __('Fax') ?>"
+                           class="input-text <?php echo $block->getAttributeValidationClass('fax') ?>"
+                           id="shipping:fax"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field fflfile required" id="fflupload" style="display:none">
+                <label for="shipping:fflfile"
+                       class="label required"><?= $block->escapeHtml(__('FFL File (PDF or JPG)')) ?>
+                </label>
+                <div class="control" id="fflfileupload"></div>
+            </div>
+        </fieldset>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <input type="hidden" name="hideit" id="hideit" value=""/>
+                <button type="submit" title="<?= $block->escapeHtmlAttr(__('Update FFL Ship To')) ?>"
+                        class="action submit primary">
+                    <span><?= $block->escapeHtml(__('Update FFL Ship To')) ?></span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/x-magento-init">
+    {
+        "#country": {
+            "regionUpdater": {
+                "optionalRegionAllowed": "<?= /* @noEscape */
+        $block->getConfig('general/region/display_all') ? "true" : "false" ?>",
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip",
+                "form": "#form-validate",
+                "regionJson": <?= /* @noEscape */
+        $this->helper(\Magento\Directory\Helper\Data::class)->getRegionJson() ?>,
+                "defaultRegion": "0",
+                "countriesWithOptionalZip": <?= /* @noEscape */
+        $this->helper(\Magento\Directory\Helper\Data::class)->getCountriesWithOptionalZip(true) ?>
+            }
+        }
+    }
+    </script>
+
+    <div class="block block-order-details-view">
+        <div class="block-title">
+            <strong><?= $block->escapeHtml(__('Order Information')) ?></strong>
+        </div>
+        <div class="block-content">
+            <div class="box box-order-shipping-address">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Shipping Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <address>
+                        <?= __($_order->ORDER_SHIP_TO_NAME); ?><br/>
+                        <?= __($_order->ORDER_SHIP_TO_ADDR_1); ?><br/>
+                        <?php echo trim($_order->ORDER_SHIP_TO_ADDR_2) != '' ? __($_order->ORDER_SHIP_TO_ADDR_2) . '<br/>' : ''; ?>
+                        <?= sprintf('%s, %s %s', $_order->ORDER_SHIP_TO_CITY, $_order->ORDER_SHIP_TO_ST, $_order->ORDER_SHIP_TO_ZIPCD); ?>
+                    </address>
+                </div>
+            </div>
+            <div class="box box-order-shipping-method">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Shipping Method')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <p>
+                        <span class="nobr">
+                            <?php echo $block->getShippingMethod(strval($_order->ORDER_SHIP_VIA_CODE)); ?>
+                        </span>
+                    </p>
+                    <?php if (trim($_order->ORDER_SHIP_INSTRUC1) != '' || trim($_order->ORDER_SHIP_INSTRUC2) != ''): ?>
+                        <p>
+                            <strong>Instructions: </strong><span><?= __($_order->ORDER_SHIP_INSTRUC1 . ' ' . $_order->ORDER_SHIP_INSTRUC2); ?></span>
+                        </p>
+                    <?php endif; ?>
+                    <?php if (count($_trackingnumbers) > 0) : ?>
+                        <p>
+                            <strong>Tracking Numbers: </strong><br/>
+                            <?php foreach ($_trackingnumbers as $tnum) : ?>
+                                <span>
+                                    <?= __($tnum['shipVia']); ?>
+                                    <a target="_blank"
+                                       href="<?= __($tnum['url']); ?>"><?= __($tnum['trackingNumber']); ?></a>
+                                </span>
+                                <br/>
+                            <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <div class="block-content">
+            <div class="box box-order-billing-address">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Billing Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <address>
+                        <?= __($_order->ORDER_BILL_TO_NAME); ?><br/>
+                        <?= __($_order->ORDER_BILL_TO_ADDR_1); ?><br/>
+                        <?php echo trim($_order->ORDER_BILL_TO_ADDR_2) != '' ? __($_order->ORDER_BILL_TO_ADDR_2) . '<br/>' : ''; ?>
+                        <?= sprintf('%s, %s %s', $_order->ORDER_BILL_TO_CITY, $_order->ORDER_BILL_TO_ST, $_order->ORDER_BILL_TO_ZIPCD); ?>
+                    </address>
+                </div>
+            </div>
+
+            <div class="box box-order-billing-method">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Payment Method')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <p><?= __($block->getTerms(strval($_order->ORDER_TERMS_CODE))); ?></p>
+                    <p>
+                        <strong>Purchase Order Number: </strong>
+                        <span class="nobr"><?= __($_order->ORDER_PURCH_ORDER_NO); ?></span>
+                    </p>
+                    <p>
+                        <strong>Ship/Pick Up Date: </strong>
+                        <span class="nobr"><?= __($block->formatDate($_order->ORDER_SHIPPING_DATE . ' CST')); ?></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="items order-links">
+        <li class="nav item current">
+            <strong><?= $block->escapeHtml(__('Items Ordered')) ?></strong>
+        </li>
+    </ul>
+
+    <div class="order-details-items ordered">
+        <div class="order-title">
+            <strong><?= $block->escapeHtml(__('Items Ordered')) ?></strong>
+        </div>
+        <div class="table-wrapper order-items">
+            <table class="data table table-order-items" id="my-orders-table" summary="<?= __('Items Ordered') ?>">
+                <col/>
+                <col width="1"/>
+                <col width="1"/>
+                <col width="1"/>
+                <col width="1"/>
+                <thead>
+                <tr>
+                    <th class="col name"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                    <th class="col sku"><?= $block->escapeHtml(__('SKU')) ?></th>
+                    <th class="col price"><?= $block->escapeHtml(__('Price')) ?></th>
+                    <th class="col qty"><?= $block->escapeHtml(__('Qty')) ?></th>
+                    <th class="col subtotal"><?= $block->escapeHtml(__('Subtotal')) ?></th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr class="subtotal first">
+                    <th colspan="4" class="mark">Sales Amount</th>
+                    <td class="amount">
+                        <?php echo $block->formatPrice($_subtotal) ?>
+                    </td>
+                </tr>
+                <tr class="shipping">
+                    <th colspan="4" class="mark">Shipping</th>
+                    <td class="amount">
+                        <?php echo $block->formatPrice($_freight) ?>
+                    </td>
+                </tr>
+                <tr class="misc">
+                    <th colspan="4" class="mark">Misc. Charges</th>
+                    <td class="amount">
+                        <?php echo $block->formatPrice($_misc) ?>
+                    </td>
+                </tr>
+                <tr class="salestax">
+                    <th colspan="4" class="mark">Sales Tax</th>
+                    <td class="amount">
+                        <?php echo $block->formatPrice($_tax) ?>
+                    </td>
+                </tr>
+                <tr class="grandtotal last">
+                    <th colspan="4" class="mark"><strong>Grand Total</strong></th>
+                    <td class="amount">
+                        <strong><?php echo $block->formatPrice($_grandtotal) ?></strong>
+                    </td>
+                </tr>
+                </tfoot>
+                <?php $_items = $_orderinfo->NewDataSet->OrderLineItems; ?>
+                <?php $_index = 0; ?>
+                <?php $_count = count($_items); ?>
+                <?php foreach ($_items as $_item): ?>
+                    <tbody>
+                    <tr class="border" id="order-item-row-<?php echo $_item->LINE_ITM_SEQ_NO ?>">
+                        <td class="col name">
+                            <h3 class="product-name"><?php echo $block->escapeHtml(trim($_item->LINE_ITM_DESC1) . ' ' . trim($_item->LINE_ITM_DESC2)) ?></h3>
+                        </td>
+                        <td class="col sku"><?php echo $block->escapeHtml($block->splitInjection(trim($_item->LINE_ITM_ITEM_NO))) ?></td>
+                        <td class="col price"><?php echo $block->formatPrice($_item->LINE_ITM_UNIT_PRICE) ?></td>
+                        <td class="col qty">
+                            <span class="nobr">
+                                <?php if ($_item->LINE_ITM_QTY_ORDRD > 0): ?>
+                                    <?= __('Ordered'); ?>:
+                                    <strong><?php echo $_item->LINE_ITM_QTY_ORDRD * 1 ?></strong><br/>
+                                <?php endif; ?>
+                                <?php if ($_item->LINE_ITM_QTY_TO_SHIP > 0): ?>
+                                    <?= __('To Ship'); ?>:
+                                    <strong><?php echo $_item->LINE_ITM_QTY_TO_SHIP * 1 ?></strong><br/>
+                                <?php endif; ?>
+                                <?php if ($_item->LINE_ITM_QTY_BCK_ORD > 0): ?>
+                                    <?= __('Back Ordered'); ?>:
+                                    <strong><?php echo $_item->LINE_ITM_QTY_BCK_ORD * 1 ?></strong><br/>
+                                <?php endif; ?>
+                            </span>
+                        </td>
+                        <td class="col subtotal"><?php echo $block->formatPrice(floatval($_item->LINE_ITM_UNIT_PRICE) * floatval($_item->LINE_ITM_QTY_ORDRD)) ?></td>
+                    </tr>
+                    </tbody>
+                <?php endforeach; ?>
+            </table>
+        </div>
+
+        <div class="buttons-set">
+            <p class="back-link"><a href="<?php echo $block->getUrl('zanders/orders/') ?>">
+                    <small>&laquo;</small><?= __('Back To Order List') ?></a></p>
+        </div>
+    </div>
+
+<?php else : ?>
+    <div class="message info empty">
+        <span><?= $block->escapeHtml(__('This order cannot be viewed at this time. Please Check Invoices.')) ?></span>
+    </div>
+<?php endif; ?>

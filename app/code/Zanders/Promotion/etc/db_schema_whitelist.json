@@ -1,0 +1,47 @@
+{
+    "zanders_promotion": {
+        "column": {
+            "id": true,
+            "title": true,
+            "type": true,
+            "pdf": true
+        },
+        "index": {
+            "ZANDERS_PROMOTION_TITLE": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_bogo": {
+        "column": {
+            "id": true,
+            "buy_one_sku": true,
+            "buy_one_id": true,
+            "get_one_sku": true,
+            "get_one_id": true,
+            "details": true
+        },
+        "index": {
+            "ZANDERS_BOGO_BUY_ONE_SKU_GET_ONE_SKU": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_toppromo": {
+        "column": {
+            "id": true,
+            "title": true,
+            "image": true,
+            "link": true,
+            "sort_order": true
+        },
+        "index": {
+            "ZANDERS_TOPPROMO_TITLE": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

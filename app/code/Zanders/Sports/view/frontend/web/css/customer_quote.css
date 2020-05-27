@@ -1,0 +1,105 @@
+.page-title-wrapper {
+    display: none;
+}
+.search-menu-cart .vertnav-container {
+    display: none !important;
+}
+.search-menu-cart .vertnav-container:hover {
+    display: block !important;
+}
+.search-menu-cart .menu-header:hover + .vertnav-container {
+    display: block !important;
+}
+.page-layout-1column .column.main {
+    float: right;
+    width: 100% !important;
+}
+.quote .fieldset {
+    border: 0;
+    background: #fff;
+    padding: 22px 25px 25px 30px;
+    margin: 28px 0 0;
+}
+.quote legend.legend{
+	border: 0;
+	margin-bottom: 5px;
+}
+.quote .legend > span {
+    font-size: 24px;
+}
+.quote .label span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+}
+.quote label.label {
+    margin-bottom: 0 !important;
+}
+.quote input#street_2, .quote input#customerstreet_2 {
+    margin-top: 6px;
+}
+.quote input[type=text], .quote input[type=email], .quote input[type=password], .quote input[type=tel], .quote select {
+    font: normal 14px/24px Montserrat;
+    height: 26px;
+    color: #000;
+	border: 1px solid #ddd;
+	padding: 0 5px;
+}
+.quote .fieldset > .field{
+	float: left;
+	width: 260px;
+    margin-right: 15px;
+	clear: both;
+	margin-bottom: 10px;
+}
+.quote .field.name, .quote .field.email, .quote .field.street, .quote .field.customername, .quote .field.customerstreet {
+    width: 535px;
+}
+.quote .field.fax, .quote .field.region_id, .quote .field.customeremail, .quote .field.customerregion_id {
+    clear: right;
+}
+.quotetitle {
+    color: #000;
+    font-size: 18px;
+}
+.column .actions-toolbar {
+    border: 0;
+    margin-top: 0;
+    background: #fff;
+    padding: 0 25px 25px;
+}
+.column .actions-toolbar .primary {
+    float: right;
+    margin-right: 0;
+}
+.column .actions-toolbar .primary button {
+    margin-right: 0 !important;
+    background: #50a725;
+    border: 0;
+    border-radius: 0;
+    padding: 8px 30px;
+}
+.column .actions-toolbar .primary button:hover {
+    background: #50a725;
+    border: 0;
+}
+.column .actions-toolbar p.required {
+    color: #991020;
+    text-align: right;
+}
+.column .actions-toolbar p.back-link {
+    float: left;
+    margin: 0;
+    margin-top: 5px;
+}
+.column .actions-toolbar p.back-link a {
+    color: #000;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.quote .fieldset > .field.description, .quote .fieldset > .field.notes {
+    width: 535px;
+}
+.quote .fieldset > .field.customerprice, .quote .fieldset > .field.quoteexpires {
+    clear: right;
+}
