@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Zanders\Sports\Block\Customer\PaymentPortalLink" name="payment-portal-link">
+                <arguments>
+                    <argument name="path" xsi:type="string">https://www.paymyinvoices.us/zanders/</argument>
+                    <argument name="label" xsi:type="string" translate="true">Payment Portal</argument>
+                    <argument name="attributes" xsi:type="array">
+                        <item name="style" xsi:type="string">color:red;font-weight:bold</item>
+                        <item name="target" xsi:type="string">_blank</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
