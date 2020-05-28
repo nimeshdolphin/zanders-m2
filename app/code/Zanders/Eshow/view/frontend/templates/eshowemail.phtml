@@ -1,0 +1,203 @@
+<?php
+
+
+$_eshoworder = $this->getEshoworder();
+$_eshow = $this->getEshow();
+$_customer = $this->getCustomer();
+$_order = $this->getOrdernumber();
+
+?>
+<div class="eshow" style='color: #000; font: 12px/1.5em Arial, Helvetica, sans-serif;'>
+<table class="data-table" style='border-collapse: separate; border-spacing: 0; width:600px; border-width: 1px 0  0 1px; border-color: #999; border-style: solid;'>
+    <colgroup><col><col width="33%"><col width="33%">
+    <tbody>
+        <tr>
+            <th style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;color:#fff' style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;' colspan="3" class="title">Order Info</th>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Order Number</td>
+            <td colspan="2" class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $_order; ?></td>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Customer Number</td>
+            <td colspan="2" class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php  echo $_customer->getNumber(); ?></td>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Customer Name</td>
+            <td colspan="2" class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $_customer->getName(); ?></td>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Customer Email</td>
+            <td colspan="2" class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $_customer->getEmail(); ?></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="blank">&nbsp;</td>
+        </tr>
+        <tr>
+            <th style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;color:#fff' style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;' colspan="3" class="title">Promotion Info</th>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Promotion Number</td>
+            <td colspan="2" class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $_eshow->getId(); ?></td>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Promotion Title</td>
+            <td colspan="2" class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $_eshow->getTitle(); ?></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="blank">&nbsp;</td>
+        </tr>
+        <tr>
+            <th style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;color:#fff' style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;' colspan="3" class="title">Purchased Items</th>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Item Number</td>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Quantity</td>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">E-Show Price</td>
+        </tr>
+        <?php
+        $_purchasetotal = 0.00;
+        $_purchasecount = 0;
+        foreach ($_eshoworder['qty'] as $sku => $qty) {
+            if ($qty>0) {
+                //$item = Mage::getModel('sports/eshowitems')->getCollection()->addFilter('show_id',$_eshow->getId())->addFilter('sku',$sku)->getFirstItem();
+                $item = $block->getEshowSpecialPurchase($_eshow->getId(), $sku);
+                
+                $data = $item->getData()[0];
+                //echo "<pre>"; print_r($data); exit;
+                $price = 0.00;
+                if (is_null($data['custom_price'])) {
+                    $product = $this->getProductById($data['item_id']);
+                    $price = $product->getFinalPrice();
+                    if ($_eshow->getType()=='markdown') {
+                        $price = $price-$_eshow->getMarkdown();
+                    } elseif ($_eshow->getType()=='percent') {
+                        $price = $price-$price*1/$_eshow->getPercentOff();
+                    }
+                } else {
+                    $price = $data['custom_price'];
+                }
+                $_purchasetotal += $price*$qty;
+                $_purchasecount += $qty;
+                ?>
+        <tr>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?=  $sku; ?></td>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?= intval($qty); ?></td>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?= $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($price, true, false); ?></td>
+        </tr>
+                <?php
+            }
+        }
+        ?>
+        <tr>
+            <td colspan="3" class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">E-Show Totals</td>
+        </tr>
+        <tr>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;">&nbsp;</td>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $_purchasecount; ?></td>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?= $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_purchasetotal, true, false); ?></td>
+        </tr>
+        <?php
+        if ($_eshow->getType() == 'free') {
+            ?>
+        <tr>
+            <td colspan="3" class="blank">&nbsp;</td>
+        </tr>
+        <tr>
+            <th style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;color:#fff' style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;' colspan="3" class="title">Free Items</th>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Item Number</td>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Quantity</td>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Price</td>
+        </tr>
+            <?php
+            $_freebietotal = 0.00;
+            $_freebiecount = 0;
+            foreach ($_eshoworder['recqty'] as $sku => $qty) {
+                if ($qty>0) {
+                    //$item = Mage::getModel('sports/eshowfreebie')->getCollection()->addFilter('show_id',$_eshow->getId())->addFilter('sku',$sku)->getFirstItem();
+                    $item = $this->getEshowSpecialRecive($_eshow->getId(), $sku);
+                    $data = $item->getData()[0];
+                    $price = 0.00;
+                    if (!is_null($data['custom_price']) && $data['custom_price'] != 0.00) {
+                        $price = $data['custom_price'];
+                    }
+                    $_freebietotal += $price*$qty;
+                    $_freebiecount += $qty;
+                    ?>
+        <tr>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $sku; ?></td>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo intval($qty); ?></td>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($price, true, false); ?></td>
+        </tr>
+                    <?php
+                }
+            }
+            ?>
+        <tr>
+            <td colspan="3" class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Totals</td>
+        </tr>
+        <tr>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;">&nbsp;</td>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $_freebiecount; ?></td>
+            <td class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_freebietotal, true, false); ?></td>
+        </tr>
+            <?php
+        }
+        if ($_eshow->getType() == 'percent') {
+            $_original = $_purchasetotal/(1-($_eshow->getPercentOff()/100));
+            ?>
+        <tr>
+            <td colspan="3" class="blank">&nbsp;</td>
+        </tr>
+        <tr>
+            <th style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;color:#fff' style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;' colspan="3" class="title">Percent Off</th>
+        </tr>
+        <tr>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Percentage</td>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Value</td>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Original Total</td>
+        </tr>
+        <tr>
+            <td class="total"><?php echo $_eshow->getPercentOff(); ?>%</td>
+            <td class="total"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_original-$_purchasetotal, true, false); ?></td>
+            <td class="total"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_original-$_purchasetotal, true, false); ?></td>
+        </tr>
+            <?php
+        }
+        if ($_eshow->getType() == 'markdown') {
+            $_markdown = $_eshow->getMarkdown()*$_purchasecount;
+            ?>
+        <tr>
+            <td colspan="3" class="blank">&nbsp;</td>
+        </tr>
+        <tr>
+            <th style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;color:#fff' style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;' colspan="3" class="title">Markdown</th>
+        </tr>
+        <tr>
+            <td class="label style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;"">Markdown</td>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Total Markdown</td>
+            <td class="label" style="border-width: 0 1px 1px 0;border-color: #999;border-style: solid;display: table-cell;padding: 2px 4px 2px 4px;text-align: center;background: #DDD;font-weight: bold;">Original Total</td>
+        </tr>
+        <tr>
+            <td class="total">$<?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_eshow->getMarkdown(), true, false);?> per item</td>
+            <td class="total"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_markdown, true, false); ?></td>
+            <td class="total"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_purchasetotal+$_markdown, true, false);?></td>
+        </tr>
+            <?php
+        }
+        ?>
+        <tr>
+            <td colspan="3" class="blank">&nbsp;</td>
+        </tr>
+        <tr>
+            <th style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;color:#fff' style='border-width: 0 1px 1px 0; border-color: #999; border-style: solid; display: table-cell; background: #6f8992; padding: 2px 4px 2px 4px;' colspan="3" class="title">Order Comments</th>
+        </tr>
+        <tr>
+            <td colspan="3" class="data" style="border: 1px solid #999;border-width: 0 1px 1px 0;"><?php echo strip_tags($_eshoworder['comments']); ?>&nbsp;</td>
+        </tr>
+
+    </tbody>
+</colgroup>
+</table>        

@@ -1,0 +1,64 @@
+<?php
+/** @var Zanders\Eshow\Block\Adminhtml\Index\PurchasedItem $block */
+?>
+
+<div class="admin__data-grid-wrap">
+    <p><strong><?= $block->escapeHtml(__('Product List')) ?></strong> :</p>
+    <p><?= $block->escapeHtml(__('0\'s will reset item')) ?></p>
+    <table class="data-grid">
+        <colgroup>
+            <col width="20%">
+            <col width="40%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+        </colgroup>
+        <thead>
+        <tr>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Item Number')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Description')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Min. Qty.')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Max. Qty.')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Price')) ?></th>
+            <th class="data-grid-th"><?= $block->escapeHtml(__('Remove')) ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $purchasedItems = $block->getPurchasedItems(); ?>
+        <?php foreach ($purchasedItems as $key => $purchasedItem): ?>
+            <tr>
+                <td>
+                    <?= $purchasedItem['sku'] ?>
+                    <input type="hidden" name="pursku[<?= $purchasedItem['sku'] ?>]"
+                           value="<?= $purchasedItem['sku'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td>
+                    <input type="text" class="admin__control-text" name="purdesc[<?= $purchasedItem['sku'] ?>]"
+                           value="<?= $purchasedItem['desc'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td>
+                    <input type="text" class="admin__control-text" name="purminqty[<?= $purchasedItem['sku'] ?>]"
+                           value="<?= $purchasedItem['min_qty'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td>
+                    <input type="text" class="admin__control-text" name="purmaxqty[<?= $purchasedItem['sku'] ?>]"
+                           value="<?= $purchasedItem['max_qty'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td>
+                    <input type="text" class="admin__control-text" name="purprice[<?= $purchasedItem['sku'] ?>]"
+                           value="<?= $purchasedItem['price'] ?>" data-form-part="eshow_form"/>
+                </td>
+                <td class="data-grid-checkbox-cell">
+                    <label class="data-grid-checkbox-cell-inner">
+                        <input class="admin__control-checkbox" id="removepur<?= $purchasedItem['sku'] ?>" type="checkbox"
+                               name="purremove[<?= $purchasedItem['sku'] ?>]"
+                               value="1" data-form-part="eshow_form"/>
+                        <label for="removepur<?= $purchasedItem['sku'] ?>"></label>
+                    </label>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
