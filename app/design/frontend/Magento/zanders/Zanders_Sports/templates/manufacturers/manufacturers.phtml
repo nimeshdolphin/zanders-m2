@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('css/manufacturers.css')?>">
+<div class="std"><div class="page-title"><h2>Manufacturers</h2></div>
+<p>Click on the name of the manufacturer to see all products from that manufacturer.</p>
+<p>Click on the manufacturers url to go the manufacturers web site.</p><?php
+$object = $block->getCollection();
+foreach($object as $manufacturer){
+	echo "<span class=\"manufacturer\"><p><a href=\"";
+	echo $this->getUrl();
+	echo "catalogsearch/advanced/result/?manufacturer[]=";
+	echo $manufacturer->getId();
+	echo "\">";
+	echo $manufacturer->getName();
+	echo "</a><br />";
+	echo nl2br($manufacturer->getAddress(),true);
+	echo "<br />";
+	echo $manufacturer->getPhone();
+	echo "<br /><a target=\"_blank\" href=\"http://".$manufacturer->getWeb()."\">";
+	echo $manufacturer->getWeb();
+	echo "</a></p></span>";
+}
+?></div>

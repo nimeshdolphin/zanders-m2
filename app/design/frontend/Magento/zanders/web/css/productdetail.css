@@ -262,3 +262,12 @@ p.product-image.product-image-zoom {
     float: left;
     margin: 0 0 7px 7px;
 }
+.product.attribute.description {
+    background: #f4f4f4;
+    padding: 15px;
+    font-size: 14px;
+    color: #000000;
+    float: left;
+    width: calc(100% - 30px);
+    margin-bottom: 10px;
+}

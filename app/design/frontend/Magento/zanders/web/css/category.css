@@ -557,3 +557,42 @@ h3.listing-module-title:after {
 .catalogsearch-advanced-result.page-products .search-menu-cart .vertnav-container{
     display: block !important;
 }
+
+/* layer filter */
+.sidebar .filter-options-title {
+    background: url(../images/bkg_block-layered-dt.gif) 9px 11px no-repeat;
+    padding: 7px 10px 0 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 5px 0;
+}
+.sidebar .filter-options-title:after {
+    content: "\f107";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    right: 8px;
+    position: absolute;
+    font-size: 12px;
+    top: 7px;
+    color: #777;
+}
+.sidebar .filter-options-item {
+    padding-bottom: 0;
+    border: 0;
+}
+.sidebar .filter .block-subtitle {
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    padding-top: 5px;
+    border-color: #000;
+    font-size: 12px;
+}
+.sidebar .filter-options ol.items {
+    max-height: 110px;
+    overflow-y: auto;
+    overflow-x: initial;
+}
+.sidebar .filter-options-content {
+    padding-top: 0; 
+    background: url(../images/bkg_block-layered-dd.gif) 0 100% repeat-x;
+}

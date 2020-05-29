@@ -1,6 +1,4 @@
 /* Common */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 body {
     background: #efefef;
     font: 12px/1.55 Montserrat, Helvetica, sans-serif;
@@ -652,9 +650,6 @@ span.miniqty {
 .block.block-wishlist .product-item .price-box .price {
     font-size: 12px;
 }
-
-
-
 .sidebar .product-items .price-box {
     margin: 0;
 }

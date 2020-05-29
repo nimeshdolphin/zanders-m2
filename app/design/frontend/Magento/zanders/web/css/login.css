@@ -64,11 +64,11 @@ body .page-main{padding-bottom: 80px;padding-top: 25px;}
     width: 208px !important;
     background-color: #E41B37;
     box-shadow: 3px 6px 16px 1px rgba(0,0,0,0.58);
-    margin: 20px 174px 14px !important;
+    margin: 20px 203px 14px !important;
     border: 0;
     border-radius: 0;}
 .actions-toolbar .primary button span{font: 24px Montserrat, Helvetica, sans-serif;}
-.actions-toolbar .secondary a{    margin: 0px 197px 0px !important;}
+.actions-toolbar .secondary a{    margin: 0px 226px 0px !important;}
 .actions-toolbar .secondary a span{font-size: 14px;
     color: black;
     text-decoration: none;}
