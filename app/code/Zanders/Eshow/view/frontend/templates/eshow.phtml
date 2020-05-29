@@ -1,0 +1,475 @@
+<?php
+/**
+ * @category   Zanders
+ * @package    Zanders_Eshow
+ */
+
+/* @var $block Zanders\Eshow\Block\Eshow */
+?>
+<?php
+$eshow = $block->getEshow();
+$helper = $this->helper('Zanders\Sports\Helper\Data');
+$_savedEshow = $block->getSavedEshow();
+$_priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+
+?>
+
+<h2><?=__('Number') . ': ' . $eshow->getId(); ?></h2>
+
+<h2><?=$eshow->getTitle(); ?> from <?=date_format(date_create($eshow->getStartDate()), "M d, Y") ?>
+    to <?=date_format(date_create($eshow->getEndDate()), "M d, Y") ?>
+</h2>
+
+<div style="width: 100%;margin-bottom: 25px;">
+<a style="float:right;color:#fff" href="<?php echo $this->getUrl('zanders/index/eshow', ['id'=>$this->getNextEshow()]); ?>">Go to Next E-Show</a>
+<a style="color:#fff" href="<?php echo $this->getUrl('zanders/index/eshow', ['id'=>$this->getPrevEShow()]); ?>">Go to Previous E-Show</a>
+</div>
+
+<h5 style="margin-bottom:15px;"><?=nl2br($eshow->getDescription(), true); ?></h5>
+
+<?php if (file_exists($helper->getRelativePath('media') . "/eshows/" . $eshow->getId() . '.pdf')): ?>
+    <a target="_blank" href="<?=$helper->getRelativePath('media') . 'media/eshows/' . $eshow->getId() . '.pdf'; ?>"
+        title="<?=__($eshow->getPdfTitle()); ?>"  style="font-weight:bold;color:#740000;">
+    <?=$eshow->getPdfTitle(); ?></a>
+    <?php
+endif; ?>
+
+ <form action="" method="post" id="eshoworder">
+     <?= $block->getBlockHtml('formkey'); ?>
+<?php
+$maxmult = $eshow->getMultiples();
+if ($maxmult == 0) {
+    $maxmult = 10;
+}
+
+if ($eshow->getMultiples() != 0 || $eshow->getType() == 'free') {
+    ?>
+    <p>Please select the number of programs you would like to create:
+    <select id="multiples" name="multiples" class="select">
+    <?php
+    for ($i = 1; $i <= $maxmult; $i++) {
+        ?>
+        <option value="<?php echo $i; ?>"><?php echo $i; ?></option><?php
+    }
+    ?>
+    </select>
+    </p>
+
+    <?php
+}
+
+$_items = $eshow->getReceiveItems();
+$_recskus = [];
+?>
+
+<?php if ($_items->count() > 0): ?>
+    <p>Receive <strong id="maxrecqty"><?php echo __($eshow->getReceiveQty()); ?></strong> From the Following Items</p>
+    <table class="data-table" id='data-table-receive'>
+    <colgroup><col><col><col><col><col></colgroup>
+    <thead>
+        <tr>
+            <th class="sortcol sortfirstasc">Item Number</th>
+            <th class="sortcol">Description</th>
+            <th class="sortcol">Value</th>
+            <th class="sortcol">Cost</th>
+            <th class="nosort">Qty.</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    $_recskus = [];
+    $count = 0;
+    foreach ($_items as $item) {
+
+        $product = $block->getProductById($item->getItemId());
+        $price = 0.00;
+        if (is_null($item->getCustomPrice())) {
+            $price = number_format(0.00, 2, '.', '');
+        } else {
+            $price = number_format($item->getCustomPrice(), 2, '.', '');
+        }
+        $maxqty = $item->getMaxQty();
+        if (is_null($maxqty)) {
+            $maxqty = $eshow->getReceiveQty();
+        }
+
+        $_recskus[] = $item->getSku();
+        if ($_savedEshow) {
+            if (isset($_savedEshow['recqty'][$item->getSku()])) {
+                $savedShow = $_savedEshow['recqty'][$item->getSku()];
+            } else {
+                $savedShow = 0;
+            }
+               
+
+        } else {
+            $savedShow = 0;
+        }
+        $count++;
+        ?>
+        <tr class="<?php echo $count % 2 == 0 ? 'even' : 'odd'; ?>">
+            <td><a href="<?php echo $this->getUrl('zanders/index/eshowitem', ['item'=>$product->getId()]); ?>" class="eshowitem"><?php echo $item->getSku(); ?></a></td>
+            <td><?php echo is_null($item->getDesctiption()) ? $product->getName() : $item->getDescription(); ?></td>
+            <td><?php echo $_priceHelper->currency($product->getPrice(), true, false); ?></td>
+            <td><?php echo $_priceHelper->currency($price, true, false); ?><input type="hidden" id="recprice<?php echo $item->getSku(); ?>" value="<?php echo $price; ?>"></td>
+            <td><input type="text" name="recqty[<?php echo $item->getSku(); ?>]" id="recqty<?php echo $item->getSku(); ?>" maxlength="12" min="0" max="<?php echo $maxqty; ?>" 
+                value="<?php echo $savedShow ?>" title="Qty" class="input-text qty"
+            types='receive' sku='<?php echo $item->getSku(); ?>'></td>
+        </tr>
+
+        <?php
+    }
+    ?>
+</tbody>
+</table>
+<p>&nbsp;</p>
+
+    <?php
+endif; ?>
+
+<p>Select <strong id="maxpurqty"><?php if ($eshow->getMultiples() != 0 || $eshow->getType() == 'free') {
+    echo __($eshow->getPurchaseQty());
+                                 } ?></strong>
+Items from the List Below to create an Order.</p>
+
+<table class="data-table" id='data-table-purchase'>
+    <thead><tr>
+        <th class="sortcol sortfirstasc">Item Number</th>
+        <th class="sortcol">Description</th>
+        <th class="sortcol">Avail.</th>
+        <th class="sortcol">E-show Price</th>
+        <th class="sortcol">Reg Price</th>
+        <th class="nosort">Min. Qty</th>
+        <th class="nosort">Max Qty</th>
+        <th class="nosort">Qty:</th>
+    </tr></thead>
+<tbody>
+    <?php
+    $_items = $eshow->getPurchaseItems();
+    $_purskus = [];
+    foreach ($_items as $item) {
+        $product = $block->getProductById($item->getItemId());
+        $available = $product->getQty();
+        if ($eshow->getAllowBo() || $available>0) {
+            $price = 0.00;
+            if (!is_null($item->getCustomPrice())) {
+                $price = number_format($item->getCustomPrice(), 2, '.', '');
+            } elseif ($eshow->getType()=='markdown') {
+                $price = number_format($product->getPrice()-$eshow->getMarkdown(), 2, '.', '');
+            } elseif ($eshow->getType()=='percent') {
+                $price = number_format($product->getPrice()-$product->getPrice()*1/$eshow->getPercentOff(), 2, '.', '');
+            } else {
+                $price = number_format($product->getFinalPrice(), 2, '.', '');
+            }
+            $maxqty = $item->getMaxQty();
+            if (is_null($maxqty)) {
+                $maxqty = $eshow->getPurchaseQty();
+            }
+            $desc = $item->getDescription();
+            if (is_null($desc)) {
+                $desc = $product->getName();
+            }
+            $_purskus[] = $item->getSku();
+            ?>
+    <tr>
+        <td><a href="<?php echo $this->getUrl('zanders/index/eshowitem', ['item'=>$product->getId()]); ?>" class="eshowitem"><?php echo $item->getSku(); ?></a></td>
+        <td><?php echo $desc; ?></td>
+        <td><?php echo intval($available); ?><input type="hidden" id="qtyavail<?php echo $item->getSku(); ?>" value="<?php echo intval($available); ?>"></td>
+        <td style="color:#d83820;">
+            <?php echo $_priceHelper->currency($price, true, false); ?>
+            <input type="hidden" id="purprice<?php echo $item->getSku(); ?>" value="<?php echo ($eshow->getType()=='percent')?$product->getFinalPrice():$price; ?>"></td>
+        <td><?php echo $_priceHelper->currency($product->getPrice(), true, false); ?><input type="hidden" id="normalprice<?php echo $item->getSku(); ?>" value="<?php echo $product->getPrice(); ?>"></td>
+        <td><?php echo $item->getMinQty(); ?><input type="hidden" id="minqty<?php echo $item->getSku(); ?>" value="<?php echo is_null($item->getMinQty())?0:$item->getMinQty(); ?>"></td>
+        <td><?php echo $item->getMaxQty(); ?><input type="hidden" id="maxqty<?php echo $item->getSku(); ?>" value="<?php echo is_null($item->getMaxQty())?$maxqty:$item->getMaxQty(); ?>"></td>
+        <td><input type="text" name="qty[<?php echo $item->getSku(); ?>]" id="purqty<?php echo $item->getSku(); ?>" maxlength="12" min="0" max="<?php echo $maxqty; ?>" value="<?php echo ($_savedEshow)?$_savedEshow['qty'][$item->getSku()]:'0'; ?>" title="Qty" class="input-text qty"
+            types='purchase' sku='<?php echo $item->getSku(); ?>'></td>
+    </tr>
+            <?php
+        }
+    }
+    ?></tbody>
+<tfoot>
+<tr>
+    <th rowspan="3" style="text-align:right;">Order Comments:</th>
+    <th rowspan="3"><textarea name="comments" id="comments" style="width:300px;height:60px;"><?php
+    if ($_savedEshow) {
+        echo $_savedEshow["comments"];
+    }
+    ?></textarea></th>
+    <th colspan="4" style="text-align:right">Purchase Item Quantity</th>
+    <th colspan="2"><span id="purqty">0</span></th>
+</tr>
+<?php
+if ($eshow->getType()=='price') {
+    ?>
+<tr>
+    <th colspan="4" style="text-align:right">Savings</th>
+    <th colspan="2"><span id="savings" class="price">$0.00</span></th>
+</tr>
+<tr>
+    <th colspan="4" style="text-align:right">Grand Total</th>
+    <th colspan="2"><span id="grandtotal" class="price">$0.00</span></th>
+</tr>
+    <?php
+} else {
+    ?>
+<tr>
+    <th colspan="4" style="text-align:right">Purchase Total</th>
+    <th colspan="2"><span id="purtotal" class="price">$0.00</span></th>
+</tr>
+    <?php
+}
+if ($eshow->getType()=='free') {
+    ?>
+<tr>
+    <th colspan="4" style="text-align:right">Free Goods Quantity</th>
+    <th colspan="2"><span id="recqty">0</span></th>
+</tr>
+<tr>
+    <th colspan="6" style="text-align:right">Free Goods Total</th>
+    <th colspan="2"><span id="rectotal" class="price">$0.00</span></th>
+</tr>
+    <?php
+}
+if ($eshow->getType()=='percent') {
+    ?>
+<tr>
+    <th colspan="4" style="text-align:right">Percent Off</th>
+    <th colspan="2"><span id="percentoff"><?php echo $eshow->getPercentOff(); ?>%</span></th>
+</tr>
+<tr>
+    <th colspan="6" style="text-align:right">Savings</th>
+    <th colspan="2"><span id="savings" class="price">$0.00</span></th>
+</tr>
+<tr>
+    <th colspan="6" style="text-align:right">Grand Total</th>
+    <th colspan="2"><span id="grandtotal" class="price">$0.00</span></th>
+</tr>
+    <?php
+}
+if ($eshow->getType()=='markdown') {
+    ?>
+<tr>
+    <th colspan="4" style="text-align:right">Savings</th>
+    <th colspan="2"><span id="savings" class="price">$0.00</span></th>
+</tr>
+<tr>
+    <th colspan="6" style="text-align:right">Grand Total</th>
+    <th colspan="2"><span id="grandtotal" class="price">$0.00</span></th>
+</tr>
+    <?php
+}
+?>
+<tr>
+        <th colspan="8" style="text-align:right"><button type="button" title="<?php echo __('Save For Later') ?>" class="button btn-checkout" style="float: left;" onclick="saveForLater();"><span><span><?php echo __('Save For Later') ?></span></span></button><button type="button" id='btnSubmit' title="<?php echo __('Place Special Order') ?>" class="button btn-checkout" "><span><span><?php echo __('Place Special Order') ?></span></span></button></th>
+    </tr>
+<tr>
+    <th colspan="8">&nbsp;</th>
+</tr>
+<tr>
+    <th colspan="2" style="text-align:left"><a href="<?php echo $this->getUrl('zanders/index/eshow', ['id'=>$this->getPrevEShow()]); ?>">Go to Previous E-Show</a></th>
+    <th colspan="4">&nbsp;</th>
+    <th colspan="2" style="text-align:right"><a href="<?php echo $this->getUrl('zanders/index/eshow', ['id'=>$this->getNextEshow()]); ?>">Go to Next E-Show</a></th>
+</tr></tfoot>
+</table>
+</form>
+
+<script type="text/javascript">
+
+     require([
+        'jquery',
+        'Zanders_Eshow/js/jquery.dataTables.min'
+    ], function($, $t){
+        $(document).ready(function() {
+            $('#data-table-purchase').DataTable({sDom: 'lrtip',  "paging": false});
+            $('#data-table-receive').DataTable({sDom: 'lrtip',  "paging": false});            
+        } );
+    })
+
+
+    require(['jquery', 'jquery/ui'], function($){
+     //your js code here
+
+
+
+         var eshowType = '<?php echo $eshow->getType(); ?>';
+        var percentOff = <?php echo $eshow->getPercentOff(); ?>/100;
+        var markdown = <?php echo $eshow->getMarkdown(); ?>;
+        var maxPurQty = <?php echo __($eshow->getPurchaseQty()); ?>;
+        var purskus = new Array('<?php echo implode("','", $_purskus); ?>');
+        var maxRecQty = <?php echo __($eshow->getReceiveQty()); ?>;
+        var recskus = new Array('<?php echo implode("','", $_recskus); ?>');
+        var maxMult = <?php echo __($eshow->getMultiples()); ?>;
+        var allowBo = <?php echo __($eshow->getAllowBo()); ?>;
+
+
+        $(document).on('change',"[id='multiples']",function(){
+            maxPurQty = <?php echo __($eshow->getPurchaseQty()); ?> * parseInt($('#multiples').val());
+            $('#maxpurqty').html(maxPurQty);
+            if(eshowType=='free'){
+                maxRecQty = <?php echo __($eshow->getReceiveQty()); ?> * parseInt($('#multiples').val());
+                $('#maxrecqty').html(maxRecQty);
+            }
+
+        });
+
+        $( ".input-text.qty" ).keyup(function() {
+               ;
+                  var type =       $(this).attr('types');
+                  var sku =       $(this).attr('sku');
+                  var maxqty =  $(this).attr('max');
+
+                  if(type=='receive')
+                  {
+                    maxqty=maxqty*parseInt($('#multiples').val());
+
+                    if($('#recqty'+sku).val() > maxqty){
+                        $('#recqty'+sku).val(maxqty);
+                    }
+
+
+
+        var recQty = 0;
+
+        $.each(recskus, function( index, item ) {
+              if(parseInt($('#recqty'+item).val()) > 0){
+                recQty += parseInt($('recqty'+item).val());
+            }
+        });
+
+        if(recQty > maxRecQty){
+            var difference = parseInt(recQty - maxRecQty);
+            $('recqty'+sku).val() = $('recqty'+sku).val() - difference;
+        }
+    }else if(type=='purchase'){
+
+        if(maxMult!=0 || eshowType=='free'){
+            maxqty=maxqty*parseInt($('#multiples').val());
+            if($('#purqty'+sku).val() > maxqty){
+                $('#purqty'+sku).val(maxqty) ;
+            }
+        }
+        var purQty = 0;
+
+        $.each(purskus, function( index, item ) {
+              if(parseInt($('#purqty'+item).val()) > 0){
+                purQty += parseInt($('#purqty'+item).val());
+            }
+        });
+
+
+        if(eshowType!='free' && maxMult==0){
+            maxPurQty = purQty;
+        }
+        if(purQty > maxPurQty){
+            var difference = parseInt(purQty - maxPurQty);
+            $('#purqty'+sku).val(parseInt($('#purqty'+sku).val() - difference));
+        }
+    }
+    updateTotalValues();
+
+        });
+
+
+        function updateTotalValues()
+        {
+            var purQty = 0;
+            var purTotal = 0.00;
+            var purSavings = 0.00;
+
+            $.each(purskus, function( index, item ) {
+                  if(parseInt($('#purqty'+item).val()) > 0){
+                    if(allowBo == 0 && parseInt($('#purqty'+item).val())>parseInt($('#qtyavail'+item).val())){
+                        $('#purqty'+item).val(parseInt($('#qtyavail'+item).value));
+                    }
+                    purQty += parseInt($('#purqty'+item).val());                    
+                    purTotal += parseFloat($('#purprice'+item).val())*parseInt($('#purqty'+item).val());
+                    purSavings += parseFloat($('#normalprice'+item).val()-$('#purprice'+item).val())*parseInt($('#purqty'+item).val())
+                }
+            });
+
+            $('#purqty').html(purQty);
+            if(eshowType=='free'){
+                $('#purtotal').html('$'+purTotal.toFixed(2));
+                var recTotal = 0.00;
+                var recQty = 0;
+                $.each(purskus, function( index, item ) {
+                    if(parseInt($('#recqty'+item).val()) > 0){
+                        recQty += parseInt($('#recqty'+item).val());
+                        recTotal += parseFloat($('#recprice'+item).val())*parseInt($('#recqty'+item).val());
+                    }
+                });
+                $('#rectotal').html('$'+recTotal.toFixed(2));
+                $('#recqty').html(recQty);
+            }else if(eshowType=='percent'){
+                $('#purtotal').html('$'+purTotal.toFixed(2));
+                var savings = purTotal * percentOff;
+                var grand = purTotal-savings;
+                $('#savings').html('$'+savings.toFixed(2));
+                $('#grandtotal').html('$'+grand.toFixed(2));
+            }else if(eshowType=='markdown'){
+                $('#purtotal').html('$'+purTotal.toFixed(2));
+                var savings = purQty * markdown;
+                var grand = purTotal-savings;
+                $('#savings').html('$'+savings.toFixed(2));
+                $('#grandtotal').html('$'+grand.toFixed(2));
+            }else if(eshowType=='price'){
+                $('#savings').html('$'+purSavings.toFixed(2));
+                $('#grandtotal').html('$'+purTotal.toFixed(2));
+            }
+        }
+
+
+    jQuery("#btnSubmit").button().click(function(){
+        var recQty = 0;
+        if(eshowType=='free'){
+            $.each(recskus, function( index, item ){
+                if(parseInt($('#recqty'+item).val()) > 0){
+                    recQty += parseInt($('#recqty'+item).val());
+                }
+            });
+        }
+
+        var purQty = 0;
+        $.each(purskus, function( index, item ){
+            if(parseInt($('#purqty'+item).val()) > 0){
+                purQty += parseInt($('#purqty'+item).val());
+            }
+        });
+
+        //alert(recQty + ' ' + maxRecQty);
+        //alert(purQty + ' ' + maxPurQty);
+        
+        if(recQty==maxRecQty && purQty==maxPurQty){            
+            var action = '<?= $this->getUrl('zanders/index/createorder', ['eshow'=>$eshow->getId()]); ?>';
+             document.getElementById('eshoworder').action = action;
+             document.getElementById("eshoworder").submit(); 
+        }else{
+            if(recQty>maxRecQty){
+                alert('You have too many Free Items Please Change the Quantity and try again.');
+            }else if(recQty<maxRecQty){
+                alert('You do NOT have enough Free Items Please Change the Quantity and try again.');
+            }
+            if(purQty>maxPurQty){
+                alert('You have too many Purchase Items Please Change the Quantity and try again.');
+            }else if(purQty<maxPurQty){
+                alert('You do NOT have enough Purchase Items Please Change the Quantity and try again.');
+            }
+            return false;
+        }
+    });
+
+
+     });
+
+
+     function saveForLater(){
+             var action = '<?= $this->getUrl('zanders/index/saveeshow', ['eshow'=>$eshow->getId()]); ?>';
+             document.getElementById('eshoworder').action = action;
+              document.getElementById("eshoworder").submit(); 
+    }
+
+
+
+
+</script>

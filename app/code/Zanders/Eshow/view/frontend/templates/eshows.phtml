@@ -1,0 +1,20 @@
+<?php
+/**
+ * @category   Zanders
+ * @package    Zanders_Eshow
+ */
+
+/* @var $block Zanders\Eshow\Block\Eshows */
+?>
+<?php $eshowPromotions = $block->getEshowPromotions(); ?>
+<?php if ($eshowPromotions->count() > 0): ?>
+    <h3><?= __("Click on a promotion below to find savings on selected products!") ?></h3>
+    <ul>
+        <?php foreach ($eshowPromotions as $eshowPromotion): ?>
+            <li><a href="<?= $block->getUrl('zanders/index/eshow', ['id' => $eshowPromotion->getId()]) ?>">
+                    <?= __($eshowPromotion->getTitle()); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

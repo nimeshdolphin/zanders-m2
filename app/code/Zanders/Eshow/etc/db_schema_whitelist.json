@@ -1,0 +1,92 @@
+{
+    "zanders_show_specials": {
+        "column": {
+            "id": true,
+            "title": true,
+            "description": true,
+            "type": true,
+            "percent_off": true,
+            "markdown": true,
+            "start_date": true,
+            "end_date": true,
+            "allow_bo": true,
+            "purchase_qty": true,
+            "receive_qty": true,
+            "multiples": true,
+            "stocking_dealer": true,
+            "has_pdf": true,
+            "pdf_title": true,
+            "special_attention": true
+        },
+        "index": {
+            "ZANDERS_SHOW_SPECIALS_TITLE": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_show_specials_manufacturers": {
+        "column": {
+            "id": true,
+            "show_id": true,
+            "manufacturer_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_show_orders": {
+        "column": {
+            "id": true,
+            "show_id": true,
+            "customer_number": true,
+            "customer_name": true,
+            "date": true,
+            "save": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_show_save": {
+        "column": {
+            "id": true,
+            "show_id": true,
+            "customer_id": true,
+            "selections": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_show_specials_purchase": {
+        "column": {
+            "id": true,
+            "show_id": true,
+            "item_id": true,
+            "sku": true,
+            "description": true,
+            "min_qty": true,
+            "max_qty": true,
+            "custom_price": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "zanders_show_specials_receive": {
+        "column": {
+            "id": true,
+            "show_id": true,
+            "item_id": true,
+            "sku": true,
+            "description": true,
+            "min_qty": true,
+            "max_qty": true,
+            "custom_price": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
