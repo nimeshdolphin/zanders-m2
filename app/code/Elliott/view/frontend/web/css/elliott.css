@@ -1,0 +1,52 @@
+.zanders-orders-order .page-title-wrapper,.zanders-orders-editorder .page-title-wrapper{float: left;}
+.page-title h1{margin: 0;color: #fff;font-size: 48px;font-weight: 400;}
+.title-buttons h1{float: left;}
+.title-buttons {float: right;}
+.link-print {font-weight: bold;color: #dc6809;}
+.order-date{color: #fff;margin: 10px 0;float: left;text-align: left;width: 100%;}
+.title-buttons a.button{display: inline-flex;height: auto;border: 0;background: #50a725;padding: 0 8px;font: 400 14px/26px Montserrat, sans-serif;text-align: center;white-space: nowrap;color: #fff;margin-right: 5px !important;}
+.block-order-details-view{float: left;width: 100%;margin-bottom: 0 !important;}
+.block-order-details-view .block-title{display: none;}
+.block-order-details-view .block-content{background: #fff;border: 1px solid #d0cbc1;padding: 12px 15px;margin: 0 0 15px;}
+.block-order-details-view .block-content .box{width: 50% !important;}
+.block-order-details-view .block-content .box .box-title{margin: 0 0 5px !important;}
+.block-order-details-view .block-content .box .box-title span{font-weight: bold;font-size: 13px !important;}
+.block-order-details-view .block-content .box .box-content p {margin: 0 0 3px;}
+.zanders-orders-order table.data.table,.zanders-orders-editorder table.data.table{border-bottom: 1px solid #000 !important;}
+table.data.table{width: 100%;border-left: 0;border-right: 0;}
+.data.table thead th {background: url(../images/bkg_th.gif) repeat-x 0 100% #d9e5ee;}
+.data.table thead th {font-weight: bold;border-right: 1px solid #c2d3e0 !important;padding: 2px 8px;color: #0a263c;white-space: nowrap;vertical-align: middle;}
+.data.table tbody td {border-right: 1px solid #d9dde3 !important;}
+.data.table td,table>tfoot>tr>th{padding: 3px 8px !important;}
+.data.table tfoot td {    padding-bottom: 1px;border-bottom: 0;     border-right: 1px solid #000;}
+ table>tfoot>tr>th{border-right: 1px solid #000 !important;}
+.data.table tbody tr.odd { background:#f8f7f5 !important; }
+.data.table tbody tr.even { background:#eeeded !important; }
+.table-order-items tfoot {background: #fff;}
+.data.table tfoot tr.first td,.data.table tfoot tr.first th { background:url(../images/bkg_tfoot.gif) 0 0 repeat-x; }
+.table-order-items .product-name {font-size: 1em !important;font-weight: bold !important;padding: 0;margin: 0 0 5px;color: #0a263c;clear: none;}
+.data.table tfoot tr.grandtotal th strong,.data.table tfoot tr.grandtotal td strong span{font-size: 16px;}
+.order-details-items tfoot td{background: transparent;}
+.nobr {white-space: nowrap !important;}
+.data.table tbody tr td a{color: #203254}
+.order-details-items .col.name{padding-top: 0 !important}
+.order-details-items{border: 0;margin-top: 0;background: #fff;padding: 0 !important;}
+ul.items.order-links{margin-bottom: 5px;}
+ul.items.order-links li{line-height: 2;color: #fff;}
+ul.items.order-links li strong{padding: 0;background: transparent;border: 0;font-weight: bold;font-size: 13px;}
+.buttons-set {border: 0;margin-top: 0;background: #fff;padding: 0 25px 25px;}
+.buttons-set .back-link a {font-size: 14px;text-transform: uppercase;color: #000;text-decoration: none;}
+.order-details-items .table-wrapper,.order-details-items{margin-bottom: 0 !important}
+.account .column.main form.form {margin: 0 0 10px;float: left;width: 100%;}
+.fieldset{background: #fff;padding: 20px 20px 0;margin-bottom: 0;}
+.fieldset .field {display: inline-grid;width: 350px;margin: 0 0 10px 10px;}
+.fieldset .field.clear {clear: both;}
+.fieldset .field label {color: #000;font-weight: 400 !important;font-size: 14px;margin: 0 !important;}
+.account .column.main form.form .actions-toolbar {border: 0;margin-top: 0;background: #fff;padding: 0 25px 25px;}
+.account .column.main form.form .actions-toolbar .primary {float: right;}
+.account .column.main form.form .actions-toolbar > .secondary .action.back{display: block;text-transform: uppercase;color: #000;text-decoration: none;}
+.account .column.main form.form .actions-toolbar > .secondary .action.back span{font-size: 14px;}
+.account .column.main form.form .primary button.action {margin-right: 0px;background: #50a725;box-shadow: none;color: #fff;border: 0;border-radius: 0;padding: 0 30px;height: 30px;font: 400 14px/28px Montserrat, sans-serif;}
+p.required {color: #991020;font-size: 11px;text-align: right;}
+a.link-print:visited{color: #dc6809;}
+.account.zanders-orders-editorder .edit-order .field.street1,.account.zanders-orders-editorder .edit-order .field.street2,.account.zanders-orders-editorder .edit-order .field.fflfile{width: 74%;}

@@ -35,7 +35,7 @@
         <div class="field comment required">
             <label class="label" for="comment"><span><?= $block->escapeHtml(__('Comment')) ?></span></label>
             <div class="control">
-                <textarea name="comment" id="comment" title="<?= $block->escapeHtmlAttr(__('Comment')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"><?= $block->escapeHtml($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('comment')) ?></textarea>
+                <textarea name="comment" id="comment" title="<?= $block->escapeHtmlAttr(__('Comment')) ?>" class="input-text" cols="5" rows="6" data-validate="{required:true}"><?= $block->escapeHtml($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('comment')) ?></textarea>
             </div>
         </div>
         <?= $block->getChildHtml('form.additional.info') ?>

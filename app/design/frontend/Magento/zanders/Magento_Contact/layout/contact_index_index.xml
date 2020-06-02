@@ -12,10 +12,5 @@
     </head>
     <body>
         <move element="page.main.title" destination="main" before="-"/>
-        <referenceContainer name="content">
-            <block class="Magento\Contact\Block\ContactForm" name="contactForm" template="Magento_Contact::form.phtml">
-                <container name="form.additional.info" label="Form Additional Info"/>
-            </block>
-        </referenceContainer>
     </body>
 </page>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Zanders
+ * @package    Zanders_Sports
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <css src="Zanders_Sports::css/sports.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Zanders\Sports\Block\ResaleCertificate" name="resale.certificate"
+                   template="Zanders_Sports::resale/certificate.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>
