@@ -23,7 +23,7 @@ class Save extends \Zanders\Manufacturer\Controller\Adminhtml\Items
                         $uploaderFactory->setAllowRenameFiles(true);
                         $uploaderFactory->setFilesDispersion(true);
                         $mediaDirectory = $this->filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
-                        $destinationPath = $mediaDirectory->getAbsolutePath('zanders/manufacturer');
+                        $destinationPath = $mediaDirectory->getAbsolutePath('manufacturer');
                         $result = $uploaderFactory->save($destinationPath);
                         if (!$result) {
                             throw new LocalizedException(
@@ -31,8 +31,11 @@ class Save extends \Zanders\Manufacturer\Controller\Adminhtml\Items
                             );
                         }
 
-                        $imagePath = 'zanders/manufacturer' . $result['file'];
-                        $data['image'] = $imagePath;
+                    
+
+                        $imagePath = 'manufacturer' . $result['file'];
+                        $data['image'] = $imagePath;                        
+                        //$data['image_path'] = substr(strtolower($_FILES['image']['name']),-3);
                     } catch (\Exception $e) {
                     }
                 }
@@ -62,8 +65,30 @@ class Save extends \Zanders\Manufacturer\Controller\Adminhtml\Items
                     }
                 }
                 $model->setData($data);
+                $imageType = substr(strtolower($result['file']),-3);
+                $imageTmpPath = $result['path'].$result['file'];
+                if(getimagesize($imageTmpPath) != 0 )
+                {
+                    $model->setImageType($imageType);
+                    $model->save();
+                    rename($imageTmpPath, $mediaDirectory."manufacturers/".$model->getId().".".$model->getImageType());                            
+                }
+
+
                 $session = $this->_objectManager->get('Magento\Backend\Model\Session');
                 $session->setPageData($model->getData());
+                
+                if(file_exists($_FILES['image']['tmp_name']))
+                {
+                    if(getimagesize($_FILES['image']['tmp_name'])!=0){
+                        $model->setImage(substr(strtolower($_FILES['image']['name']),-3));
+                        move_uploaded_file($_FILES['image']['tmp_name'], Mage::getBaseDir()."/media/manufacturers/".$model->getId().".".$$model->getImageType());
+                    }else{
+                        // 
+                    }
+                }
+
+                
                 $model->save();
                 $this->messageManager->addSuccess(__('You saved the item.'));
                 $session->setPageData(false);

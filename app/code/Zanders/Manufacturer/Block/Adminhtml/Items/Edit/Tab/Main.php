@@ -124,9 +124,9 @@ class Main extends Generic implements TabInterface
             ]
         );
         $fieldset->addField(
-            'status',
+            'enable',
             'select',
-            ['name' => 'status', 'label' => __('Status'), 'title' => __('Status'), 'options' => [0 => 'Disable', 1 => 'Enable'], 'required' => true]
+            ['name' => 'enable', 'label' => __('Status'), 'title' => __('Status'), 'options' => [0 => 'Disable', 1 => 'Enable'], 'required' => true]
         );
 
         $form->setValues($model->getData());

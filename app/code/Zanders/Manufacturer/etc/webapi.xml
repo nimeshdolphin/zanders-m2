@@ -2,35 +2,35 @@
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
     <route method="POST" url="/V1/manufacturer/create">
-        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="save"/>
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="saveManufacture"/>
         <resources>
             <resource ref="Zanders_Manufacturer::manufacturer"/>
         </resources>
     </route>
     <route method="POST" url="/V1/manufacturer/update">
-        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="update"/>
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="updateManufacture"/>
         <resources>
             <resource ref="Zanders_Manufacturer::manufacturer"/>
         </resources>
     </route>
     <route url="/V1/manufacturer/:manufacturerId" method="GET">
-        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="getById"/>
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="getManufactureById"/>
         <resources>
             <resource ref="Zanders_Manufacturer::manufacturer"/>
         </resources>
     </route>
     <route url="/V1/manufacturer" method="GET">
-        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="getList"/>
+        <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="getManufacturerList"/>
         <resources>
             <resource ref="Zanders_manufacturer/searchManufacturer::manufacturer"/>
         </resources>
     </route>
-    <route url="/V1/manufacturer/:manufacturerId" method="PUT">
+    <!-- <route url="/V1/manufacturer/:manufacturerId" method="PUT">
         <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="save"/>
         <resources>
             <resource ref="Zanders_Manufacturer::manufacturer"/>
         </resources>
-    </route>
+    </route> -->
     <route url="/V1/manufacturer/:manufacturerId" method="DELETE">
         <service class="Zanders\Manufacturer\Api\ManufacturerRepositoryInterface" method="deleteById"/>
         <resources>

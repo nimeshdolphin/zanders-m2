@@ -12,22 +12,6 @@ namespace Zanders\Manufacturer\Api;
  */
 interface ManufacturerRepositoryInterface {
 
-	/**
-	 * Save Manufacturer.
-	 * @param  string $id
-	 * @param  string $name
-	 * @param  string $address
-	 * @param  string $serialized_display_on
-	 * @param  string $serialized_text
-	 * @param  string $phone
-	 * @param  string $web
-	 * @param  string $enable
-	 * @param  string $image
-	 * @param  string $imagetype
-	 * @return \Zanders\Manufacturer\Api\Data\ManufacturerInterface
-	 * @throws \Magento\Framework\Exception\LocalizedException
-	 */
-	public function update($id, $name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $imagetype);
 
 	/**
 	 * Save Manufacturer.
@@ -43,13 +27,13 @@ interface ManufacturerRepositoryInterface {
 	 * @return \Zanders\Manufacturer\Api\Data\ManufacturerInterface
 	 * @throws \Magento\Framework\Exception\LocalizedException
 	 */
-	public function save($name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $imagetype);
+	public function save($name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $image_type);
 
 	/**
 	 * Retrieve Manufacturer.
 	 *
 	 * @param int $manufacturerId
-	 * @return \Zanders\Manufacturer\Api\Data\ManufacturerInterface
+	 * @return string
 	 * @throws \Magento\Framework\Exception\LocalizedException
 	 */
 	public function getById($manufacturerId);
@@ -80,4 +64,58 @@ interface ManufacturerRepositoryInterface {
 	 * @throws \Magento\Framework\Exception\LocalizedException
 	 */
 	public function deleteById($manufacturerId);
+
+
+	/**
+	 * Retrieve Manufacturer matching the specified criteria.
+	 *
+	 * @return string
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 */
+	public function getManufacturerList();
+
+
+	/**
+	 * Retrieve Manufacturer.
+	 *
+	 * @param int $manufacturerId
+	 * @return string
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 */
+	public function getManufactureById($manufacturerId);
+
+
+	/**
+	 * Save Manufacturer.
+	 * @param  string $id
+	 * @param  string $name
+	 * @param  string $address
+	 * @param  string $serialized_display_on
+	 * @param  string $serialized_text
+	 * @param  string $phone
+	 * @param  string $web
+	 * @param  string $enable
+	 * @param  string $image
+	 * @param  string $imagetype
+	 * @return \Zanders\Manufacturer\Api\Data\ManufacturerInterface
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 */
+	public function updateManufacture($id, $name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $image_type);
+
+	/**
+	 * Save Manufacturer.
+	 * @param  string $name
+	 * @param  string $address
+	 * @param  string $serialized_display_on
+	 * @param  string $serialized_text
+	 * @param  string $phone
+	 * @param  string $web
+	 * @param  string $enable
+	 * @param  string $image
+	 * @param  string $imagetype
+	 * @return \Zanders\Manufacturer\Api\Data\ManufacturerInterface
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 */
+	public function saveManufacture($name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $image_type);
+
 }

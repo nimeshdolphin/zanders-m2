@@ -12,7 +12,7 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
 {
-    const NAME = 'image';
+    const NAME = 'image_type';
     const ALT_FIELD = 'name';
     protected $storeManager;
 
@@ -51,9 +51,9 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
             );
             foreach ($dataSource['data']['items'] as & $item) {
                 if ($item['image_type']) {
-                    $item[$fieldName . '_src'] = $path . $item['image'];
-                    $item[$fieldName . '_alt'] = $item['name'];
-                    $item[$fieldName . '_orig_src'] = $path . $item['image'];
+                    $item[$fieldName . '_src'] = $item['image_type'];
+                    $item[$fieldName . '_alt'] = $item['image_type'];
+                    $item[$fieldName . '_orig_src'] = $path . $item['image_type'];
                 } else {
                     $item[$fieldName . '_src'] = $path . 'zanders/manufacturer/placeholder/placeholder.jpg';
                     $item[$fieldName . '_alt'] = 'Place Holder';

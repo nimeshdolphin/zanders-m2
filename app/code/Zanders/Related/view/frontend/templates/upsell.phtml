@@ -1,37 +1,37 @@
-	<?php
+    <?php
 
-		 if ($exist = count($block->getItemCollection()->getItems())) {
-            $type = 'upsell';
-            $class = $type;
+    if ($exist = count($block->getItemCollection()->getItems())) {
+        $type = 'upsell';
+        $class = $type;
 
-            $image = 'upsell_products_list';
-            $title = __('We found other products you might like!');
-            $items = $block->getItemCollection()->getItems();
-            $limit = $block->getItemLimit('upsell');
-            $shuffle = 0;
+        $image = 'upsell_products_list';
+        $title = __('We found other products you might like!');
+        $items = $block->getItemCollection()->getItems();
+        $limit = $block->getItemLimit('upsell');
+        $shuffle = 0;
 
-            $showAddTo = false;
-            $showCart = false;
-            $templateType = null;
-            $description = false;
-            $canItemsAddToCart = false;
-            $helper = $this->helper('Zanders\Sports\Helper\Data');
-        }
+        $showAddTo = false;
+        $showCart = false;
+        $templateType = null;
+        $description = false;
+        $canItemsAddToCart = false;
+        $helper = $this->helper('Zanders\Sports\Helper\Data');
+    }
 
-	?>
+    ?>
 
-    <?php if ($exist) :?>
+    <?php if ($exist):?>
 
         <div class='box-collateral box-related_products'>
         <h2>Alternative Products</h2>
-		<div class="owl-up">
+        <div class="owl-up">
                <!--  <ul> -->
                 <?php foreach ($items as $_item): ?>
                    <!--  <li> -->
-                <?php $available = ''; ?>
-                <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
-                    <?php if (!$_item->getRequiredOptions()): ?>
-                        <?php $available = 'related-available'; ?>
+                    <?php $available = ''; ?>
+                    <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
+                        <?php if (!$_item->getRequiredOptions()): ?>
+                            <?php $available = 'related-available'; ?>
                     <?php endif; ?>
                 <?php endif; ?>
  
@@ -47,15 +47,15 @@
                         </strong>
 
                         <div class="desc std">
-                            <?php echo __('Item Number: ');?><span style="font-weight: bold;"><?php echo $_item->getSku(); ?></span>
+                            <?= __('Item Number: ');?><span style="font-weight: bold;"><?= $_item->getSku(); ?></span>
                         </div>
 
                         <?php
                         $upc = $_item->getUpc();
-                        if(!empty($upc )):
-                        ?>
+                        if (!empty($upc)):
+                            ?>
                         <div class="desc std">
-                            <?php echo __('UPC') ?>: <span style="font-weight: bold;"><?php echo $this->escapeHtml($upc) ?></span>
+                            <?= __('UPC') ?>: <span style="font-weight: bold;"><?= $this->escapeHtml($upc) ?></span>
                         </div>
                         <?php endif;?>
 

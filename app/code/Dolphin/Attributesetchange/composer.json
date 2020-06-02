@@ -1,0 +1,16 @@
+{
+    "name": "dolphin/module-attributesetchange",
+    "description": "",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Dolphin\\Attributesetchange\\": ""
+        }
+    }
+}

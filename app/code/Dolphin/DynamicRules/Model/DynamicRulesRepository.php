@@ -105,6 +105,11 @@ class DynamicRulesRepository implements DynamicRulesRepositoryInterface {
 			$dynamicRulesModel = $this->dynamicRulesFactory->create();
 			$dynamicRulesModel->load($Id);
 
+			if($dynamicRulesModel->getId()=='')
+			{
+				throw new CouldNotSaveException(__('Id Not Exists'));
+			}
+
 			if ($source_category == '') {
 				throw new CouldNotSaveException(__('Source Category Required'));
 			}

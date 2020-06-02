@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="catalog_controller_product_view">
+		<observer instance="Zanders\Sports\Observer\Frontend\Catalog\ControllerProductView" name="zanders_sports_observer_catalog_controller_product_view"/>
+	</event>
+	<event name="catalog_block_product_list_collection">
+		<observer instance="Zanders\Sports\Observer\Frontend\Catalog\BlockProductListCollection" name="zanders_sports_observer_catalog_block_product_list_collection"/>
+	</event>
+</config>
+

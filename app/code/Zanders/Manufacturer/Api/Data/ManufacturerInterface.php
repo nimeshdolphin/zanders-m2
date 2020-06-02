@@ -135,7 +135,7 @@ interface ManufacturerInterface {
 	 *
 	 * @return string
 	 */
-	public function getImage();
+	public function getImageType();
 
 	/**
 	 * Set image
@@ -143,7 +143,7 @@ interface ManufacturerInterface {
 	 * @param string $image
 	 * @return \Zanders\Manufacturer\Api\Data\ManufacturerInterface
 	 */
-	public function setImage($image);
+	public function setImageType($image);
 
 	/**
 	 * Get Status

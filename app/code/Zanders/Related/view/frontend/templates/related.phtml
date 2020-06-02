@@ -1,39 +1,39 @@
-	<?php
+    <?php
 
-		 if ($exist = $block->getItems()->getSize()) {
-            $type = 'related';
-            $class = $type;
+    if ($exist = $block->getItems()->getSize()) {
+        $type = 'related';
+        $class = $type;
 
-            $image = 'related_products_list';
-            $title = __('Related Products');
-            $items = $block->getItems();
-            $limit = 0;
-            $shuffle = 0;
-            $canItemsAddToCart = $block->canItemsAddToCart();
+        $image = 'related_products_list';
+        $title = __('Related Products');
+        $items = $block->getItems();
+        $limit = 0;
+        $shuffle = 0;
+        $canItemsAddToCart = $block->canItemsAddToCart();
 
-            $showAddTo = true;
-            $showCart = false;
-            $templateType = null;
-            $description = false;
-            $helper = $this->helper('Zanders\Sports\Helper\Data');
-        }
+        $showAddTo = true;
+        $showCart = false;
+        $templateType = null;
+        $description = false;
+        $helper = $this->helper('Zanders\Sports\Helper\Data');
+    }
 
 
 
-	?>
+    ?>
 
-    <?php if ($exist) :?>
+    <?php if ($exist):?>
 
         <div class='box-collateral box-related_products'>
         <h2>Related Products</h2>
-		<div class="owl-carousel">
+        <div class="owl-carousel">
                <!--  <ul> -->
                 <?php foreach ($items as $_item): ?>
                    <!--  <li> -->
-                <?php $available = ''; ?>
-                <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
-                    <?php if (!$_item->getRequiredOptions()): ?>
-                        <?php $available = 'related-available'; ?>
+                    <?php $available = ''; ?>
+                    <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'): ?>
+                        <?php if (!$_item->getRequiredOptions()): ?>
+                            <?php $available = 'related-available'; ?>
                     <?php endif; ?>
                 <?php endif; ?>
 
@@ -42,10 +42,10 @@
                     <?php $allRelatedProductIds = $_item->getRelatedProductIds();     ?>
                     <?php $allupsellProductIds =  $_item->getUpSellProductIds();   ?>
 
-                    <?php if((count($allRelatedProductIds) > 0) or (count($allupsellProductIds) > 0)) :  ?>
-                    <a href="javascript:;" data-href="<?php echo $this->getUrl('related/index/replacement') ?>id/<?php echo $_item->getId() ?>" class="open-popup">
+                    <?php if ((count($allRelatedProductIds) > 0) or (count($allupsellProductIds) > 0)):  ?>
+                    <a href="javascript:;" data-href="<?= $this->getUrl('related/index/replacement') ?>id/<?= $_item->getId() ?>" class="open-popup">
                             <img class="cross-popupicon"
-                                src="<?php echo $helper->getMediaUrl().'images/related_icon.png'; ?>" />
+                                src="<?= $helper->getMediaUrl().'images/related_icon.png'; ?>" />
                     </a>
                     <?php  endif?>
 
@@ -59,15 +59,15 @@
                         </strong>
 
                         <div class="desc std">
-                            <?php echo __('Item Number: ');?><span style="font-weight: bold;"><?php echo $_item->getSku(); ?></span>
+                            <?= __('Item Number: ');?><span style="font-weight: bold;"><?= $_item->getSku(); ?></span>
                         </div>
 
                         <?php
                         $upc = $_item->getUpc();
-                        if(!empty($upc )):
-                        ?>
+                        if (!empty($upc)):
+                            ?>
                         <div class="desc std">
-                            <?php echo __('UPC') ?>: <span style="font-weight: bold;"><?php echo $this->escapeHtml($upc) ?></span>
+                            <?= __('UPC') ?>: <span style="font-weight: bold;"><?= $this->escapeHtml($upc) ?></span>
                         </div>
                         <?php endif;?>
 
@@ -203,31 +203,31 @@
         require(["jquery","Magento_Ui/js/modal/modal",'mage/template',
                 "mage/mage","owlcarousel"],function($,modal,mageTemplate, alerts,owlcarousel)
                 {
-       		 
-         	$(".open-popup").click(function () {'$','modal'
+                
+             $(".open-popup").click(function () {'$','modal'
                 var customurl = $(this).attr('data-href');
                 var options = {
-			        type: 'popup',
-			        responsive: true,
-			        innerScroll: true,
-			        title: 'Products',
-			        modalClass: 'custom-modal',
-			        buttons: [{
-			 
-			            class: '',
-			            click: function () {
-			                this.closeModal();
-			                $('#popup-modal').html(" ");
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    title: 'Products',
+                    modalClass: 'custom-modal',
+                    buttons: [{
+             
+                        class: '',
+                        click: function () {
+                            this.closeModal();
+                            $('#popup-modal').html(" ");
                             $(".upsellcustom").remove();
                             $(".upsellcustom").remove();
-			            }
-			        }]
-			    };
+                        }
+                    }]
+                };
 
                 $.ajax({
                     url: customurl,
                     type: 'POST',
-                	complete: function(response) {
+                    complete: function(response) {
                         //console.log(response);
                         
                         $('#relatedcustom').empty();
@@ -317,7 +317,7 @@
                 });
             });
 
-    		});
+            });
 
     </script>
 

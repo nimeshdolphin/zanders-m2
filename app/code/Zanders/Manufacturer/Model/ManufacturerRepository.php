@@ -147,11 +147,11 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface {
 	 * @param  string $web
 	 * @param  string $enable
 	 * @param  string $image
-	 * @param  string $imagetype
+	 * @param  string $image_type
 	 * @return Manufacturer
 	 * @throws CouldNotSaveException
 	 */
-	public function save($name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $imagetype) {
+	public function saveManufacture($name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $image_type) {
 		try
 		{
 			if ($name == '') {
@@ -169,20 +169,30 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface {
 			$manufacturerModel = $this->manufacturerFactory->create()->setData($dynamicRulesData);
 			$this->resource->save($manufacturerModel);
 
-			if ($image != '' && $imagetype != '') {
+			if (($image != '' && isset($image)) && ($image_type != '' && isset($image_type))) {
 
-				$imagetype = $_mimeTypes[$imagetype];
+				$imagetype = $_mimeTypes[$image_type];
 				if ($imagetype) {
 					$file = $this->storeManager->getStore()->getBaseMediaDir() . "/manufacturers/" . $manufacturerModel->getId() . '.' . $imagetype;
 					file_put_contents($file, base64_decode($image));
 					$manufacturerModel->setImageType($imagetype);
 					$media_path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "manufacturers/" . $manufacturerModel->getId() . '.' . $imagetype;
-					$manufacturerModel->setImage($media_path);
+					$manufacturerModel->setImage($imagetype);
 					$manufacturerModel->save();
 				}
 			}
 
-			return $manufacturerModel;
+
+			$media_path = null;		
+			if($manufacturerModel->getImageType())
+			{
+				 $media_path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "manufacturers/" . $manufacturerModel->getId() . '.' . $manufacturerModel->getImageType();							 
+			}
+			 
+			$data[] = array('id'=>$manufacturerModel->getId(),'name'=>$manufacturerModel->getName(), 'address' => $manufacturerModel->getAddress(), 'serialized_display_on'=>$manufacturerModel->getSerializedDisplayOn(), 'serialized_text'=>$manufacturerModel->getSerializedText(), 'phone'=>$manufacturerModel->getPhone(),'web'=>$manufacturerModel->getWeb(), 'enable'=>$manufacturerModel->getEnable(), 'image'=>$media_path, 'image_type'=>$manufacturerModel->getImageType());
+
+			return $data;
+
 
 		} catch (\Exception $exception) {
 			throw new CouldNotSaveException(
@@ -203,10 +213,45 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface {
 	public function getById($manufacturerId) {
 		$manufacturer = $this->manufacturerFactory->create();
 		$manufacturer->load($manufacturerId);
+		if($manufacturer->getImageType())
+		{
+			$media_path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "manufacturers/" . $manufacturer->getId() . '.' . $manufacturer->getImageType();
+			if(@getimagesize($media_path))
+			{
+				$manufacturer->setImage($media_path);	
+			}
+			
+		}
 		if (!$manufacturer->getId()) {
 			throw new NoSuchEntityException(__('The manufacturer with the "%1" ID doesn\'t exist.', $manufacturerId));
 		}
 		return $manufacturer;
+	}
+
+
+
+	/**
+	 * Load Manufacturer data by given Manufacturer Identity
+	 *
+	 * @param string $manufacturerId
+	 * @return Manufacturer
+	 * @throws \Magento\Framework\Exception\NoSuchEntityException
+	 */
+	public function getManufactureById($manufacturerId) {
+		$manufacturer = $this->manufacturerFactory->create();
+		$manufacturer->load($manufacturerId);
+		$media_path = null;					
+		if($manufacturer->getImageType())
+		{
+			$media_path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "manufacturers/" . $manufacturer->getId() . '.' . $manufacturer->getImageType();			
+		}
+		if (!$manufacturer->getId()) {
+			throw new NoSuchEntityException(__('The manufacturer with the "%1" ID doesn\'t exist.', $manufacturerId));
+		}
+
+		$data = array(array('id'=>$manufacturer->getId(),'name'=>$manufacturer->getName(), 'address' => $manufacturer->getAddress(), 'serialized_display_on'=>$manufacturer->getSerializedDisplayOn(), 'serialized_text'=>$manufacturer->getSerializedText(), 'phone'=>$manufacturer->getPhone(),'web'=>$manufacturer->getWeb(), 'enable'=>$manufacturer->getEnable(), 'image'=>$media_path, 'image_type'=>$manufacturer->getImageType()));
+
+		return $data;
 	}
 
 	/**
@@ -286,11 +331,11 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface {
 	 * @param  string $web
 	 * @param  string $enable
 	 * @param  string $image
-	 * @param  string $imagetype
+	 * @param  string $image_type
 	 * @return Manufacturer
 	 * @throws CouldNotSaveException
 	 */
-	public function update($id, $name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $imagetype) {
+	public function updateManufacture($id, $name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $image_type) {
 		try
 		{
 
@@ -328,15 +373,15 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface {
 				$manufacturerModel->setWeb($web);
 			}
 
-			if (isset($enable) && $enable) {
+			if ($enable=='1' or $enable=='0') {
 				$manufacturerModel->setEnable($enable);
 			}
 
 			//$this->resource->save($manufacturerModel);
 
-			if ($image != '' && $imagetype != '') {
+			if (($image != '' && isset($image)) && ($image_type != '' && isset($image_type))) {
 
-				$imagetype = $_mimeTypes[$imagetype];
+				$imagetype = $_mimeTypes[$image_type];
 				if ($imagetype) {
 					$file = $this->storeManager->getStore()->getBaseMediaDir() . "/manufacturers/" . $manufacturerModel->getId() . '.' . $imagetype;
 					file_put_contents($file, base64_decode($image));
@@ -348,6 +393,94 @@ class ManufacturerRepository implements ManufacturerRepositoryInterface {
 			}
 
 			$manufacturerModel->save();
+
+			$media_path = null;		
+			if($manufacturerModel->getImageType())
+			{
+				 $media_path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "manufacturers/" . $manufacturerModel->getId() . '.' . $manufacturerModel->getImageType();							 
+			}
+			 
+			$data[] = array('id'=>$manufacturerModel->getId(),'name'=>$manufacturerModel->getName(), 'address' => $manufacturerModel->getAddress(), 'serialized_display_on'=>$manufacturerModel->getSerializedDisplayOn(), 'serialized_text'=>$manufacturerModel->getSerializedText(), 'phone'=>$manufacturerModel->getPhone(),'web'=>$manufacturerModel->getWeb(), 'enable'=>$manufacturerModel->getEnable(), 'image'=>$media_path, 'image_type'=>$manufacturerModel->getImageType());
+
+			return $data;
+
+		} catch (\Exception $exception) {
+			throw new CouldNotSaveException(
+				__($exception->getMessage()),
+				$exception
+			);
+		}
+
+	}
+
+
+	/**
+	 * Load Manufacturer data collection by given search criteria
+	 *
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 * @SuppressWarnings(PHPMD.NPathComplexity)
+	 * @return string
+	 */
+	public function getManufacturerList() {
+		/** @var \Zanders\Manufacturer\Model\ResourceModel\Manufacturer\Collection $collection */
+		$collection = $this->manufacturerCollectionFactory->create();
+
+		foreach ($collection as $manufacturer) {	
+			$media_path = null;		
+			if($manufacturer->getImageType())
+			{
+				 $media_path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "manufacturers/" . $manufacturer->getId() . '.' . $manufacturer->getImageType();							 
+			}
+			 
+			$data[] = array('id'=>$manufacturer->getId(),'name'=>$manufacturer->getName(), 'address' => $manufacturer->getAddress(), 'serialized_display_on'=>$manufacturer->getSerializedDisplayOn(), 'serialized_text'=>$manufacturer->getSerializedText(), 'phone'=>$manufacturer->getPhone(),'web'=>$manufacturer->getWeb(), 'enable'=>$manufacturer->getEnable(), 'image'=>$media_path, 'image_type'=>$manufacturer->getImageType());	
+		}
+		return $data;
+	}
+
+	/**
+	 * Save Manufacturer data
+	 * @param  string $name
+	 * @param  string $address
+	 * @param  string $serialized_display_on
+	 * @param  string $serialized_text
+	 * @param  string $phone
+	 * @param  string $web
+	 * @param  string $enable
+	 * @param  string $image
+	 * @param  string $imagetype
+	 * @return Manufacturer
+	 * @throws CouldNotSaveException
+	 */
+	public function save($name, $address, $serialized_display_on, $serialized_text, $phone, $web, $enable, $image, $imagetype) {
+		try
+		{
+			if ($name == '') {
+				throw new CouldNotSaveException(__('Name Required'));
+			}
+
+			$_mimeTypes = array(
+				'image/jpg' => 'jpg',
+				'image/jpeg' => 'jpg',
+				'image/gif' => 'gif',
+				'image/png' => 'png',
+			);
+
+			$dynamicRulesData = array('name' => $name, 'address' => $address, 'serialized_display_on' => $serialized_display_on, 'serialized_text' => $serialized_text, 'phone' => $phone, 'web' => $web, 'enable' => $enable);
+			$manufacturerModel = $this->manufacturerFactory->create()->setData($dynamicRulesData);
+			$this->resource->save($manufacturerModel);
+
+			if ($image != '' && $imagetype != '') {
+
+				$imagetype = $_mimeTypes[$imagetype];
+				if ($imagetype) {
+					$file = $this->storeManager->getStore()->getBaseMediaDir() . "/manufacturers/" . $manufacturerModel->getId() . '.' . $imagetype;
+					file_put_contents($file, base64_decode($image));
+					$manufacturerModel->setImageType($imagetype);
+					$media_path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "manufacturers/" . $manufacturerModel->getId() . '.' . $imagetype;
+					$manufacturerModel->setImage($imagetype);
+					$manufacturerModel->save();
+				}
+			}
 
 			return $manufacturerModel;
 

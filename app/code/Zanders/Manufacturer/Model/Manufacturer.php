@@ -155,7 +155,7 @@ class Manufacturer extends AbstractModel implements ManufacturerInterface {
 	 *
 	 * @return string
 	 */
-	public function getImage() {
+	public function getImageType() {
 		return $this->getData(self::IMAGE);
 	}
 
@@ -165,7 +165,7 @@ class Manufacturer extends AbstractModel implements ManufacturerInterface {
 	 * @param string $image
 	 * @return \Zanders\Manufacturer\Api\Data\ManufacturerInterface
 	 */
-	public function setImage($image) {
+	public function setImageType($image) {
 		return $this->setData(self::IMAGE, $image);
 	}
 
